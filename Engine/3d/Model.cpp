@@ -208,14 +208,17 @@ void cModel::MapVertexData()
 
 void cModel::CreateIndexResource()
 {
+
 }
 
 void cModel::CreateIndexBufferView()
 {
+
 }
 
 void cModel::MapIndexResource()
 {
+
 }
 
 void cModel::CreateMaterialResource()

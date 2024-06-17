@@ -59,7 +59,7 @@ void cGameScene::Initialize()
 	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	modelUVTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	model_ = new cModel();
-	modelData_ = model_->LoadObjFile("axis.obj");
+	modelData_ = model_->LoadObjFile("teapot.obj");
 	model_->Initialize(&modelData_, &modelTransform_, viewProjectionMatrix_, &light, &modelUVTransform_);
 	modelTextureHandle_ = cTextureManager::Load(modelData_.material.textureFilePath);
 
