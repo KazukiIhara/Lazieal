@@ -18,7 +18,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	/*ゲーム*/
 	std::unique_ptr<cSceneManager> game = std::make_unique<cSceneManager>();
-	/*走る*/
+
+	/*実行*/
 	game->Run();
 
 	CoUninitialize();
