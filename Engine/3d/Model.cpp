@@ -3,21 +3,19 @@
 #include "Model.h"
 #include "TextureManager.h"
 
-void cModel::Initialize(ModelData* modelData, sTransform* transform, Matrix4x4* viewProjection, Material* material, DirectionalLight* light, sTransform* uvTransform)
+void cModel::Initialize(ModelData* modelData, sTransform* transform, Matrix4x4* viewProjection, DirectionalLight* light, sTransform* uvTransform)
 {
 	/*NullCheck*/
 	assert(modelData);
 	assert(transform);
 	assert(uvTransform);
 	assert(viewProjection);
-	assert(material);
 	assert(light);
 
 	modelData_ = modelData;
 	transform_ = transform;
 	uvTransform_ = uvTransform;
 	viewProjection_ = viewProjection;
-	material_ = material;
 	directionalLight_ = light;
 
 #pragma region 頂点データ
@@ -70,9 +68,6 @@ void cModel::Update()
 	transformationData_->WVP = worldViewProjectionMatrix;
 	transformationData_->World = worldMatrix;
 
-	materialData_->color = material_->color;
-	materialData_->enbleLighting = material_->enbleLighting;
-
 	/*uvTranform用のMatrixを作る*/
 	Matrix4x4 uvTransformMatrix = MakeScaleMatrix(uvTransform_->scale);
 	uvTransformMatrix = Multiply(uvTransformMatrix, MakeRotateZMatrix(uvTransform_->rotate.z));
@@ -103,7 +98,7 @@ void cModel::Draw(uint32_t textureHandle)
 	cDirectXCommon::GetCommandList()->DrawInstanced(UINT(modelData_->vertices.size()), 1, 0, 0);
 }
 
-ModelData cModel::LoadObjFile(const std::string& directoryPath, const std::string& filename)
+ModelData cModel::LoadObjFile(const std::string& filename, const std::string& directoryPath)
 {
 	//必要な変数の宣言
 	ModelData modelData;	//構築するmodelData
@@ -225,27 +220,27 @@ void cModel::MapIndexResource()
 
 void cModel::CreateMaterialResource()
 {
-	//マテリアル用のリソースを作る。
+	// マテリアル用のリソースを作る。
 	materialResource_ = CreateBufferResource(cDirectXCommon::GetDevice(), sizeof(Material));
 }
 
 void cModel::MapMaterialData()
 {
-	//マテリアルにデータを書き込む
+	// マテリアルにデータを書き込む
 	materialData_ = nullptr;
-	//書き込むためのアドレスを取得
+	// 書き込むためのアドレスを取得
 	materialResource_->Map(0, nullptr, reinterpret_cast<void**>(&materialData_));
-	//今回は白を書き込んでみる
-	materialData_->color = material_->color;//RGBA
-	//Lightingを有効にする
-	materialData_->enbleLighting = material_->enbleLighting;
-	/*uvTransform*/
+	// mtlのデータから色を書き込む
+	materialData_->color = modelData_->material.color;
+	// Lightingを有効にする
+	materialData_->enbleLighting = true;
+	// uvTransform
 	materialData_->uvTransform = MakeIdentity4x4();
 }
 
 void cModel::CreateWVPResource()
 {
-	/*WVP用のリソースを作る*/
+	// WVP用のリソースを作る
 	transformationResource_ = CreateBufferResource(cDirectXCommon::GetDevice(), sizeof(TransformationMatrix));
 }
 
@@ -298,6 +293,13 @@ MaterialData cModel::LoadMaterialTemplateFile(const std::string& directoryPath, 
 			s >> textureFilename;
 			//連結してファイルパスにする
 			materialData.textureFilePath = directoryPath + "/" + textureFilename;
+		}
+		else if (identifier == "Kd")
+		{
+			Vector4 color;
+			s >> color.x >> color.y >> color.z;
+			color.w = 1.0f;
+			materialData.color = color;
 		}
 	}
 
