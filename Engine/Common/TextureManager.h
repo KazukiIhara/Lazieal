@@ -1,16 +1,13 @@
 #pragma once
 #include <array>
+#include <vector>
 #include <unordered_map>
 #include <wrl.h>
 #include <cstdint>
 #include <string>
 #include <memory>
 #include "DirectXCommon.h"
-#include "Vector4.h"
-#include "Matrix4x4.h"
-#include "Lazieal.h"
 #include "externals/DirectXTex/DirectXTex.h"
-#include <vector>
 #include "externals/DirectXTex/d3dx12.h"
 
 class cTextureManager
@@ -35,7 +32,6 @@ public:
 	/// シングルトンインスタンスの取得
 	/// </summary>
 	static cTextureManager* GetInstance();
-
 
 	/// <summary>
 	/// 初期化

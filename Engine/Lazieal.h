@@ -1,25 +1,15 @@
 #pragma once
 
-#define _USE_MATH_DIFINES
-#include <math.h>
 #include <cmath>
 #include <vector>
 #include <string>
-#include <fstream>
-#include <sstream>
-#include <assert.h>
+#include <cassert>
 #include <numbers>
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4x4.h"
-#include "Log.h"
 
-
-#ifndef M_PI
-/* M_PIが未定義であればここで定義する */
-#define M_PI 3.14159f
-#endif
 
 /*---構造体---*/
 

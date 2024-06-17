@@ -1,4 +1,3 @@
-
 #include "PipelineStateObject.h"
 #include "Log.h"
 

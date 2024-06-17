@@ -1,7 +1,6 @@
-
 #pragma once
-#include "wrl.h"
 #include "DirectXCommon.h"
+#include "wrl.h"
 #include <dxcapi.h>
 #include <string>
 

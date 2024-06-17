@@ -1,7 +1,5 @@
 #include "GameScene.h"
 
-#include "Log.h"
-#include "WinApp.h"
 #include "DirectXCommon.h"
 #include "PipelineStateObject.h"
 #include "CameraController.h"

@@ -320,9 +320,9 @@ Matrix4x4 MakeRotateXYZMatrix(Vector3 rotate)
 
 Matrix4x4 MakeRotateXYZMatrixRad(Vector3 rotate)
 {
-	Matrix4x4 rotateX = MakeRotateXMatrix(rotate.x * M_PI);
-	Matrix4x4 rotateY = MakeRotateYMatrix(rotate.y * M_PI);
-	Matrix4x4 rotateZ = MakeRotateZMatrix(rotate.z * M_PI);
+	Matrix4x4 rotateX = MakeRotateXMatrix(rotate.x * std::numbers::pi_v<float>);
+	Matrix4x4 rotateY = MakeRotateYMatrix(rotate.y * std::numbers::pi_v<float>);
+	Matrix4x4 rotateZ = MakeRotateZMatrix(rotate.z * std::numbers::pi_v<float>);
 
 	Matrix4x4 result = Multiply(rotateX, Multiply(rotateY, rotateZ));
 	return result;

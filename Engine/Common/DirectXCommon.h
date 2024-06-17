@@ -1,14 +1,16 @@
 #pragma once
 #include <d3d12.h>
 #include <dxgi1_6.h>
-#include <cassert>
-#include <wrl.h>
 #include <dxgidebug.h>
+#include <wrl.h>
+#include <cassert>
+
 #include "WinApp.h"
 
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
 #pragma comment(lib,"dxguid.lib")
+#pragma comment(lib,"dxcompiler.lib")
 
 /*リークチェッカー*/
 class D3DResourceLeakChecker
