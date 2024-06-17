@@ -31,12 +31,51 @@ public:
 		v.w = this->w - obj.w;
 		return v;
 	}
+	Vector4 operator*(const Vector4& obj)
+	{
+		Vector4 v;
+		v.x = this->x * obj.x;
+		v.y = this->y * obj.y;
+		v.z = this->z * obj.z;
+		v.w = this->w * obj.w;
+		return v;
+	}
+	Vector4 operator/(const Vector4& obj)
+	{
+		Vector4 v;
+		v.x = this->x / obj.x;
+		v.y = this->y / obj.y;
+		v.z = this->z / obj.z;
+		v.w = this->w / obj.w;
+		return v;
+	}
 	void operator+=(const Vector4& obj)
 	{
 		this->x = this->x + obj.x;
 		this->y = this->y + obj.y;
 		this->z = this->z + obj.z;
 		this->w = this->w + obj.w;
+	}
+	void operator-=(const Vector4& obj)
+	{
+		this->x = this->x - obj.x;
+		this->y = this->y - obj.y;
+		this->z = this->z - obj.z;
+		this->w = this->w - obj.w;
+	}
+	void operator*=(const Vector4& obj)
+	{
+		this->x = this->x * obj.x;
+		this->y = this->y * obj.y;
+		this->z = this->z * obj.z;
+		this->w = this->w * obj.w;
+	}
+	void operator/=(const Vector4& obj)
+	{
+		this->x = this->x / obj.x;
+		this->y = this->y / obj.y;
+		this->z = this->z / obj.z;
+		this->w = this->w / obj.w;
 	}
 
 	float x;

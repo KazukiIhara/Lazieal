@@ -25,10 +25,39 @@ public:
 		v.y = this->y - obj.y;
 		return v;
 	}
+	Vector2 operator*(const Vector2& obj)
+	{
+		Vector2 v;
+		v.x = this->x * obj.x;
+		v.y = this->y * obj.y;
+		return v;
+	}
+	Vector2 operator/(const Vector2& obj)
+	{
+		Vector2 v;
+		v.x = this->x / obj.x;
+		v.y = this->y / obj.y;
+		return v;
+	}
 	void operator+=(const Vector2& obj)
 	{
 		this->x = this->x + obj.x;
 		this->y = this->y + obj.y;
+	}
+	void operator-=(const Vector2& obj)
+	{
+		this->x = this->x - obj.x;
+		this->y = this->y - obj.y;
+	}
+	void operator*=(const Vector2& obj)
+	{
+		this->x = this->x * obj.x;
+		this->y = this->y * obj.y;
+	}
+	void operator/=(const Vector2& obj)
+	{
+		this->x = this->x / obj.x;
+		this->y = this->y / obj.y;
 	}
 
 	float x;
