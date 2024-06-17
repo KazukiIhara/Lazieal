@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "PipelineStateObject.h"
 #include "externals/DirectXTex/d3dx12.h"
+#include "Log.h"
 
 cTextureManager* cTextureManager::GetInstance()
 {

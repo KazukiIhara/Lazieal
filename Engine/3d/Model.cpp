@@ -1,3 +1,5 @@
+#include <sstream>
+#include <fstream>
 #include "Model.h"
 #include "TextureManager.h"
 

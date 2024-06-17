@@ -1,8 +1,6 @@
 #pragma once
-#include "DirectXCommon.h"
-#include "Vector4.h"
-#include "Matrix4x4.h"
 #include <memory>
+#include "DirectXCommon.h"
 #include "Lazieal.h"
 #include "externals/DirectXTex/DirectXTex.h"
 
