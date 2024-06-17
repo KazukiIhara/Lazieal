@@ -28,30 +28,37 @@ public:
 		std::string name;
 	};
 
-	/// <summary>
-	/// シングルトンインスタンスの取得
-	/// </summary>
-	static cTextureManager* GetInstance();
+	// 初期化
+	static void Initialize();
 
-	/// <summary>
-	/// 初期化
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// テクスチャのロード
-	/// </summary>
-	/// <returns></returns>
-	uint32_t Load(std::string filePath);
+	// テクスチャのロード
+	static uint32_t Load(const std::string& filePath);
 
 	/*Textureを渡す*/
 	static std::vector<Texture>& GetTexture() { return GetInstance()->textures_; }
 
 private:/*メンバ関数*/
+
+	/// <summary>
+	/// シングルトンインスタンスの取得
+	/// </summary>
+	static cTextureManager* GetInstance();
+
 	cTextureManager() = default;
 	~cTextureManager() = default;
 	cTextureManager(const cTextureManager&) = delete;
 	const cTextureManager& operator=(const cTextureManager&) = delete;
+
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	void InitializeSystem();
+
+	/// <summary>
+	/// テクスチャのロード
+	/// </summary>
+	/// <returns></returns>
+	uint32_t TransferTexture(const std::string& filePath);
 
 	/*バッファリソースを作成する*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);

@@ -11,17 +11,26 @@ cTextureManager* cTextureManager::GetInstance()
 
 void cTextureManager::Initialize()
 {
+	GetInstance()->InitializeSystem();
+}
+
+uint32_t cTextureManager::Load(const std::string& filePath)
+{
+	return GetInstance()->TransferTexture(filePath);
+}
+
+void cTextureManager::InitializeSystem()
+{
 	textureIndex_ = 0;
 	CreateFence();
 }
 
-uint32_t cTextureManager::Load(std::string filePath)
+uint32_t cTextureManager::TransferTexture(const std::string& filePath)
 {
-	/*今回ぶち込むテクスチャーの箱*/
-	Texture texture;
 	/*Textureを読んで転送*/
 	++textureIndex_;
-
+	/*今回ぶち込むテクスチャーの箱*/
+	Texture texture;
 	DirectX::ScratchImage mipImage_ = LoadTexture(filePath);
 	const DirectX::TexMetadata& metadata = mipImage_.GetMetadata();
 	texture.resource = CreateTextureResource(cDirectXCommon::GetDevice(), metadata);
