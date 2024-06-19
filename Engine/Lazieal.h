@@ -61,7 +61,10 @@ struct DirectionalLight
 struct MaterialData
 {
 	std::string textureFilePath;
+	Vector4 color;
 };
+
+
 
 struct ModelData
 {

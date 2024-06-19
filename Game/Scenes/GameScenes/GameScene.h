@@ -51,8 +51,6 @@ private:
 	cPipelineStateObject* pso = nullptr;
 	/*ImGui*/
 	cImGuiManager* imgui_ = nullptr;
-	/*テクスチャマネージャー*/
-	cTextureManager* textureManager_ = nullptr;
 
 	/*カメラ*/
 	cCameraController* mainCamera_{};

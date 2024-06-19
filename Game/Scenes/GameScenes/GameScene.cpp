@@ -22,8 +22,6 @@ cGameScene::cGameScene()
 	pso = cPipelineStateObject::GetInstance();
 	/*ImGui*/
 	imgui_ = cImGuiManager::GetInstance();
-	/*TextureManager*/
-	textureManager_ = cTextureManager::GetInstance();
 }
 
 cGameScene::~cGameScene()
@@ -38,9 +36,8 @@ cGameScene::~cGameScene()
 }
 void cGameScene::Initialize()
 {
-	/*テクスチャマネージャーの初期化*/
-	textureManager_->Initialize();
-
+	// テクスチャマネージャー初期化
+	cTextureManager::Initialize();
 	/*カメラ作成*/
 	cameraTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-10.0f} };
 	mainCamera_ = new cCameraController();
@@ -62,12 +59,11 @@ void cGameScene::Initialize()
 	modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	modelUVTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	model_ = new cModel();
-	modelData_ = model_->LoadObjFile("Game/Resources", "axis.obj");
-	model_->Initialize(&modelData_, &modelTransform_, viewProjectionMatrix_, &material_, &light, &modelUVTransform_);
-	modelTextureHandle_ = textureManager_->Load(modelData_.material.textureFilePath);
+	modelData_ = model_->LoadObjFile("teapot.obj");
+	model_->Initialize(&modelData_, &modelTransform_, viewProjectionMatrix_, &light, &modelUVTransform_);
+	modelTextureHandle_ = cTextureManager::Load(modelData_.material.textureFilePath);
 
-
-	textureHandle_ = textureManager_->Load("Game/Resources/monsterBall.png");
+	textureHandle_ = cTextureManager::Load("Game/Resources/monsterBall.png");
 	/*Spriteのトランスフォーム*/
 	spriteTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	spriteUVTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };

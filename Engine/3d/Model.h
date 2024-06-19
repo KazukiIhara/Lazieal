@@ -7,12 +7,12 @@ class cModel
 {
 public:
 
-	void Initialize(ModelData* modelData, sTransform* transform, Matrix4x4* viewProjection, Material* material, DirectionalLight* light, sTransform* uvTransform);
+	void Initialize(ModelData* modelData, sTransform* transform, Matrix4x4* viewProjection, DirectionalLight* light, sTransform* uvTransform);
 	void Update();
 	void Draw(uint32_t textureHandle);
 
 	/*Objファイルからデータを読み取る関数*/
-	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
+	ModelData LoadObjFile(const std::string& filename,const std::string& directoryPath ="Game/Resources");
 
 private:
 #pragma region Vertex
@@ -88,8 +88,6 @@ private:/*メンバ変数*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> materialResource_ = nullptr;
 	/*マテリアルデータ*/
 	Material* materialData_ = nullptr;
-	/*マテリアル情報を受け取る箱*/
-	Material* material_;
 	/*uvTransformを受け取る箱*/
 	sTransform* uvTransform_;
 #pragma endregion
