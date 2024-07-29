@@ -1,10 +1,10 @@
 #pragma once
 
 // フレームワーク
-class cLazieal {
+class cLaziealFramework {
 public: // 仮想関数
 	// 仮想デストラクタ
-	virtual ~cLazieal() = default;
+	virtual ~cLaziealFramework() = default;
 	// 初期化
 	virtual void Initialize();
 	// 終了
