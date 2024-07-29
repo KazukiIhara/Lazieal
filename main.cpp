@@ -6,11 +6,12 @@
 
 // MyHedder
 #include "LaziealFramework.h"
+#include "Logger.h"
 
 // エントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// 開始時デバッグ用文字
-	OutputDebugStringA("Hello,Lazieal!\n");
+	cLogger::Log("Hello,Lazieal!\n");
 
 	// フレームワークを動的確保
 	std::unique_ptr<cLaziealFramework> lazieal = std::make_unique<cLaziealFramework>();
@@ -19,7 +20,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	lazieal->Run();
 
 	// 終了時デバッグ用文字
-	OutputDebugStringA("Bye,Lazieal!\n");
+	cLogger::Log("Bye,Lazieal!\n");
 
 	// 無事終了
 	return 0;
