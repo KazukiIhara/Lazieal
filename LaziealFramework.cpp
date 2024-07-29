@@ -4,15 +4,18 @@
 // WinAPI
 #include <Windows.h>
 
+// MyHedder
+#include "Logger.h"
+
 void cLaziealFramework::Initialize() {
 	// デバッグ用文字
-	OutputDebugStringA("Lazieal,Initialized\n");
+	cLogger::Log("Lazieal,Initialized\n");
 	// 初期化処理を実行
 }
 
 void cLaziealFramework::Finalize() {
 	// デバッグ用文字出力
-	OutputDebugStringA("Lazieal,Finalized\n");
+	cLogger::Log("Lazieal,Finalized\n");
 	// 解放処理を実行
 
 }

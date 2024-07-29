@@ -5,6 +5,9 @@
     <ClCompile Include="LaziealFramework.cpp">
       <Filter>Engine\Lazieal\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Engine\Base\Logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -31,10 +34,19 @@
     <Filter Include="Engine\Lazieal\Framework">
       <UniqueIdentifier>{81ea3894-e58e-455d-9cd0-b55bb7e8503d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Base">
+      <UniqueIdentifier>{446292a9-fe88-4f45-9b9d-f8d9204d90e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Logger">
+      <UniqueIdentifier>{cacbf317-6f71-4c27-a334-cb84a7e9636f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LaziealFramework.h">
       <Filter>Engine\Lazieal\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Engine\Base\Logger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
