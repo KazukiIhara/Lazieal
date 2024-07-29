@@ -8,6 +8,15 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Engine\Base\Logger</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Game\Scene\GameScene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Game\Scene\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneFactory.cpp">
+      <Filter>Game\Scene\SceneFactory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -40,6 +49,15 @@
     <Filter Include="Engine\Base\Logger">
       <UniqueIdentifier>{cacbf317-6f71-4c27-a334-cb84a7e9636f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Base\AbstractSceneFactory">
+      <UniqueIdentifier>{3cb2877c-66cd-4450-898d-7ab371bac2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\SceneFactory">
+      <UniqueIdentifier>{019f258c-ed74-4bbf-bd19-d39247c5acb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\SceneManager">
+      <UniqueIdentifier>{67101570-96ca-4f5d-a5f9-f075e3a2145d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LaziealFramework.h">
@@ -47,6 +65,21 @@
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Engine\Base\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>Game\Scene\BaseScene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Game\Scene\GameScene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractSceneFactory.h">
+      <Filter>Engine\Base\AbstractSceneFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneFactory.h">
+      <Filter>Game\Scene\SceneFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Game\Scene\SceneManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
