@@ -5,7 +5,7 @@
 #include <memory>
 
 // MyHedder
-#include "Lazieal.h"
+#include "LaziealFramework.h"
 
 // エントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
