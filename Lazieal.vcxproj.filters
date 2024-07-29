@@ -2,5 +2,36 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Lazieal.cpp">
+      <Filter>Engine\Lazieal</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{6d8ec35c-199d-4768-a998-2343f9ca06c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{a6cc3803-4d33-4da3-b3a0-a74890593aba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene">
+      <UniqueIdentifier>{1d2f3f8a-8f67-4575-a73a-4e41f7bd5a56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\BaseScene">
+      <UniqueIdentifier>{d277c258-0127-4a0b-91da-c6e3becdbd16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\GameScene">
+      <UniqueIdentifier>{f7d33aa6-f8ba-4f0d-9128-b198b56886df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Scene\GameScene\TitleScene">
+      <UniqueIdentifier>{3ef2728b-eba8-4351-86e7-007cd99d23ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal">
+      <UniqueIdentifier>{0eb9fc40-66c0-48d8-a873-84d1bba22aa5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lazieal.h">
+      <Filter>Engine\Lazieal</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
