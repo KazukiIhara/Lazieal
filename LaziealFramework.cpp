@@ -1,33 +1,33 @@
 // This
-#include "Lazieal.h"
+#include "LaziealFramework.h"
 
 // WinAPI
 #include <Windows.h>
 
-void cLazieal::Initialize() {
+void cLaziealFramework::Initialize() {
 	// デバッグ用文字
 	OutputDebugStringA("Lazieal,Initialized\n");
 	// 初期化処理を実行
 }
 
-void cLazieal::Finalize() {
+void cLaziealFramework::Finalize() {
 	// デバッグ用文字出力
 	OutputDebugStringA("Lazieal,Finalized\n");
 	// 解放処理を実行
 
 }
 
-void cLazieal::Update() {
+void cLaziealFramework::Update() {
 	// 更新処理を実行
 
 }
 
-void cLazieal::Draw() {
+void cLaziealFramework::Draw() {
 	// 描画処理を実行
 
 }
 
-void cLazieal::Run() {
+void cLaziealFramework::Run() {
 	// 初期化
 	Initialize();
 	// 更新

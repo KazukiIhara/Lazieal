@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Lazieal.cpp">
-      <Filter>Engine\Lazieal</Filter>
+    <ClCompile Include="LaziealFramework.cpp">
+      <Filter>Engine\Lazieal\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,10 +28,13 @@
     <Filter Include="Engine\Lazieal">
       <UniqueIdentifier>{0eb9fc40-66c0-48d8-a873-84d1bba22aa5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lazieal\Framework">
+      <UniqueIdentifier>{81ea3894-e58e-455d-9cd0-b55bb7e8503d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lazieal.h">
-      <Filter>Engine\Lazieal</Filter>
+    <ClInclude Include="LaziealFramework.h">
+      <Filter>Engine\Lazieal\Framework</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
