@@ -20,6 +20,9 @@
     <ClCompile Include="GameApp.cpp">
       <Filter>Game\GameApp</Filter>
     </ClCompile>
+    <ClCompile Include="D3DResourceLeakChecker.cpp">
+      <Filter>Engine\Base\ResourceLeakChecker</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -64,6 +67,9 @@
     <Filter Include="Game\GameApp">
       <UniqueIdentifier>{1e8b72a1-f4e5-4db3-bdc7-5840a27a271b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Base\ResourceLeakChecker">
+      <UniqueIdentifier>{64e22ff4-980d-4481-98a2-f5d6521b92fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LaziealFramework.h">
@@ -89,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="GameApp.h">
       <Filter>Game\GameApp</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DResourceLeakChecker.h">
+      <Filter>Engine\Base\ResourceLeakChecker</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

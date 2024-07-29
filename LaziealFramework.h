@@ -26,7 +26,7 @@ public: // 公開メンバ関数
 	void Run();
 private: // メンバ変数
 	// 終了リクエスト
-	bool endRequest_ = true;
+	bool endRequest_ = false;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

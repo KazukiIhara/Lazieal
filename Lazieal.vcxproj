@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3DResourceLeakChecker.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="LaziealFramework.cpp" />
     <ClCompile Include="Logger.cpp" />
@@ -22,6 +23,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="BaseScene.h" />
+    <ClInclude Include="D3DResourceLeakChecker.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="LaziealFramework.h" />
     <ClInclude Include="Logger.h" />
