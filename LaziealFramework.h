@@ -1,5 +1,8 @@
 #pragma once
 
+// 前方宣言
+class cAbstractSceneFactory;
+
 // フレームワーク
 class cLaziealFramework {
 public: // 仮想関数
@@ -12,7 +15,8 @@ public: // 仮想関数
 	// 更新
 	virtual void Update();
 	// 描画
-	virtual void Draw();
+	virtual void Draw() = 0;
+
 	// 終了チェック
 	virtual bool IsEndRequest() {
 		return endRequest_;
@@ -22,6 +26,7 @@ public: // 公開メンバ関数
 	void Run();
 private: // メンバ変数
 	// 終了リクエスト
-	bool endRequest_ = false;
-
+	bool endRequest_ = true;
+	// シーンファクトリー
+	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

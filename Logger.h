@@ -4,7 +4,6 @@
 #include <string>
 #include <format>
 
-
 // デバッグログ表示用クラス
 class cLogger {
 public: // 静的メンバ関数

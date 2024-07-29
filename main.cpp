@@ -6,6 +6,7 @@
 
 // MyHedder
 #include "LaziealFramework.h"
+#include "GameApp.h"
 #include "Logger.h"
 
 // エントリーポイント
@@ -14,10 +15,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	cLogger::Log("Hello,Lazieal!\n");
 
 	// フレームワークを動的確保
-	std::unique_ptr<cLaziealFramework> lazieal = std::make_unique<cLaziealFramework>();
+	std::unique_ptr<cLaziealFramework> game = std::make_unique<cGameApp>();
 
 	// 実行
-	lazieal->Run();
+	game->Run();
 
 	// 終了時デバッグ用文字
 	cLogger::Log("Bye,Lazieal!\n");

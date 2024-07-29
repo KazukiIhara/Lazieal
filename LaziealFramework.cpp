@@ -6,37 +6,47 @@
 
 // MyHedder
 #include "Logger.h"
+#include "AbstractSceneFactory.h"
 
 void cLaziealFramework::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("Lazieal,Initialized\n");
-	// 初期化処理を実行
+	// 基底システムの初期化処理を実行
+
 }
 
 void cLaziealFramework::Finalize() {
 	// デバッグ用文字出力
 	cLogger::Log("Lazieal,Finalized\n");
-	// 解放処理を実行
-
+	// 基底システムの解放処理を実行
+	// シーンファクトリーを開放
+	delete sceneFactory_;
 }
 
 void cLaziealFramework::Update() {
-	// 更新処理を実行
-
-}
-
-void cLaziealFramework::Draw() {
-	// 描画処理を実行
+	// デバッグ用文字出力
+	cLogger::Log("Lazieal,Update\n");
+	// 基底システムの更新処理を実行
 
 }
 
 void cLaziealFramework::Run() {
 	// 初期化
 	Initialize();
-	// 更新
-	Update();
-	// 描画
-	Draw();
+	// メインループ
+	while (true) {
+		// 更新
+		Update();
+
+		// 終了リクエストがあったらループを抜ける;
+		if (IsEndRequest()) {
+			break;
+		}
+
+		// 描画
+		Draw();
+	}
+
 	// 終了
 	Finalize();
 }
