@@ -17,6 +17,9 @@
     <ClCompile Include="SceneFactory.cpp">
       <Filter>Game\Scene\SceneFactory</Filter>
     </ClCompile>
+    <ClCompile Include="GameApp.cpp">
+      <Filter>Game\GameApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -58,6 +61,9 @@
     <Filter Include="Game\Scene\SceneManager">
       <UniqueIdentifier>{67101570-96ca-4f5d-a5f9-f075e3a2145d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\GameApp">
+      <UniqueIdentifier>{1e8b72a1-f4e5-4db3-bdc7-5840a27a271b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LaziealFramework.h">
@@ -80,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>Game\Scene\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameApp.h">
+      <Filter>Game\GameApp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

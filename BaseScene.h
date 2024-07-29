@@ -1,7 +1,7 @@
 #pragma once
 
 // 前方宣言
-class SceneManager;
+class cSceneManager;
 
 // シーンの基底クラス
 class cBaseScene {
@@ -16,11 +16,12 @@ public: // 仮想関数
 	virtual void Update() = 0;
 	// 描画
 	virtual void Draw() = 0;
+
 	// シーンマネージャのセット
-	virtual void SetSceneManager(SceneManager* sceneManager) {
+	virtual void SetSceneManager(cSceneManager* sceneManager) {
 		sceneManager_ = sceneManager;
 	}
 private:
 	// シーンマネージャ
-	SceneManager* sceneManager_ = nullptr;
+	cSceneManager* sceneManager_ = nullptr;
 };
