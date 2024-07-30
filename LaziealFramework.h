@@ -1,6 +1,7 @@
 #pragma once
 
 // 前方宣言
+class cWinAPI;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -27,6 +28,12 @@ public: // 公開メンバ関数
 private: // メンバ変数
 	// 終了リクエスト
 	bool endRequest_ = false;
+
+	// 汎用クラスのポインタ
+
+	// WinAPI
+	cWinAPI* win_ = nullptr;
+
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };
