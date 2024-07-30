@@ -34,8 +34,6 @@ void cLaziealFramework::Finalize() {
 }
 
 void cLaziealFramework::Update() {
-	// デバッグ用文字出力
-	cLogger::Log("Lazieal,Update\n");
 	// 基底システムの更新処理を実行
 
 	// ウィンドウにメッセージが来ていたら最優先で処理

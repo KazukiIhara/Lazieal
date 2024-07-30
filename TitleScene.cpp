@@ -21,11 +21,9 @@ void cTitleScene::Finalize() {
 }
 
 void cTitleScene::Update() {
-	// デバッグ用文字
-	cLogger::Log("TitleScene,Update\n");
+	
 }
 
 void cTitleScene::Draw() {
-	// デバッグ用文字
-	cLogger::Log("TitleScene,Draw\n");
+	
 }
