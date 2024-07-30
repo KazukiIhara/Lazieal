@@ -41,6 +41,10 @@ void cGameApp::Update() {
 }
 
 void cGameApp::Draw() {
+	// 基底システムの描画後処理
+	cLaziealFramework::PreDraw();
 	// シーンの描画処理
 	sceneManager_->Draw();
+	// 基底システムの描画後処理
+	cLaziealFramework::PostDraw();
 }

@@ -7,6 +7,7 @@
 // MyHedder
 #include "Logger.h"
 #include "WinAPI.h"
+#include "DirectXCommon.h"
 #include "AbstractSceneFactory.h"
 
 void cLaziealFramework::Initialize() {
@@ -17,6 +18,12 @@ void cLaziealFramework::Initialize() {
 	// WinAPIの生成と初期化
 	win_ = new cWinAPI();
 	win_->Initialize();
+	// DirectXCommonの生成
+	directX_ = new cDirectXCommon();
+	// WinAPIのインスタンスをコピー
+	directX_->SetWinAPI(win_);
+	// DirectXCommonの初期化
+	directX_->Initialize();
 
 }
 
@@ -27,6 +34,9 @@ void cLaziealFramework::Finalize() {
 
 	// シーンファクトリーを開放
 	delete sceneFactory_;
+
+	// DirectXCommonを解放
+	delete directX_;
 
 	// WinAPIの終了と解放
 	win_->Finalize();
@@ -61,4 +71,14 @@ void cLaziealFramework::Run() {
 
 	// 終了
 	Finalize();
+}
+
+void cLaziealFramework::PreDraw() {
+	// DirectX描画前処理
+	directX_->PreDraw();
+}
+
+void cLaziealFramework::PostDraw() {
+	// DirectX描画後処理
+	directX_->PostDraw();
 }
