@@ -19,7 +19,9 @@ uint32_t cTextureManager::AllocateSrvIndex(const std::string& filePath) {
 }
 
 const DirectX::TexMetadata& cTextureManager::GetMetaData(const std::string& filePath) {
-	// TODO: return ステートメントをここに挿入します
+	assert(&GetTexture()[filePath]);
+	Texture& texture = GetTexture()[filePath];
+	return texture.metaData;
 }
 
 
