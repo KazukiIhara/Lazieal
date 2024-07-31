@@ -38,6 +38,9 @@
     <ClCompile Include="ImGuiManager.cpp">
       <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClCompile>
+    <ClCompile Include="ModelSystem.cpp">
+      <Filter>Engine\Object\3d\Model\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -106,6 +109,24 @@
     <Filter Include="Engine\Base\Manager\ImGuiManager">
       <UniqueIdentifier>{1e35ffb2-b7e7-420b-9cbd-70b497afdc51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Object">
+      <UniqueIdentifier>{2b7ecda8-0a1d-4c6a-b2b0-003296b00aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\3d">
+      <UniqueIdentifier>{27a561f9-c62e-4a84-8133-6e11b7073a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\3d\Model">
+      <UniqueIdentifier>{227e4c4f-175d-43e4-941f-0084236b7d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\3d\Model\System">
+      <UniqueIdentifier>{afc35665-b5be-44b5-8957-cf48023825fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shader">
+      <UniqueIdentifier>{c5ad832a-f863-406d-aeaa-2d45a39fb422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Shader\Object3d">
+      <UniqueIdentifier>{350484c4-5b46-48f6-baf7-f329cb93cc26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -150,5 +171,21 @@
     <ClInclude Include="ImGuiManager.h">
       <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClInclude>
+    <ClInclude Include="ModelSystem.h">
+      <Filter>Engine\Object\3d\Model\System</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Object3d.hlsli">
+      <Filter>Engine\Shader\Object3d</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Object3d.PS.hlsl">
+      <Filter>Engine\Shader\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Object3d.VS.hlsl">
+      <Filter>Engine\Shader\Object3d</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
