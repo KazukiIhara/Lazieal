@@ -27,13 +27,16 @@
       <Filter>Engine\Base\DirectX\Common</Filter>
     </ClCompile>
     <ClCompile Include="SrvManager.cpp">
-      <Filter>Engine\Base\SrvManager</Filter>
+      <Filter>Engine\Base\Manager\SrvManager</Filter>
     </ClCompile>
     <ClCompile Include="WinAPI.cpp">
       <Filter>Engine\Base\WinAPI</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\Base\TextureManager</Filter>
+      <Filter>Engine\Base\Manager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiManager.cpp">
+      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,17 +88,23 @@
     <Filter Include="Engine\Base\DirectX\ResourceLeakChecker">
       <UniqueIdentifier>{64e22ff4-980d-4481-98a2-f5d6521b92fe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\SrvManager">
-      <UniqueIdentifier>{3e4cd450-b90a-4c38-ba72-fadc05e26ee8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Base\WinAPI">
       <UniqueIdentifier>{d49fd5b6-8dce-4f04-94fd-2784872e22d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\TextureManager">
-      <UniqueIdentifier>{7e58bf52-09f1-412a-b64d-c077abe94bba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Lazieal\AbstractSceneFactory">
       <UniqueIdentifier>{3cb2877c-66cd-4450-898d-7ab371bac2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager">
+      <UniqueIdentifier>{2c6f0034-f6ef-47c8-a523-53aab3599524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\SrvManager">
+      <UniqueIdentifier>{3e4cd450-b90a-4c38-ba72-fadc05e26ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\TextureManager">
+      <UniqueIdentifier>{7e58bf52-09f1-412a-b64d-c077abe94bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\ImGuiManager">
+      <UniqueIdentifier>{1e35ffb2-b7e7-420b-9cbd-70b497afdc51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,13 +139,16 @@
       <Filter>Engine\Base\DirectX\Common</Filter>
     </ClInclude>
     <ClInclude Include="SrvManager.h">
-      <Filter>Engine\Base\SrvManager</Filter>
+      <Filter>Engine\Base\Manager\SrvManager</Filter>
     </ClInclude>
     <ClInclude Include="WinAPI.h">
       <Filter>Engine\Base\WinAPI</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Engine\Base\TextureManager</Filter>
+      <Filter>Engine\Base\Manager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiManager.h">
+      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

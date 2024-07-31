@@ -38,13 +38,23 @@ public: // 公開メンバ関数
 	// ルートパラメータインデックスと、srv番号に対応したDescriptorTableを取得
 	void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex);
 
+	// srvディスクリプタヒープを取得
+	ID3D12DescriptorHeap* GetDescriptorHeap() const {
+		return descriptorHeap_.Get();
+	}
+
+	// srvディスクリプタのサイズを取得
+	uint32_t GetDescriptorSize() const {
+		return descriptorSize_;
+	}
+
 public: // 公開メンバ変数
 	// 最大SRV数
 	static const uint32_t kMaxSRVCount = 512;
 private: // 非公開メンバ変数
-	// SRV用
+	// DescriptorHeap
 	Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeap_ = nullptr;
-	// SrvDiscriptorのサイズ
+	// Discriptorのサイズ
 	uint32_t descriptorSize_ = 0u;
 	// 使用しているSrvのインデックス
 	uint32_t useIndex = 0;

@@ -112,6 +112,6 @@ void cLazieal::PostDraw() {
 	directX_->PostDraw();
 }
 
-void cLazieal::Load(const std::string& filePath) {
+void cLazieal::LoadTexture(const std::string& filePath) {
 	textureManager_->Load(filePath);
 }

@@ -35,13 +35,15 @@ public: // 公開メンバ関数
 	// 描画後処理
 	void PostDraw();
 public: // 静的メンバ関数
+#pragma region Texture
 	// 画像読み込み関数
-	static void Load(const std::string& filePath);
+	static void LoadTexture(const std::string& filePath);
+
+#pragma endregion
 
 private: // メンバ変数
 	// 終了リクエスト
 	bool endRequest_ = false;
-
 private: // 汎用クラスのポインタ
 	// WinAPI
 	cWinAPI* win_ = nullptr;
