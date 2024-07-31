@@ -3,6 +3,10 @@
 
 #pragma comment(lib,"winmm.lib")
 
+// MyHedder
+#include "ImGuiManager.h"
+
+
 cWinAPI::cWinAPI() {
 }
 
@@ -92,13 +96,19 @@ void cWinAPI::Finalize() {
 }
 
 LRESULT cWinAPI::WindowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
+
+	/*ImGuiでもマウス操作ができるようになるやつ*/
+	if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wparam, lparam)) {
+		return true;
+	}
+
 	// メッセージに応じてゲーム固有の処理を行う
 	switch (msg) {
 		// ウィンドウが破棄された
-		case WM_DESTROY:
-			// OSに対してアプリの終了を伝える
-			PostQuitMessage(0);
-			return 0;
+	case WM_DESTROY:
+		// OSに対してアプリの終了を伝える
+		PostQuitMessage(0);
+		return 0;
 	}
 	// 標準のメッセージ処理を行う
 	return DefWindowProc(hwnd, msg, wparam, lparam);

@@ -1,6 +1,9 @@
 // This
 #include "TitleScene.h"
 
+// ImGui
+#include "externals/imgui/imgui.h"
+
 // MyHedder
 #include "Lazieal.h"
 #include "Logger.h"
@@ -22,7 +25,7 @@ void cTitleScene::Finalize() {
 }
 
 void cTitleScene::Update() {
-
+	ImGui::ShowDemoWindow();
 }
 
 void cTitleScene::Draw() {

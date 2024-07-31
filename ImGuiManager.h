@@ -19,6 +19,16 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(
 
 // imguiマネージャ
 class cImGuiManager {
+public: // インスタンスセット関数
+	void SetWinAPI(cWinAPI* win) {
+		win_ = win;
+	}
+	void SetDirectXCommon(cDirectXCommon* directX) {
+		directX_ = directX;
+	}
+	void SetSrvManager(cSrvManager* srvManager) {
+		srvManager_ = srvManager;
+	}
 public: // 公開メンバ関数
 	cImGuiManager();
 	~cImGuiManager();
@@ -37,6 +47,7 @@ public: // 公開メンバ関数
 
 	// ImGuiの終了処理
 	void Finalize();
+
 private: // インスタンスを受け取る変数
 	// WinAPI
 	cWinAPI* win_ = nullptr;

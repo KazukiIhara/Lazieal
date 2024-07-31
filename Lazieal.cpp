@@ -9,6 +9,7 @@
 #include "WinAPI.h"
 #include "DirectXCommon.h"
 #include "SrvManager.h"
+#include "ImGuiManager.h"
 #include "TextureManager.h"
 #include "AbstractSceneFactory.h"
 
@@ -37,6 +38,18 @@ void cLazieal::Initialize() {
 	srvManager_->SetDirectXCommon(directX_);
 	srvManager_->Initialize();
 
+	// ImGuiManagerの作成
+	imguiManager_ = new cImGuiManager();
+	// WinAPIのインスタンスをセット
+	imguiManager_->SetWinAPI(win_);
+	// DirectXのCommonインスタンスをセット
+	imguiManager_->SetDirectXCommon(directX_);
+	// SrvManagerのインスタンスをセット
+	imguiManager_->SetSrvManager(srvManager_);
+	// ImGuiManagerの初期化
+	imguiManager_->Initialize();
+
+
 	// TextureManagerの生成
 	textureManager_ = new cTextureManager();
 	// DirextXCommonのインスタンスをセット
@@ -59,6 +72,10 @@ void cLazieal::Finalize() {
 	// TextureManagerの開放
 	delete textureManager_;
 
+	// ImGuiManagerの開放
+	imguiManager_->Finalize();
+	delete imguiManager_;
+
 	// SrvManagerを開放
 	delete srvManager_;
 
@@ -77,6 +94,10 @@ void cLazieal::Update() {
 	if (win_->ProcessMessage()) {
 		endRequest_ = true;
 	}
+
+	// ImGui開始処理
+	imguiManager_->BeginFrame();
+
 }
 
 void cLazieal::Run() {
@@ -101,6 +122,8 @@ void cLazieal::Run() {
 }
 
 void cLazieal::PreDraw() {
+	// ImGui内部コマンド生成
+	imguiManager_->EndFrame();
 	// DirectX描画前処理
 	directX_->PreDraw();
 	// SrvManager描画前処理
@@ -108,6 +131,8 @@ void cLazieal::PreDraw() {
 }
 
 void cLazieal::PostDraw() {
+	// ImGui描画処理
+	imguiManager_->Draw();
 	// DirectX描画後処理
 	directX_->PostDraw();
 }

@@ -7,6 +7,7 @@
 class cWinAPI;
 class cDirectXCommon;
 class cSrvManager;
+class cImGuiManager;
 class cTextureManager;
 class cAbstractSceneFactory;
 
@@ -51,6 +52,8 @@ private: // 汎用クラスのポインタ
 	cDirectXCommon* directX_ = nullptr;
 	// SrvManager
 	cSrvManager* srvManager_ = nullptr;
+	// ImGuiManager
+	cImGuiManager* imguiManager_ = nullptr;
 	// TextureManager
 	static cTextureManager* textureManager_;
 	// シーンファクトリー
