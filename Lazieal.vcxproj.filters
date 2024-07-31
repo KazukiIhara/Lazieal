@@ -41,6 +41,9 @@
     <ClCompile Include="ModelSystem.cpp">
       <Filter>Engine\Object\3d\Model\System</Filter>
     </ClCompile>
+    <ClCompile Include="PipelineManager.cpp">
+      <Filter>Engine\Base\Manager\PipelineManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -127,6 +130,9 @@
     <Filter Include="Engine\ShaderFiles\Object3d">
       <UniqueIdentifier>{350484c4-5b46-48f6-baf7-f329cb93cc26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Base\Manager\PipelineManager">
+      <UniqueIdentifier>{6ac31e26-f778-47ec-bde7-3756e7f44fc5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -173,6 +179,9 @@
     </ClInclude>
     <ClInclude Include="ModelSystem.h">
       <Filter>Engine\Object\3d\Model\System</Filter>
+    </ClInclude>
+    <ClInclude Include="PipelineManager.h">
+      <Filter>Engine\Base\Manager\PipelineManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

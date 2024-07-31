@@ -19,6 +19,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelSystem.cpp" />
+    <ClCompile Include="PipelineManager.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SrvManager.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Lazieal.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="ModelSystem.h" />
+    <ClInclude Include="PipelineManager.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SrvManager.h" />
