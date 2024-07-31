@@ -15,7 +15,25 @@ void cTextureManager::Initialize() {
 }
 
 uint32_t cTextureManager::AllocateSrvIndex(const std::string& filePath) {
-	return 0;
+	// 今回ぶち込むテクスチャーの箱
+	Texture& texture = textures_[filePath];
+	DirectX::ScratchImage mipImage_ = LoadTexture(filePath);
+	texture.metaData = mipImage_.GetMetadata();
+	texture.resource = CreateTextureResource(directX_->GetDevice(), texture.metaData);
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource = UploadTextureData(texture.resource.Get(), mipImage_, directX_->GetDevice(), directX_->GetCommandList());
+
+	// コマンドのクローズと実行
+	KickCommand();
+
+	// SRVを作成するDescriptorHeapの場所を決める
+	texture.srvIndex = srvManager_->Allocate();
+	// srvの作成
+	srvManager_->CreateSrvTexture2d(texture.srvIndex, textures_[filePath].resource.Get(), texture.metaData.format, UINT(texture.metaData.mipLevels));
+
+	// テクスチャ枚数上限チェック
+	assert(srvManager_->IsLowerSrvMax());
+
+	return texture.srvIndex;
 }
 
 const DirectX::TexMetadata& cTextureManager::GetMetaData(const std::string& filePath) {

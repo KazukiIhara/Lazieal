@@ -8,6 +8,7 @@
 #include "Logger.h"
 #include "WinAPI.h"
 #include "DirectXCommon.h"
+#include "SrvManager.h"
 #include "AbstractSceneFactory.h"
 
 void cLaziealFramework::Initialize() {
@@ -18,12 +19,20 @@ void cLaziealFramework::Initialize() {
 	// WinAPIの生成と初期化
 	win_ = new cWinAPI();
 	win_->Initialize();
+
 	// DirectXCommonの生成
 	directX_ = new cDirectXCommon();
-	// WinAPIのインスタンスをコピー
+	// WinAPIのインスタンスをセット
 	directX_->SetWinAPI(win_);
 	// DirectXCommonの初期化
 	directX_->Initialize();
+
+	// srvManagerの生成
+	srvManager_ = new cSrvManager();
+	// DirectXのインスタンスをセット
+	srvManager_->SetDirectXCommon(directX_);
+	srvManager_->Initialize();
+
 
 }
 
@@ -34,6 +43,9 @@ void cLaziealFramework::Finalize() {
 
 	// シーンファクトリーを開放
 	delete sceneFactory_;
+
+	// srvManagerを開放
+	delete srvManager_;
 
 	// DirectXCommonを解放
 	delete directX_;
@@ -76,9 +88,12 @@ void cLaziealFramework::Run() {
 void cLaziealFramework::PreDraw() {
 	// DirectX描画前処理
 	directX_->PreDraw();
+	// SrvManager描画前処理
+	srvManager_->PreDraw();
 }
 
 void cLaziealFramework::PostDraw() {
 	// DirectX描画後処理
 	directX_->PostDraw();
+	
 }

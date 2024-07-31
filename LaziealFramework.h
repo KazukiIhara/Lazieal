@@ -3,6 +3,7 @@
 // 前方宣言
 class cWinAPI;
 class cDirectXCommon;
+class cSrvManager;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -39,6 +40,8 @@ private: // 汎用クラスのポインタ
 	cWinAPI* win_ = nullptr;
 	// DirectXCommon
 	cDirectXCommon* directX_ = nullptr;
+	// SrvManager
+	cSrvManager* srvManager_ = nullptr;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

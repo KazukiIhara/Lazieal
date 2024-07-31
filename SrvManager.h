@@ -50,5 +50,5 @@ private: // 非公開メンバ変数
 	uint32_t useIndex = 0;
 private: // インスタンスコピーポインタ
 	// DirectXCommon
-	cDirectXCommon* directX_;
+	cDirectXCommon* directX_ = nullptr;
 };
