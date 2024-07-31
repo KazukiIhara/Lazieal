@@ -121,10 +121,10 @@
     <Filter Include="Engine\Object\3d\Model\System">
       <UniqueIdentifier>{afc35665-b5be-44b5-8957-cf48023825fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Shader">
+    <Filter Include="Engine\ShaderFiles">
       <UniqueIdentifier>{c5ad832a-f863-406d-aeaa-2d45a39fb422}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Shader\Object3d">
+    <Filter Include="Engine\ShaderFiles\Object3d">
       <UniqueIdentifier>{350484c4-5b46-48f6-baf7-f329cb93cc26}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -177,15 +177,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Object3d.hlsli">
-      <Filter>Engine\Shader\Object3d</Filter>
+      <Filter>Engine\ShaderFiles\Object3d</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
-      <Filter>Engine\Shader\Object3d</Filter>
+      <Filter>Engine\ShaderFiles\Object3d</Filter>
     </FxCompile>
     <FxCompile Include="Object3d.VS.hlsl">
-      <Filter>Engine\Shader\Object3d</Filter>
+      <Filter>Engine\ShaderFiles\Object3d</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
