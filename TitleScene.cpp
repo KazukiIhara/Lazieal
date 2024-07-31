@@ -25,6 +25,7 @@ void cTitleScene::Finalize() {
 }
 
 void cTitleScene::Update() {
+	// デモウィンドウを描画
 	ImGui::ShowDemoWindow();
 }
 
