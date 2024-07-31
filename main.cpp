@@ -6,7 +6,7 @@
 
 // MyHedder
 
-#include "LaziealFramework.h"
+#include "Lazieal.h"
 #include "GameApp.h"
 #include "Logger.h"
 
@@ -25,7 +25,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 #endif // DEBUG
 
 	// フレームワークを動的確保
-	std::unique_ptr<cLaziealFramework> game = std::make_unique<cGameApp>();
+	std::unique_ptr<cLazieal> game = std::make_unique<cGameApp>();
 
 	// 実行
 	game->Run();

@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="LaziealFramework.cpp">
+    <ClCompile Include="Lazieal.cpp">
       <Filter>Engine\Lazieal\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
@@ -21,7 +21,22 @@
       <Filter>Game\GameApp</Filter>
     </ClCompile>
     <ClCompile Include="D3DResourceLeakChecker.cpp">
-      <Filter>Engine\Base\ResourceLeakChecker</Filter>
+      <Filter>Engine\Base\DirectX\ResourceLeakChecker</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXCommon.cpp">
+      <Filter>Engine\Base\DirectX\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SrvManager.cpp">
+      <Filter>Engine\Base\Manager\SrvManager</Filter>
+    </ClCompile>
+    <ClCompile Include="WinAPI.cpp">
+      <Filter>Engine\Base\WinAPI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Base\Manager\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiManager.cpp">
+      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,9 +70,6 @@
     <Filter Include="Engine\Base\Logger">
       <UniqueIdentifier>{cacbf317-6f71-4c27-a334-cb84a7e9636f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\AbstractSceneFactory">
-      <UniqueIdentifier>{3cb2877c-66cd-4450-898d-7ab371bac2b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scene\SceneFactory">
       <UniqueIdentifier>{019f258c-ed74-4bbf-bd19-d39247c5acb4}</UniqueIdentifier>
     </Filter>
@@ -67,12 +79,36 @@
     <Filter Include="Game\GameApp">
       <UniqueIdentifier>{1e8b72a1-f4e5-4db3-bdc7-5840a27a271b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\ResourceLeakChecker">
+    <Filter Include="Engine\Base\DirectX">
+      <UniqueIdentifier>{6e11f8d8-d7a1-4f76-9773-95e32418390b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\DirectX\Common">
+      <UniqueIdentifier>{61dfce0a-993e-4119-9c78-91d6df2296af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\DirectX\ResourceLeakChecker">
       <UniqueIdentifier>{64e22ff4-980d-4481-98a2-f5d6521b92fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\WinAPI">
+      <UniqueIdentifier>{d49fd5b6-8dce-4f04-94fd-2784872e22d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\AbstractSceneFactory">
+      <UniqueIdentifier>{3cb2877c-66cd-4450-898d-7ab371bac2b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager">
+      <UniqueIdentifier>{2c6f0034-f6ef-47c8-a523-53aab3599524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\SrvManager">
+      <UniqueIdentifier>{3e4cd450-b90a-4c38-ba72-fadc05e26ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\TextureManager">
+      <UniqueIdentifier>{7e58bf52-09f1-412a-b64d-c077abe94bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Manager\ImGuiManager">
+      <UniqueIdentifier>{1e35ffb2-b7e7-420b-9cbd-70b497afdc51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LaziealFramework.h">
+    <ClInclude Include="Lazieal.h">
       <Filter>Engine\Lazieal\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
@@ -85,7 +121,7 @@
       <Filter>Game\Scene\GameScene\TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="AbstractSceneFactory.h">
-      <Filter>Engine\Base\AbstractSceneFactory</Filter>
+      <Filter>Engine\Lazieal\AbstractSceneFactory</Filter>
     </ClInclude>
     <ClInclude Include="SceneFactory.h">
       <Filter>Game\Scene\SceneFactory</Filter>
@@ -97,7 +133,22 @@
       <Filter>Game\GameApp</Filter>
     </ClInclude>
     <ClInclude Include="D3DResourceLeakChecker.h">
-      <Filter>Engine\Base\ResourceLeakChecker</Filter>
+      <Filter>Engine\Base\DirectX\ResourceLeakChecker</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXCommon.h">
+      <Filter>Engine\Base\DirectX\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SrvManager.h">
+      <Filter>Engine\Base\Manager\SrvManager</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAPI.h">
+      <Filter>Engine\Base\WinAPI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\Base\Manager\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiManager.h">
+      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
