@@ -1,5 +1,8 @@
 #pragma once
 
+// C++
+#include <cstdint>
+
 // MyHedder
 #include "BaseScene.h"
 
@@ -17,7 +20,6 @@ public: // 公開メンバ関数
 	void Update()override;
 	// 描画
 	void Draw()override;
-
 
 private:
 

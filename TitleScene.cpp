@@ -2,6 +2,7 @@
 #include "TitleScene.h"
 
 // MyHedder
+#include "Lazieal.h"
 #include "Logger.h"
 
 cTitleScene::cTitleScene() {
@@ -21,9 +22,9 @@ void cTitleScene::Finalize() {
 }
 
 void cTitleScene::Update() {
-	
+
 }
 
 void cTitleScene::Draw() {
-	
+
 }

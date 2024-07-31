@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="LaziealFramework.cpp">
+    <ClCompile Include="Lazieal.cpp">
       <Filter>Engine\Lazieal\Framework</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
@@ -99,7 +99,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LaziealFramework.h">
+    <ClInclude Include="Lazieal.h">
       <Filter>Engine\Lazieal\Framework</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">

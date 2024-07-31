@@ -14,7 +14,7 @@ cGameApp::~cGameApp() {
 
 void cGameApp::Initialize() {
 	// 基底システムの初期化
-	cLaziealFramework::Initialize();
+	cLazieal::Initialize();
 
 	// シーンファクトリ生成
 	sceneFactory_ = new cSceneFactory();
@@ -30,21 +30,21 @@ void cGameApp::Finalize() {
 	// ゲーム固有の終了処理
 	delete sceneManager_;
 	// 基底システムの終了
-	cLaziealFramework::Finalize();
+	cLazieal::Finalize();
 }
 
 void cGameApp::Update() {
 	// 基底システムの更新
-	cLaziealFramework::Update();
+	cLazieal::Update();
 	// シーンの更新処理
 	sceneManager_->Update();
 }
 
 void cGameApp::Draw() {
 	// 基底システムの描画後処理
-	cLaziealFramework::PreDraw();
+	cLazieal::PreDraw();
 	// シーンの描画処理
 	sceneManager_->Draw();
 	// 基底システムの描画後処理
-	cLaziealFramework::PostDraw();
+	cLazieal::PostDraw();
 }

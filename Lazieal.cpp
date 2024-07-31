@@ -1,5 +1,5 @@
 // This
-#include "LaziealFramework.h"
+#include "Lazieal.h"
 
 // WinAPI
 #include <Windows.h>
@@ -9,9 +9,13 @@
 #include "WinAPI.h"
 #include "DirectXCommon.h"
 #include "SrvManager.h"
+#include "TextureManager.h"
 #include "AbstractSceneFactory.h"
 
-void cLaziealFramework::Initialize() {
+// staticメンバ変数の初期化
+cTextureManager* cLazieal::textureManager_ = nullptr;
+
+void cLazieal::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("Lazieal,Initialized\n");
 	// 基底システムの初期化処理を実行
@@ -27,16 +31,24 @@ void cLaziealFramework::Initialize() {
 	// DirectXCommonの初期化
 	directX_->Initialize();
 
-	// srvManagerの生成
+	// SrvManagerの生成
 	srvManager_ = new cSrvManager();
-	// DirectXのインスタンスをセット
+	// DirectXのCommonインスタンスをセット
 	srvManager_->SetDirectXCommon(directX_);
 	srvManager_->Initialize();
 
+	// TextureManagerの生成
+	textureManager_ = new cTextureManager();
+	// DirextXCommonのインスタンスをセット
+	textureManager_->SetDirectXCommon(directX_);
+	// SrvManagerのインスタンスをセット
+	textureManager_->SetSrvManager(srvManager_);
+	// TextureManagerの初期化
+	textureManager_->Initialize();
 
 }
 
-void cLaziealFramework::Finalize() {
+void cLazieal::Finalize() {
 	// デバッグ用文字出力
 	cLogger::Log("Lazieal,Finalized\n");
 	// 基底システムの解放処理を実行
@@ -44,7 +56,10 @@ void cLaziealFramework::Finalize() {
 	// シーンファクトリーを開放
 	delete sceneFactory_;
 
-	// srvManagerを開放
+	// TextureManagerの開放
+	delete textureManager_;
+
+	// SrvManagerを開放
 	delete srvManager_;
 
 	// DirectXCommonを解放
@@ -55,7 +70,7 @@ void cLaziealFramework::Finalize() {
 	delete win_;
 }
 
-void cLaziealFramework::Update() {
+void cLazieal::Update() {
 	// 基底システムの更新処理を実行
 
 	// ウィンドウにメッセージが来ていたら最優先で処理
@@ -64,7 +79,7 @@ void cLaziealFramework::Update() {
 	}
 }
 
-void cLaziealFramework::Run() {
+void cLazieal::Run() {
 	// 初期化
 	Initialize();
 	// メインループ
@@ -85,15 +100,18 @@ void cLaziealFramework::Run() {
 	Finalize();
 }
 
-void cLaziealFramework::PreDraw() {
+void cLazieal::PreDraw() {
 	// DirectX描画前処理
 	directX_->PreDraw();
 	// SrvManager描画前処理
 	srvManager_->PreDraw();
 }
 
-void cLaziealFramework::PostDraw() {
+void cLazieal::PostDraw() {
 	// DirectX描画後処理
 	directX_->PostDraw();
-	
+}
+
+void cLazieal::Load(const std::string& filePath) {
+	textureManager_->Load(filePath);
 }

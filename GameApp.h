@@ -1,14 +1,14 @@
 #pragma once
 
 // MyHedder
-#include "LaziealFramework.h"
+#include "Lazieal.h"
 
 // 前方宣言
 class cSceneFactory;
 class cSceneManager;
 
 // ゲームクラス
-class cGameApp :public cLaziealFramework {
+class cGameApp :public cLazieal {
 public: // 公開メンバ関数
 	cGameApp();
 	~cGameApp();

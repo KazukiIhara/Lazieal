@@ -26,6 +26,16 @@ public: // 構造体
 		// srvIndex
 		uint32_t srvIndex;
 	};
+public: // インスタンスセット関数
+	// DirectXCommon
+	void SetDirectXCommon(cDirectXCommon* directX) {
+		directX_ = directX;
+	}
+
+	// SrvManager
+	void SetSrvManager(cSrvManager* srvManager) {
+		srvManager_ = srvManager;
+	}
 
 public: // 公開メンバ関数
 	cTextureManager();
@@ -35,7 +45,7 @@ public: // 公開メンバ関数
 	void Initialize();
 
 	// テクスチャのロード
-	uint32_t AllocateSrvIndex(const std::string& filePath);
+	void Load(const std::string& filePath);
 
 	// Textureを渡す
 	std::unordered_map<std::string, Texture>& GetTexture() {
@@ -47,7 +57,7 @@ public: // 公開メンバ関数
 
 private: // 非公開メンバ関数
 	// バッファリソースを作成する
-	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 	// テクスチャー転送用のfence作成
 	void CreateFence();
 	// テクスチャー転送のコマンドを実行する関数
@@ -55,9 +65,9 @@ private: // 非公開メンバ関数
 	// Texture読み込み
 	DirectX::ScratchImage LoadTexture(const std::string& filePath);
 	// テクスチャリソースを作る
-	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTextureResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata);
 	// テクスチャデータを送る
-	Microsoft::WRL::ComPtr<ID3D12Resource> UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages, ID3D12Device* device, ID3D12GraphicsCommandList* commandList);
+	Microsoft::WRL::ComPtr<ID3D12Resource> UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
 
 
 private: // メンバ変数

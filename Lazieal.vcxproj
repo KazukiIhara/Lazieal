@@ -14,7 +14,7 @@
     <ClCompile Include="D3DResourceLeakChecker.cpp" />
     <ClCompile Include="DirectXCommon.cpp" />
     <ClCompile Include="GameApp.cpp" />
-    <ClCompile Include="LaziealFramework.cpp" />
+    <ClCompile Include="Lazieal.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
@@ -30,7 +30,7 @@
     <ClInclude Include="D3DResourceLeakChecker.h" />
     <ClInclude Include="DirectXCommon.h" />
     <ClInclude Include="GameApp.h" />
-    <ClInclude Include="LaziealFramework.h" />
+    <ClInclude Include="Lazieal.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />

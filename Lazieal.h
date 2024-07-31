@@ -1,16 +1,20 @@
 #pragma once
 
+// C++
+#include <string>
+
 // 前方宣言
 class cWinAPI;
 class cDirectXCommon;
 class cSrvManager;
+class cTextureManager;
 class cAbstractSceneFactory;
 
 // フレームワーク
-class cLaziealFramework {
+class cLazieal {
 public: // 仮想関数
 	// 仮想デストラクタ
-	virtual ~cLaziealFramework() = default;
+	virtual ~cLazieal() = default;
 	// 初期化
 	virtual void Initialize();
 	// 終了
@@ -30,6 +34,9 @@ public: // 公開メンバ関数
 	void PreDraw();
 	// 描画後処理
 	void PostDraw();
+public: // 静的メンバ関数
+	// 画像読み込み関数
+	static void Load(const std::string& filePath);
 
 private: // メンバ変数
 	// 終了リクエスト
@@ -42,6 +49,8 @@ private: // 汎用クラスのポインタ
 	cDirectXCommon* directX_ = nullptr;
 	// SrvManager
 	cSrvManager* srvManager_ = nullptr;
+	// TextureManager
+	static cTextureManager* textureManager_;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };
