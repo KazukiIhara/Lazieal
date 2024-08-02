@@ -36,7 +36,7 @@ public: // メンバ関数
 	// 描画
 	void Draw();
 	// モデルの読み込み
-	void LoadObjFileWithAssimp(const std::string& filename, const std::string& directoryPath = "Game/Resources");
+	void LoadModel(const std::string& filename, const std::string& directoryPath = "Game/Resources");
 
 private: // メンバ関数
 #pragma region Vertex
