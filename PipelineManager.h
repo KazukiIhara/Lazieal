@@ -28,6 +28,12 @@ public: // 列挙型
 		kObject3d,
 	};
 
+public: // インスタンスセット関数
+	// DirectXCommon
+	void SetDirectXCommon(cDirectXCommon* directX) {
+		directX_ = directX;
+	}
+
 public: // 公開メンバ変数
 	cPipelineManager();
 	~cPipelineManager();
@@ -105,5 +111,9 @@ private: // メンバ変数
 	Microsoft::WRL::ComPtr<ID3DBlob> model3DVertexShaderBlob_;
 	// Model3D用ピクセルシェーダー
 	Microsoft::WRL::ComPtr<ID3DBlob> model3DPixelShaderBlob_;
+
+private: // インスタンスを受け取るポインタ
+	// DirectX
+	cDirectXCommon* directX_ = nullptr;
 
 };

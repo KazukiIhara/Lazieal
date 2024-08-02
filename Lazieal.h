@@ -9,6 +9,7 @@ class cDirectXCommon;
 class cSrvManager;
 class cImGuiManager;
 class cTextureManager;
+class cPipelineManager;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -56,6 +57,8 @@ private: // 汎用クラスのポインタ
 	cImGuiManager* imguiManager_ = nullptr;
 	// TextureManager
 	static cTextureManager* textureManager_;
+	// グラフィックパイプライン
+	cPipelineManager* pipelineManager_ = nullptr;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

@@ -38,11 +38,11 @@
     <ClCompile Include="ImGuiManager.cpp">
       <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClCompile>
-    <ClCompile Include="ModelSystem.cpp">
-      <Filter>Engine\Object\3d\Model\System</Filter>
-    </ClCompile>
     <ClCompile Include="PipelineManager.cpp">
       <Filter>Engine\Base\Manager\PipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3dSystem.cpp">
+      <Filter>Engine\Object\3d\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,9 +121,6 @@
     <Filter Include="Engine\Object\3d\Model">
       <UniqueIdentifier>{227e4c4f-175d-43e4-941f-0084236b7d51}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Object\3d\Model\System">
-      <UniqueIdentifier>{afc35665-b5be-44b5-8957-cf48023825fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ShaderFiles">
       <UniqueIdentifier>{c5ad832a-f863-406d-aeaa-2d45a39fb422}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="Engine\Base\Manager\PipelineManager">
       <UniqueIdentifier>{6ac31e26-f778-47ec-bde7-3756e7f44fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\3d\System">
+      <UniqueIdentifier>{a3db4257-7497-4f3f-80b3-c2b1b7f478b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -177,11 +177,11 @@
     <ClInclude Include="ImGuiManager.h">
       <Filter>Engine\Base\Manager\ImGuiManager</Filter>
     </ClInclude>
-    <ClInclude Include="ModelSystem.h">
-      <Filter>Engine\Object\3d\Model\System</Filter>
-    </ClInclude>
     <ClInclude Include="PipelineManager.h">
       <Filter>Engine\Base\Manager\PipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3dSystem.h">
+      <Filter>Engine\Object\3d\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@
 #include "SrvManager.h"
 #include "ImGuiManager.h"
 #include "TextureManager.h"
+#include "PipelineManager.h"
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
@@ -21,23 +22,30 @@ void cLazieal::Initialize() {
 	cLogger::Log("Lazieal,Initialized\n");
 	// 基底システムの初期化処理を実行
 
+#pragma region WinAPI
 	// WinAPIの生成と初期化
 	win_ = new cWinAPI();
 	win_->Initialize();
+#pragma endregion
 
+#pragma region DirectXCommon
 	// DirectXCommonの生成
 	directX_ = new cDirectXCommon();
 	// WinAPIのインスタンスをセット
 	directX_->SetWinAPI(win_);
 	// DirectXCommonの初期化
 	directX_->Initialize();
+#pragma endregion
 
+#pragma region SrvManager
 	// SrvManagerの生成
 	srvManager_ = new cSrvManager();
 	// DirectXのCommonインスタンスをセット
 	srvManager_->SetDirectXCommon(directX_);
 	srvManager_->Initialize();
+#pragma endregion
 
+#pragma region ImGuiManager
 	// ImGuiManagerの作成
 	imguiManager_ = new cImGuiManager();
 	// WinAPIのインスタンスをセット
@@ -48,8 +56,9 @@ void cLazieal::Initialize() {
 	imguiManager_->SetSrvManager(srvManager_);
 	// ImGuiManagerの初期化
 	imguiManager_->Initialize();
+#pragma endregion
 
-
+#pragma region TextureManager
 	// TextureManagerの生成
 	textureManager_ = new cTextureManager();
 	// DirextXCommonのインスタンスをセット
@@ -58,6 +67,16 @@ void cLazieal::Initialize() {
 	textureManager_->SetSrvManager(srvManager_);
 	// TextureManagerの初期化
 	textureManager_->Initialize();
+#pragma endregion
+
+#pragma region GraphicsPipelineManager
+	// GraphicsPipelineManagerの生成
+	pipelineManager_ = new cPipelineManager();
+	// DirectXCommonのインスタンスをセット
+	pipelineManager_->SetDirectXCommon(directX_);
+	// GraphicsPipelineManagerの初期化
+	pipelineManager_->Initialize();
+#pragma endregion
 
 }
 
@@ -68,6 +87,9 @@ void cLazieal::Finalize() {
 
 	// シーンファクトリーを開放
 	delete sceneFactory_;
+
+	// PipelineManagerの解放
+	delete pipelineManager_;
 
 	// TextureManagerの開放
 	delete textureManager_;
