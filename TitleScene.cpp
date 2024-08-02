@@ -31,4 +31,7 @@ void cTitleScene::Update() {
 
 void cTitleScene::Draw() {
 
+	// 3Dオブジェクト描画前処理
+	cLazieal::PreDrawObject3D();
+
 }

@@ -12,12 +12,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3DResourceLeakChecker.cpp" />
+    <ClCompile Include="DebugCamera.cpp" />
     <ClCompile Include="DirectXCommon.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="Lazieal.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MathFunction.cpp" />
+    <ClCompile Include="MathOperator.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object3dSystem.cpp" />
     <ClCompile Include="PipelineManager.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
@@ -26,24 +30,35 @@
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WinAPI.cpp" />
+    <ClCompile Include="WorldTransform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="D3DResourceLeakChecker.h" />
+    <ClInclude Include="DebugCamera.h" />
     <ClInclude Include="DirectXCommon.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="ImGuiManager.h" />
     <ClInclude Include="Lazieal.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="MathFunction.h" />
+    <ClInclude Include="MathOperator.h" />
+    <ClInclude Include="Matrix4x4.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Object3dSystem.h" />
+    <ClInclude Include="ObjectStruct.h" />
     <ClInclude Include="PipelineManager.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SrvManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vector4.h" />
     <ClInclude Include="WinAPI.h" />
+    <ClInclude Include="WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">

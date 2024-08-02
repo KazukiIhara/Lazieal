@@ -44,6 +44,21 @@
     <ClCompile Include="Object3dSystem.cpp">
       <Filter>Engine\Object\3d\System</Filter>
     </ClCompile>
+    <ClCompile Include="WorldTransform.cpp">
+      <Filter>Engine\Lazieal\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="MathFunction.cpp">
+      <Filter>Engine\Lazieal\Math\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MathOperator.cpp">
+      <Filter>Engine\Lazieal\Math\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Engine\Lazieal\DebugCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Engine\Object\3d\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -133,6 +148,24 @@
     <Filter Include="Engine\Object\3d\System">
       <UniqueIdentifier>{a3db4257-7497-4f3f-80b3-c2b1b7f478b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lazieal\WorldTransform">
+      <UniqueIdentifier>{478be496-63f9-41ce-891d-2fcdeda8f175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Math">
+      <UniqueIdentifier>{cdabd621-1f3c-4dc5-9a72-ee335e165a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Math\Hedder">
+      <UniqueIdentifier>{d4816ad5-3d29-40d8-b357-aba4ecdef27b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Math\Source">
+      <UniqueIdentifier>{c400381d-e7fa-4b28-a334-9216e2126f4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\DebugCamera">
+      <UniqueIdentifier>{2052e617-0fdc-4710-a6fe-0c3028ae043c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Object\3d\Struct">
+      <UniqueIdentifier>{062f4045-0b95-44f6-ba15-e9b1e7fb6669}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -182,6 +215,36 @@
     </ClInclude>
     <ClInclude Include="Object3dSystem.h">
       <Filter>Engine\Object\3d\System</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldTransform.h">
+      <Filter>Engine\Lazieal\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="MathFunction.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="MathOperator.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4x4.h">
+      <Filter>Engine\Lazieal\Math\Hedder</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Engine\Lazieal\DebugCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Engine\Object\3d\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectStruct.h">
+      <Filter>Engine\Object\3d\Struct</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

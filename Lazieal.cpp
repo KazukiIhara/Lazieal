@@ -12,10 +12,13 @@
 #include "ImGuiManager.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
+#include "DebugCamera.h"
+#include "Object3dSystem.h"
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
 cTextureManager* cLazieal::textureManager_ = nullptr;
+cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
 
 void cLazieal::Initialize() {
 	// デバッグ用文字
@@ -78,6 +81,26 @@ void cLazieal::Initialize() {
 	pipelineManager_->Initialize();
 #pragma endregion
 
+#pragma region DebugCamera
+	// DebugCameraを生成
+	debugCamera_ = new cDebugCamera();
+	// DebugCameraのトランスフォームを初期化
+	debugCameraTransform_.Initialize();
+	// DebugCameraを初期化
+	debugCamera_->Initialize(&debugCameraTransform_);
+#pragma endregion
+
+#pragma region Object3dSystem
+	// Object3dSystemの生成
+	object3dSystem_ = new cObject3dSystem();
+	// DirectXCommonのインスタンスをセット
+	object3dSystem_->SetDirectXCommon(directX_);
+	// GraphicsPipelineManagerのインスタンスをセット
+	object3dSystem_->SetPipelineManager(pipelineManager_);
+	// デフォルトカメラをセット
+	object3dSystem_->SetDefaultCamera(debugCamera_);
+#pragma endregion
+
 }
 
 void cLazieal::Finalize() {
@@ -87,6 +110,12 @@ void cLazieal::Finalize() {
 
 	// シーンファクトリーを開放
 	delete sceneFactory_;
+
+	// Object3dSystemの解放
+	delete object3dSystem_;
+
+	// DebugCameraの開放
+	delete debugCamera_;
 
 	// PipelineManagerの解放
 	delete pipelineManager_;
@@ -161,4 +190,8 @@ void cLazieal::PostDraw() {
 
 void cLazieal::LoadTexture(const std::string& filePath) {
 	textureManager_->Load(filePath);
+}
+
+void cLazieal::PreDrawObject3D() {
+	object3dSystem_->PreDraw();
 }

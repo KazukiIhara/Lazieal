@@ -3,6 +3,9 @@
 // C++
 #include <string>
 
+// MyHedder
+#include "WorldTransform.h"
+
 // 前方宣言
 class cWinAPI;
 class cDirectXCommon;
@@ -10,6 +13,8 @@ class cSrvManager;
 class cImGuiManager;
 class cTextureManager;
 class cPipelineManager;
+class cDebugCamera;
+class cObject3dSystem;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -40,8 +45,13 @@ public: // 静的メンバ関数
 #pragma region Texture
 	// 画像読み込み関数
 	static void LoadTexture(const std::string& filePath);
-
 #pragma endregion
+
+#pragma region Object3d
+	// 3dオブジェクト描画前処理
+	static void PreDrawObject3D();
+#pragma endregion
+
 
 private: // メンバ変数
 	// 終了リクエスト
@@ -59,6 +69,12 @@ private: // 汎用クラスのポインタ
 	static cTextureManager* textureManager_;
 	// グラフィックパイプライン
 	cPipelineManager* pipelineManager_ = nullptr;
+	// デバッグカメラ
+	cDebugCamera* debugCamera_ = nullptr;
+	// デバッグカメラのトランスフォーム
+	cWorldTransform debugCameraTransform_{};
+	// Object3dSystem
+	static cObject3dSystem* object3dSystem_;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };
