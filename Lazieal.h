@@ -81,6 +81,8 @@ public: // 静的メンバ関数
 #pragma region Object3d
 	// 3dオブジェクト描画前処理
 	static void PreDrawObject3D();
+	// UVなし3Dオブジェクト描画前処理
+	static void PreDrawObject3DUnUV();
 	// 3dオブジェクトのデフォルトカメラ取得
 	static cCamera* GetDefaultCamera();
 #pragma endregion

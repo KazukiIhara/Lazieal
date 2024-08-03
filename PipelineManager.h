@@ -26,6 +26,7 @@ public: // 列挙型
 	// パイプラインの種類
 	enum ePipelineState {
 		kObject3d,
+		kObject3dUnUV
 	};
 
 public: // インスタンスセット関数
@@ -85,15 +86,28 @@ public: // 公開メンバ変数
 	D3D12_RASTERIZER_DESC Object3DRasterizerStateSetting();
 	// シェーダーたちをコンパイルする関数
 	void CompileObject3DShaders();
-
 #pragma endregion
 
+#pragma region Object3DUnUV
+	// ルートシグネイチャを作成する関数
+	void CreateObject3DUnUVRootSignature();
+	// パイプラインを生成する関数
+	void CreateObject3DUnUVGrapchicsPipelineStateObject();
+	// DepthStencilStateの設定
+	D3D12_DEPTH_STENCIL_DESC Object3DUnUVDepthStecilDescSetting();
+	// InputLayoutの設定
+	D3D12_INPUT_LAYOUT_DESC Object3DUnUVInputLayoutSetting();
+	// RasterizerStateの設定
+	D3D12_RASTERIZER_DESC Object3DUnUVRasterizerStateSetting();
+	// シェーダーたちをコンパイルする関数
+	void CompileObject3DUnUVShaders();
+#pragma endregion
 
 private: // 静的メンバ変数
 	// ブレンドモードの数
 	static const uint32_t kBlendModeNum = 6;
 	// パイプラインの種類の数
-	static const uint32_t kPipelineStateNum = 1;
+	static const uint32_t kPipelineStateNum = 2;
 
 private: // メンバ変数
 
@@ -102,15 +116,28 @@ private: // メンバ変数
 	// グラフィックスパイプライン
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> graphicsPipelineState_[kPipelineStateNum][kBlendModeNum];
 
+	// シグネイチャの塊
+	ID3DBlob* signatureBlob = nullptr;
+	ID3DBlob* errorBlob = nullptr;
+
 	// シェーダー
 	IDxcUtils* dxcUtils = nullptr;
 	IDxcCompiler3* dxcCompiler = nullptr;
 	IDxcIncludeHandler* includeHandler = nullptr;
 
-	// Model3D用頂点シェーダー
-	Microsoft::WRL::ComPtr<ID3DBlob> model3DVertexShaderBlob_;
-	// Model3D用ピクセルシェーダー
-	Microsoft::WRL::ComPtr<ID3DBlob> model3DPixelShaderBlob_;
+#pragma region Object3d
+	// Object3D用頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object3DVertexShaderBlob_;
+	// Object3D用ピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object3DPixelShaderBlob_;
+#pragma endregion
+
+#pragma region Object3dUnUV
+	// Object3DUnUV用頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object3DUnUVVertexShaderBlob_;
+	// Object3D用UnUvピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object3DUnUVPixelShaderBlob_;
+#pragma endregion
 
 private: // インスタンスを受け取るポインタ
 	// DirectX

@@ -251,6 +251,10 @@ void cLazieal::PreDrawObject3D() {
 	object3dSystem_->PreDraw();
 }
 
+void cLazieal::PreDrawObject3DUnUV() {
+	object3dSystem_->PreDrawUnUV();
+}
+
 cCamera* cLazieal::GetDefaultCamera() {
 	return object3dSystem_->GetDefaultCamera();
 }

@@ -14,16 +14,17 @@
 // 3Dモデル
 class cModel {
 public: // 構造体
-	// マテリアルデータ
+	// UVありマテリアルデータ
 	struct sMaterialData {
 		std::string textureFilePath;
 		Vector4 color;
-		bool isHaveUV;
+		bool haveUV_;
 	};
 
-	// モデルデータ
+	// UVありモデルデータ
 	struct sModelData {
 		std::vector<sVertexData3D> vertices;
+		std::vector<sVertexData3DUnUV> verticesUnUV;
 		sMaterialData material;
 	};
 
@@ -65,8 +66,11 @@ private: // メンバ変数
 #pragma region 頂点
 	/*頂点リソース*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource_ = nullptr;
-	/*頂点データ*/
+	// UVあり頂点データ
 	sVertexData3D* vertexData_ = nullptr;
+	// UVなし頂点データ
+	sVertexData3DUnUV* vertexDataUnUV_ = nullptr;
+
 	/*VBV*/
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
 #pragma endregion
@@ -81,4 +85,5 @@ private: // メンバ変数
 	/*uvTransform*/
 	sUVTransform uvTransform_;
 #pragma endregion
+
 };

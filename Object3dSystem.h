@@ -25,6 +25,9 @@ public: // 公開メンバ関数
 	// 描画前処理
 	void PreDraw();
 
+	// UVなし描画前処理
+	void PreDrawUnUV();
+
 	// デフォルトカメラを取得
 	cCamera* GetDefaultCamera()const {
 		return defaultCamera_;

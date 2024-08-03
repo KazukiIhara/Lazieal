@@ -18,24 +18,6 @@ void cTitleScene::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Initialized\n");
 
-
-#pragma region suzanne
-	// モデル読み込み
-	cLazieal::LoadModel("suzanne");
-
-	// スザンヌのトランスフォーム
-	suzanneTransform_.Initialize();
-	suzanneTransform_.translate = { -1.0f,0.0f,10.0f };
-
-	// スザンヌ初期化
-	suzanne_ = new cObject3D();
-	suzanne_->Initialize();
-	suzanne_->SetModel("suzanne");
-	suzanne_->SetTranslate(suzanneTransform_.translate);
-
-#pragma endregion
-
-
 #pragma region Teapot
 	// モデル読み込み
 	cLazieal::LoadModel("teapot");
@@ -53,6 +35,23 @@ void cTitleScene::Initialize() {
 #pragma endregion
 
 
+#pragma region suzanne
+	// モデル読み込み
+	cLazieal::LoadModel("suzanne");
+
+	// スザンヌのトランスフォーム
+	suzanneTransform_.Initialize();
+	suzanneTransform_.translate = { -1.0f,0.0f,10.0f };
+	suzanneTransform_.rotate = { 0.0f,1.0f,0.0f };
+
+	// スザンヌ初期化
+	suzanne_ = new cObject3D();
+	suzanne_->Initialize();
+	suzanne_->SetModel("suzanne");
+	suzanne_->SetTranslate(suzanneTransform_.translate);
+	suzanne_->SetRotate(suzanneTransform_.rotate);
+
+#pragma endregion
 
 }
 
@@ -81,6 +80,9 @@ void cTitleScene::Draw() {
 
 	// ティーポット描画
 	teapot_->Draw();
+
+	// UVなし3Dオブジェクト描画前処理
+	cLazieal::PreDrawObject3DUnUV();
 	// suzanne描画
-	suzanne_->Draw();
+	suzanne_->DrawUnUV();
 }

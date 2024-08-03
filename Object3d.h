@@ -25,7 +25,7 @@ public:
 	void Update();
 	// 描画
 	void Draw(cPipelineManager::eBlendMode blendMode = cPipelineManager::kBlendModeNormal);
-
+	void DrawUnUV(cPipelineManager::eBlendMode blendMode = cPipelineManager::kBlendModeNormal);
 private:
 
 #pragma region WVP

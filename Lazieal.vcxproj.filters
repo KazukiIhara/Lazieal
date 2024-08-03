@@ -184,6 +184,9 @@
     <Filter Include="Engine\Lazieal\PunctualLight">
       <UniqueIdentifier>{81ad03e8-eb35-4cb1-80cf-d4694322c4f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ShaderFiles\Object3dUnUV">
+      <UniqueIdentifier>{fe5475fa-14cd-4f08-b09a-267100baf54d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -278,6 +281,9 @@
     <None Include="Object3d.hlsli">
       <Filter>Engine\ShaderFiles\Object3d</Filter>
     </None>
+    <None Include="Object3dUnUV.hlsli">
+      <Filter>Engine\ShaderFiles\Object3dUnUV</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -285,6 +291,12 @@
     </FxCompile>
     <FxCompile Include="Object3d.VS.hlsl">
       <Filter>Engine\ShaderFiles\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Object3dUnUV.PS.hlsl">
+      <Filter>Engine\ShaderFiles\Object3dUnUV</Filter>
+    </FxCompile>
+    <FxCompile Include="Object3dUnUV.VS.hlsl">
+      <Filter>Engine\ShaderFiles\Object3dUnUV</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

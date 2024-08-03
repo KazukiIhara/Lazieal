@@ -49,14 +49,18 @@ void cModel::Update() {
 }
 
 void cModel::Draw() {
-	//VBVを設定
+	// VBVを設定
 	cLazieal::GetDirectXCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView_);
 	// マテリアルCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(0, materialResource_->GetGPUVirtualAddress());
-	// SRVセット
-	cLazieal::SetGraphicsRootDescriptorTable(2, cLazieal::GetTexture()[modelData.material.textureFilePath].srvIndex);
-	//描画！(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
-	cLazieal::GetDirectXCommandList()->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
+	if (modelData.material.haveUV_) {
+		// SRVセット
+		cLazieal::SetGraphicsRootDescriptorTable(3, cLazieal::GetTexture()[modelData.material.textureFilePath].srvIndex);
+		// 描画！(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
+		cLazieal::GetDirectXCommandList()->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
+	} else {
+		cLazieal::GetDirectXCommandList()->DrawInstanced(UINT(modelData.verticesUnUV.size()), 1, 0, 0);
+	}
 }
 
 void cModel::LoadModel(const std::string& filename, const std::string& directoryPath) {
@@ -71,7 +75,9 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないmeshは今回は非対応
+
 		if (mesh->HasTextureCoords(0)) { // uvあり
+			modelData.material.haveUV_ = true;
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 				aiFace& face = mesh->mFaces[faceIndex];
 				assert(face.mNumIndices == 3);
@@ -93,6 +99,7 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 			}
 
 		} else { // uvなし
+			modelData.material.haveUV_ = false;
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 				aiFace& face = mesh->mFaces[faceIndex];
 				assert(face.mNumIndices == 3);
@@ -101,14 +108,13 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 					uint32_t vertexIndex = face.mIndices[element];
 					aiVector3D& position = mesh->mVertices[vertexIndex];
 					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					sVertexData3D vertex;
+					sVertexData3DUnUV vertex;
 					vertex.position = { position.x,position.y,position.z,1.0f };
 					vertex.normal = { normal.x,normal.y,normal.z };
-					vertex.texcoord = { 0.0f,0.0f };
 					// aiProcess_makeLeftHandedはz+=-1で、右手->左手に変換するので手動で対処
 					vertex.position.x *= -1.0f;
 					vertex.normal.x *= -1.0f;
-					modelData.vertices.push_back(vertex);
+					modelData.verticesUnUV.push_back(vertex);
 				}
 			}
 
@@ -124,29 +130,47 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 			modelData.material.textureFilePath = fileDirectoryPath + "/" + textureFilePath.C_Str();
-			modelData.material.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 			cLazieal::LoadTexture(modelData.material.textureFilePath);
 		}
 	}
+
+	modelData.material.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 }
 
 void cModel::CreateVertexResource() {
-	vertexResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(sVertexData3D) * modelData.vertices.size());
+	if (modelData.material.haveUV_) {
+		vertexResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(sVertexData3D) * modelData.vertices.size());
+	} else {
+		vertexResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(sVertexData3DUnUV) * modelData.verticesUnUV.size());
+	}
 }
 
 void cModel::CreateVretexBufferView() {
 	//リソースの先頭アドレスから使う
 	vertexBufferView_.BufferLocation = vertexResource_->GetGPUVirtualAddress();
-	//使用するリソースのサイズ
-	vertexBufferView_.SizeInBytes = UINT(sizeof(sVertexData3D) * modelData.vertices.size());
-	//1頂点あたりのサイズ
-	vertexBufferView_.StrideInBytes = sizeof(sVertexData3D);
+	if (modelData.material.haveUV_) {
+		//使用するリソースのサイズ
+		vertexBufferView_.SizeInBytes = UINT(sizeof(sVertexData3D) * modelData.vertices.size());
+		//1頂点あたりのサイズ
+		vertexBufferView_.StrideInBytes = sizeof(sVertexData3D);
+	} else {
+		//使用するリソースのサイズ
+		vertexBufferView_.SizeInBytes = UINT(sizeof(sVertexData3DUnUV) * modelData.verticesUnUV.size());
+		//1頂点あたりのサイズ
+		vertexBufferView_.StrideInBytes = sizeof(sVertexData3DUnUV);
+	}
 }
 
 void cModel::MapVertexData() {
-	vertexData_ = nullptr;
-	vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
-	std::memcpy(vertexData_, modelData.vertices.data(), sizeof(sVertexData3D) * modelData.vertices.size());
+	if (modelData.material.haveUV_) {
+		vertexData_ = nullptr;
+		vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexData_));
+		std::memcpy(vertexData_, modelData.vertices.data(), sizeof(sVertexData3D) * modelData.vertices.size());
+	} else {
+		vertexDataUnUV_ = nullptr;
+		vertexResource_->Map(0, nullptr, reinterpret_cast<void**>(&vertexDataUnUV_));
+		std::memcpy(vertexDataUnUV_, modelData.verticesUnUV.data(), sizeof(sVertexData3DUnUV) * modelData.verticesUnUV.size());
+	}
 }
 
 void cModel::CreateMaterialResource() {

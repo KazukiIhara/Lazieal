@@ -43,6 +43,12 @@ struct sMaterial3D {
 	float shininess;
 };
 
+// UVなし3D頂点データ用構造体
+struct sVertexData3DUnUV {
+	Vector4 position;
+	Vector3 normal;
+};
+
 // トランスフォーメーション構造体
 struct sTransformationMatrix {
 	Matrix4x4 WVP;

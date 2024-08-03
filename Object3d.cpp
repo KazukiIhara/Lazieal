@@ -74,7 +74,21 @@ void cObject3D::Draw(cPipelineManager::eBlendMode blendMode) {
 	// wvp用のCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
 	// PunctualLight
-	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(3, punctualLightResource_->GetGPUVirtualAddress());
+	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
+
+	// 3Dモデルが割り当てられていれば描画する
+	if (model) {
+		model->Draw();
+	}
+}
+
+void cObject3D::DrawUnUV(cPipelineManager::eBlendMode blendMode) {
+	// PSOを設定
+	cLazieal::GetDirectXCommandList()->SetPipelineState(cLazieal::GetPipelineState(cPipelineManager::kObject3dUnUV, blendMode));
+	// wvp用のCBufferの場所を設定
+	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
+	// PunctualLight
+	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
 
 	// 3Dモデルが割り当てられていれば描画する
 	if (model) {
