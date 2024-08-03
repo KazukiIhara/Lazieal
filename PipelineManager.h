@@ -47,7 +47,7 @@ public: // 公開メンバ変数
 	}
 
 	// パイプラインステイトのゲッター
-	ID3D12PipelineState* GetObject3DPipelineState(ePipelineState pipelineState, eBlendMode blendMode);
+	ID3D12PipelineState* GetPipelineState(ePipelineState pipelineState, eBlendMode blendMode);
 
 #pragma region Common
 	// BlendStateの設定

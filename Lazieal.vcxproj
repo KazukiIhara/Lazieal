@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D3DResourceLeakChecker.cpp" />
-    <ClCompile Include="DebugCamera.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectXCommon.cpp" />
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
@@ -22,8 +22,11 @@
     <ClCompile Include="MathFunction.cpp" />
     <ClCompile Include="MathOperator.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="Object3d.cpp" />
     <ClCompile Include="Object3dSystem.cpp" />
     <ClCompile Include="PipelineManager.cpp" />
+    <ClCompile Include="PunctualLight.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SrvManager.cpp" />
@@ -36,7 +39,7 @@
     <ClInclude Include="AbstractSceneFactory.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="D3DResourceLeakChecker.h" />
-    <ClInclude Include="DebugCamera.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DirectXCommon.h" />
     <ClInclude Include="GameApp.h" />
     <ClInclude Include="ImGuiManager.h" />
@@ -46,9 +49,12 @@
     <ClInclude Include="MathOperator.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="Object3d.h" />
     <ClInclude Include="Object3dSystem.h" />
     <ClInclude Include="ObjectStruct.h" />
     <ClInclude Include="PipelineManager.h" />
+    <ClInclude Include="PunctualLight.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SrvManager.h" />

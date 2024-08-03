@@ -12,7 +12,7 @@
       <Filter>Game\Scene\GameScene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Game\Scene\SceneManager</Filter>
+      <Filter>Engine\Lazieal\Scene\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="SceneFactory.cpp">
       <Filter>Game\Scene\SceneFactory</Filter>
@@ -27,22 +27,22 @@
       <Filter>Engine\Base\DirectX\Common</Filter>
     </ClCompile>
     <ClCompile Include="SrvManager.cpp">
-      <Filter>Engine\Base\Manager\SrvManager</Filter>
+      <Filter>Engine\Lazieal\Manager\SrvManager</Filter>
     </ClCompile>
     <ClCompile Include="WinAPI.cpp">
       <Filter>Engine\Base\WinAPI</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\Base\Manager\TextureManager</Filter>
+      <Filter>Engine\Lazieal\Manager\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="ImGuiManager.cpp">
-      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
+      <Filter>Engine\Lazieal\Manager\ImGuiManager</Filter>
     </ClCompile>
     <ClCompile Include="PipelineManager.cpp">
-      <Filter>Engine\Base\Manager\PipelineManager</Filter>
+      <Filter>Engine\Lazieal\Manager\PipelineManager</Filter>
     </ClCompile>
     <ClCompile Include="Object3dSystem.cpp">
-      <Filter>Engine\Object\3d\System</Filter>
+      <Filter>Engine\Lazieal\3d\System</Filter>
     </ClCompile>
     <ClCompile Include="WorldTransform.cpp">
       <Filter>Engine\Lazieal\WorldTransform</Filter>
@@ -53,11 +53,20 @@
     <ClCompile Include="MathOperator.cpp">
       <Filter>Engine\Lazieal\Math\Source</Filter>
     </ClCompile>
-    <ClCompile Include="DebugCamera.cpp">
-      <Filter>Engine\Lazieal\DebugCamera</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\Lazieal\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Model.cpp">
-      <Filter>Engine\Object\3d\Model</Filter>
+      <Filter>Engine\Lazieal\3d\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>Engine\Lazieal\Manager\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3d.cpp">
+      <Filter>Engine\Lazieal\3d\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="PunctualLight.cpp">
+      <Filter>Engine\Lazieal\PunctualLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +78,6 @@
     </Filter>
     <Filter Include="Game\Scene">
       <UniqueIdentifier>{1d2f3f8a-8f67-4575-a73a-4e41f7bd5a56}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\BaseScene">
-      <UniqueIdentifier>{d277c258-0127-4a0b-91da-c6e3becdbd16}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\Scene\GameScene">
       <UniqueIdentifier>{f7d33aa6-f8ba-4f0d-9128-b198b56886df}</UniqueIdentifier>
@@ -88,14 +94,8 @@
     <Filter Include="Engine\Base">
       <UniqueIdentifier>{446292a9-fe88-4f45-9b9d-f8d9204d90e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\Logger">
-      <UniqueIdentifier>{cacbf317-6f71-4c27-a334-cb84a7e9636f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game\Scene\SceneFactory">
       <UniqueIdentifier>{019f258c-ed74-4bbf-bd19-d39247c5acb4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Scene\SceneManager">
-      <UniqueIdentifier>{67101570-96ca-4f5d-a5f9-f075e3a2145d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\GameApp">
       <UniqueIdentifier>{1e8b72a1-f4e5-4db3-bdc7-5840a27a271b}</UniqueIdentifier>
@@ -115,38 +115,11 @@
     <Filter Include="Engine\Lazieal\AbstractSceneFactory">
       <UniqueIdentifier>{3cb2877c-66cd-4450-898d-7ab371bac2b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\Manager">
-      <UniqueIdentifier>{2c6f0034-f6ef-47c8-a523-53aab3599524}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Base\Manager\SrvManager">
-      <UniqueIdentifier>{3e4cd450-b90a-4c38-ba72-fadc05e26ee8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Base\Manager\TextureManager">
-      <UniqueIdentifier>{7e58bf52-09f1-412a-b64d-c077abe94bba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Base\Manager\ImGuiManager">
-      <UniqueIdentifier>{1e35ffb2-b7e7-420b-9cbd-70b497afdc51}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Object">
-      <UniqueIdentifier>{2b7ecda8-0a1d-4c6a-b2b0-003296b00aa9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Object\3d">
-      <UniqueIdentifier>{27a561f9-c62e-4a84-8133-6e11b7073a01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Object\3d\Model">
-      <UniqueIdentifier>{227e4c4f-175d-43e4-941f-0084236b7d51}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ShaderFiles">
       <UniqueIdentifier>{c5ad832a-f863-406d-aeaa-2d45a39fb422}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\ShaderFiles\Object3d">
       <UniqueIdentifier>{350484c4-5b46-48f6-baf7-f329cb93cc26}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Base\Manager\PipelineManager">
-      <UniqueIdentifier>{6ac31e26-f778-47ec-bde7-3756e7f44fc5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Object\3d\System">
-      <UniqueIdentifier>{a3db4257-7497-4f3f-80b3-c2b1b7f478b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Lazieal\WorldTransform">
       <UniqueIdentifier>{478be496-63f9-41ce-891d-2fcdeda8f175}</UniqueIdentifier>
@@ -160,11 +133,56 @@
     <Filter Include="Engine\Lazieal\Math\Source">
       <UniqueIdentifier>{c400381d-e7fa-4b28-a334-9216e2126f4c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Lazieal\DebugCamera">
+    <Filter Include="Engine\Lazieal\3d">
+      <UniqueIdentifier>{27a561f9-c62e-4a84-8133-6e11b7073a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\3d\Model">
+      <UniqueIdentifier>{227e4c4f-175d-43e4-941f-0084236b7d51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\3d\System">
+      <UniqueIdentifier>{a3db4257-7497-4f3f-80b3-c2b1b7f478b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\3d\Struct">
+      <UniqueIdentifier>{062f4045-0b95-44f6-ba15-e9b1e7fb6669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\3d\Object">
+      <UniqueIdentifier>{0aa91e38-cdf2-4b0d-a8d9-d0e56123ff25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Scene">
+      <UniqueIdentifier>{73726646-808c-4774-97c7-952dbe5c02f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Scene\BaseScene">
+      <UniqueIdentifier>{d277c258-0127-4a0b-91da-c6e3becdbd16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Scene\SceneManager">
+      <UniqueIdentifier>{67101570-96ca-4f5d-a5f9-f075e3a2145d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Logger">
+      <UniqueIdentifier>{cacbf317-6f71-4c27-a334-cb84a7e9636f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager">
+      <UniqueIdentifier>{2c6f0034-f6ef-47c8-a523-53aab3599524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager\SrvManager">
+      <UniqueIdentifier>{3e4cd450-b90a-4c38-ba72-fadc05e26ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager\TextureManager">
+      <UniqueIdentifier>{7e58bf52-09f1-412a-b64d-c077abe94bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager\ImGuiManager">
+      <UniqueIdentifier>{1e35ffb2-b7e7-420b-9cbd-70b497afdc51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager\PipelineManager">
+      <UniqueIdentifier>{6ac31e26-f778-47ec-bde7-3756e7f44fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Manager\ModelManager">
+      <UniqueIdentifier>{5b49591f-f00c-4da8-8687-4bddcc684f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\Camera">
       <UniqueIdentifier>{2052e617-0fdc-4710-a6fe-0c3028ae043c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Object\3d\Struct">
-      <UniqueIdentifier>{062f4045-0b95-44f6-ba15-e9b1e7fb6669}</UniqueIdentifier>
+    <Filter Include="Engine\Lazieal\PunctualLight">
+      <UniqueIdentifier>{81ad03e8-eb35-4cb1-80cf-d4694322c4f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +193,7 @@
       <Filter>Engine\Base\Logger</Filter>
     </ClInclude>
     <ClInclude Include="BaseScene.h">
-      <Filter>Game\Scene\BaseScene</Filter>
+      <Filter>Engine\Lazieal\Scene\BaseScene</Filter>
     </ClInclude>
     <ClInclude Include="TitleScene.h">
       <Filter>Game\Scene\GameScene\TitleScene</Filter>
@@ -187,7 +205,7 @@
       <Filter>Game\Scene\SceneFactory</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Game\Scene\SceneManager</Filter>
+      <Filter>Engine\Lazieal\Scene\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="GameApp.h">
       <Filter>Game\GameApp</Filter>
@@ -199,22 +217,22 @@
       <Filter>Engine\Base\DirectX\Common</Filter>
     </ClInclude>
     <ClInclude Include="SrvManager.h">
-      <Filter>Engine\Base\Manager\SrvManager</Filter>
+      <Filter>Engine\Lazieal\Manager\SrvManager</Filter>
     </ClInclude>
     <ClInclude Include="WinAPI.h">
       <Filter>Engine\Base\WinAPI</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Engine\Base\Manager\TextureManager</Filter>
+      <Filter>Engine\Lazieal\Manager\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiManager.h">
-      <Filter>Engine\Base\Manager\ImGuiManager</Filter>
+      <Filter>Engine\Lazieal\Manager\ImGuiManager</Filter>
     </ClInclude>
     <ClInclude Include="PipelineManager.h">
-      <Filter>Engine\Base\Manager\PipelineManager</Filter>
+      <Filter>Engine\Lazieal\Manager\PipelineManager</Filter>
     </ClInclude>
     <ClInclude Include="Object3dSystem.h">
-      <Filter>Engine\Object\3d\System</Filter>
+      <Filter>Engine\Lazieal\3d\System</Filter>
     </ClInclude>
     <ClInclude Include="WorldTransform.h">
       <Filter>Engine\Lazieal\WorldTransform</Filter>
@@ -237,14 +255,23 @@
     <ClInclude Include="Matrix4x4.h">
       <Filter>Engine\Lazieal\Math\Hedder</Filter>
     </ClInclude>
-    <ClInclude Include="DebugCamera.h">
-      <Filter>Engine\Lazieal\DebugCamera</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\Lazieal\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Model.h">
-      <Filter>Engine\Object\3d\Model</Filter>
+      <Filter>Engine\Lazieal\3d\Model</Filter>
     </ClInclude>
     <ClInclude Include="ObjectStruct.h">
-      <Filter>Engine\Object\3d\Struct</Filter>
+      <Filter>Engine\Lazieal\3d\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>Engine\Lazieal\Manager\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3d.h">
+      <Filter>Engine\Lazieal\3d\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="PunctualLight.h">
+      <Filter>Engine\Lazieal\PunctualLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

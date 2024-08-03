@@ -32,7 +32,7 @@ void cPipelineManager::Initialize() {
 
 }
 
-ID3D12PipelineState* cPipelineManager::GetObject3DPipelineState(ePipelineState pipelineState, eBlendMode blendMode) {
+ID3D12PipelineState* cPipelineManager::GetPipelineState(ePipelineState pipelineState, eBlendMode blendMode) {
 	return graphicsPipelineState_[pipelineState][blendMode].Get();
 }
 

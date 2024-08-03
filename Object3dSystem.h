@@ -1,7 +1,7 @@
 #pragma once
 
 // MyHedder
-#include "DebugCamera.h"
+#include "Camera.h"
 
 // 前方宣言
 class cDirectXCommon;
@@ -26,11 +26,11 @@ public: // 公開メンバ関数
 	void PreDraw();
 
 	// デフォルトカメラを取得
-	cDebugCamera* GetDefaultCamera()const {
+	cCamera* GetDefaultCamera()const {
 		return defaultCamera_;
 	}
 	// デフォルトカメラをセット
-	void SetDefaultCamera(cDebugCamera* camera) {
+	void SetDefaultCamera(cCamera* camera) {
 		defaultCamera_ = camera;
 	}
 
@@ -42,5 +42,5 @@ private: // インスタンスを受け取るポインタ
 
 private: // 非公開メンバ変数
 	// デフォルトカメラ
-	cDebugCamera* defaultCamera_ = nullptr;
+	cCamera* defaultCamera_ = nullptr;
 };
