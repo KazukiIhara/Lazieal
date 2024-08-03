@@ -28,8 +28,13 @@ private:
 	cWorldTransform teapotTransform_{};
 	cObject3D* teapot_ = nullptr;
 
+	// スザンヌ
 	cWorldTransform suzanneTransform_{};
 	cObject3D* suzanne_ = nullptr;
+
+	// マルチマテリアル
+	cWorldTransform multiMaterialTransform_{};
+	cObject3D* multiMaterial_ = nullptr;
 
 };
 

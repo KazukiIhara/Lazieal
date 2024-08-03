@@ -24,16 +24,17 @@ void cTitleScene::Initialize() {
 
 	// ティーポットのトランスフォーム
 	teapotTransform_.Initialize();
-	teapotTransform_.translate = { 1.0f,0.0f,10.0f };
+	teapotTransform_.translate = { 0.0f,0.0f,10.0f };
+	teapotTransform_.rotate = { 0.0f,1.0f,0.0f };
 
 	// ティーポット初期化
 	teapot_ = new cObject3D();
 	teapot_->Initialize();
 	teapot_->SetModel("teapot");
 	teapot_->SetTranslate(teapotTransform_.translate);
+	teapot_->SetRotate(teapotTransform_.rotate);
 
 #pragma endregion
-
 
 #pragma region suzanne
 	// モデル読み込み
@@ -41,7 +42,7 @@ void cTitleScene::Initialize() {
 
 	// スザンヌのトランスフォーム
 	suzanneTransform_.Initialize();
-	suzanneTransform_.translate = { -1.0f,0.0f,10.0f };
+	suzanneTransform_.translate = { 0.0f,0.0f,10.0f };
 	suzanneTransform_.rotate = { 0.0f,1.0f,0.0f };
 
 	// スザンヌ初期化
@@ -50,6 +51,22 @@ void cTitleScene::Initialize() {
 	suzanne_->SetModel("suzanne");
 	suzanne_->SetTranslate(suzanneTransform_.translate);
 	suzanne_->SetRotate(suzanneTransform_.rotate);
+
+#pragma endregion
+#pragma region MultiMaterial
+	cLazieal::LoadModel("multiMaterial");
+
+	// マルチマテリアルのトランスフォーム
+	multiMaterialTransform_.Initialize();
+	multiMaterialTransform_.translate = { 0.0f,0.0f,10.0f };
+	multiMaterialTransform_.rotate = { 0.0f,1.0f,0.0f };
+
+	// マルチマテリアル初期化
+	multiMaterial_ = new cObject3D();
+	multiMaterial_->Initialize();
+	multiMaterial_->SetModel("multiMaterial");
+	multiMaterial_->SetTranslate(multiMaterialTransform_.translate);
+	multiMaterial_->SetRotate(multiMaterialTransform_.rotate);
 
 #pragma endregion
 
@@ -61,6 +78,7 @@ void cTitleScene::Finalize() {
 
 	delete teapot_;
 	delete suzanne_;
+	delete multiMaterial_;
 }
 
 void cTitleScene::Update() {
@@ -69,8 +87,11 @@ void cTitleScene::Update() {
 
 	// ティーポット更新
 	teapot_->Update();
+	// MultiMaterial
+	multiMaterial_->Update();
 	// suzanne更新
 	suzanne_->Update();
+
 }
 
 void cTitleScene::Draw() {
@@ -79,10 +100,14 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject3D();
 
 	// ティーポット描画
-	teapot_->Draw();
+	//teapot_->Draw();
+
+	// MultiMaterial描画
+	multiMaterial_->Draw();
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
+
 	// suzanne描画
-	suzanne_->DrawUnUV();
+	//suzanne_->DrawUnUV();
 }
