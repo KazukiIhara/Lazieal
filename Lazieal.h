@@ -65,6 +65,7 @@ public: // 静的メンバ関数
 	// 画像取得関数
 	static std::unordered_map<std::string, cTextureManager::Texture>& GetTexture();
 #pragma endregion
+
 #pragma region PipelineManager
 	// パイプライン取得関数
 	static ID3D12PipelineState* GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode);

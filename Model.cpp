@@ -60,8 +60,11 @@ void cModel::Draw() {
 }
 
 void cModel::LoadModel(const std::string& filename, const std::string& directoryPath) {
+
+	std::string fileDirectoryPath = directoryPath + "/" + filename;
+
 	Assimp::Importer importer;
-	std::string filePath = directoryPath + "/" + filename;
+	std::string filePath = fileDirectoryPath  + "/" + filename + ".obj";
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);
 	assert(scene->HasMeshes());
 
@@ -98,7 +101,7 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 			aiString textureFilePath;
 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-			modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
+			modelData.material.textureFilePath = fileDirectoryPath + "/" + textureFilePath.C_Str();
 			modelData.material.color = { 1.0f,1.0f,1.0f,1.0f };
 			cLazieal::LoadTexture(modelData.material.textureFilePath);
 		}

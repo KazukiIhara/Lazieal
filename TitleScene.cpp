@@ -19,12 +19,12 @@ void cTitleScene::Initialize() {
 	cLogger::Log("TitleScene,Initialized\n");
 
 	// モデル読み込み
-	cLazieal::LoadModel("teapot.obj");
+	cLazieal::LoadModel("teapot");
 
 	// ティーポット初期化
 	teapot_ = new cObject3D();
 	teapot_->Initialize();
-	teapot_->SetModel("teapot.obj");
+	teapot_->SetModel("teapot");
 	teapot_->SetTranslate({ 0.0f,0.0f,10.0f });
 }
 
