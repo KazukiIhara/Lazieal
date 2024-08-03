@@ -4,6 +4,9 @@
 // C++
 #include <cassert>
 
+// ImGui
+#include "externals/imgui/imgui.h"
+
 // MyHedder
 #include "WinAPI.h"
 
@@ -19,6 +22,7 @@ void cCamera::Initialize(cWorldTransform* transform) {
 }
 
 void cCamera::Update() {
+
 	worldMatrix_ = MakeAffineMatrix(transform_->scale, transform_->rotate, transform_->translate);
 	Matrix4x4 viewMatrix = Inverse(worldMatrix_);
 	Matrix4x4 projectionMatrix = MakePerspectiveFovMatrix(fovY_, aspectRaito_, nearClipRange_, farClipRange_);

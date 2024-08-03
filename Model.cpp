@@ -64,36 +64,58 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 	std::string fileDirectoryPath = directoryPath + "/" + filename;
 
 	Assimp::Importer importer;
-	std::string filePath = fileDirectoryPath  + "/" + filename + ".obj";
+	std::string filePath = fileDirectoryPath + "/" + filename + ".obj";
 	const aiScene* scene = importer.ReadFile(filePath.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs | aiProcess_Triangulate);
 	assert(scene->HasMeshes());
 
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないmeshは今回は非対応
-		assert(mesh->HasTextureCoords(0)); // texcoordがないMeshは今回非対応
+		if (mesh->HasTextureCoords(0)) { // uvあり
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3);
 
-		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3);
-
-			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
-				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-				sVertexData3D vertex;
-				vertex.position = { position.x,position.y,position.z,1.0f };
-				vertex.normal = { normal.x,normal.y,normal.z };
-				vertex.texcoord = { texcoord.x,texcoord.y };
-				// aiProcess_makeLeftHandedはz+=-1で、右手->左手に変換するので手動で対処
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-				modelData.vertices.push_back(vertex);
+				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+					uint32_t vertexIndex = face.mIndices[element];
+					aiVector3D& position = mesh->mVertices[vertexIndex];
+					aiVector3D& normal = mesh->mNormals[vertexIndex];
+					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+					sVertexData3D vertex;
+					vertex.position = { position.x,position.y,position.z,1.0f };
+					vertex.normal = { normal.x,normal.y,normal.z };
+					vertex.texcoord = { texcoord.x,texcoord.y };
+					// aiProcess_makeLeftHandedはz+=-1で、右手->左手に変換するので手動で対処
+					vertex.position.x *= -1.0f;
+					vertex.normal.x *= -1.0f;
+					modelData.vertices.push_back(vertex);
+				}
 			}
+
+		} else { // uvなし
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3);
+
+				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+					uint32_t vertexIndex = face.mIndices[element];
+					aiVector3D& position = mesh->mVertices[vertexIndex];
+					aiVector3D& normal = mesh->mNormals[vertexIndex];
+					sVertexData3D vertex;
+					vertex.position = { position.x,position.y,position.z,1.0f };
+					vertex.normal = { normal.x,normal.y,normal.z };
+					vertex.texcoord = { 0.0f,0.0f };
+					// aiProcess_makeLeftHandedはz+=-1で、右手->左手に変換するので手動で対処
+					vertex.position.x *= -1.0f;
+					vertex.normal.x *= -1.0f;
+					modelData.vertices.push_back(vertex);
+				}
+			}
+
 		}
 
 	}
+
 
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
 		aiMaterial* material = scene->mMaterials[materialIndex];
@@ -102,7 +124,7 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 			modelData.material.textureFilePath = fileDirectoryPath + "/" + textureFilePath.C_Str();
-			modelData.material.color = { 1.0f,1.0f,1.0f,1.0f };
+			modelData.material.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 			cLazieal::LoadTexture(modelData.material.textureFilePath);
 		}
 	}

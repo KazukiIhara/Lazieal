@@ -24,7 +24,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	D3DResourceLeakChecker* leakCheck = D3DResourceLeakChecker::GetInstance();
 #endif // DEBUG
 
-	// フレームワークを動的確保
+	// ゲームを動的確保
 	std::unique_ptr<cLazieal> game = std::make_unique<cGameApp>();
 
 	// 実行

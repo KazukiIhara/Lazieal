@@ -18,6 +18,7 @@ public: // 構造体
 	struct sMaterialData {
 		std::string textureFilePath;
 		Vector4 color;
+		bool isHaveUV;
 	};
 
 	// モデルデータ

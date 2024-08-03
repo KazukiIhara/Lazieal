@@ -25,7 +25,11 @@ public: // 公開メンバ関数
 private:
 
 	// ティーポット
+	cWorldTransform teapotTransform_{};
 	cObject3D* teapot_ = nullptr;
+
+	cWorldTransform suzanneTransform_{};
+	cObject3D* suzanne_ = nullptr;
 
 };
 

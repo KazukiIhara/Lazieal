@@ -165,6 +165,17 @@ void cLazieal::Update() {
 	// ImGui開始処理
 	imguiManager_->BeginFrame();
 
+#pragma region ImGuiDebugCamera
+	ImGui::SetNextWindowSize(ImVec2(400.0f, 80.0f));
+	ImGui::Begin("DebugCamera");
+	ImGui::DragFloat3("Rotate", &debugCameraTransform_.rotate.x, 0.001f);
+	ImGui::DragFloat3("Translate", &debugCameraTransform_.translate.x, 0.01f);
+	ImGui::End();
+#pragma endregion
+
+	// デバッグカメラの更新
+	debugCamera_->Update();
+
 }
 
 void cLazieal::Run() {

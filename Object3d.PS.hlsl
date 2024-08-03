@@ -10,7 +10,6 @@ SamplerState gSampler : register(s0);
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
-    output.color = gMaterial.color;
     
     float4 transformedUV = mul(float32_t4(input.texcoord, 0.0f, 1.0f), gMaterial.uvTransform);
     float32_t4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
@@ -80,8 +79,11 @@ PixelShaderOutput main(VertexShaderOutput input)
         
         // 拡散反射、鏡面反射
         output.color.rgb = diffuseDirectionalLight + specularDirectionalLight + diffusePointLight + specularPointLight + diffuseSpotLight + specularSpotLight;
+        
+
         // アルファ値は今まで通り
         output.color.a = gMaterial.color.a * textureColor.a;
+   
     }
     else
     {
