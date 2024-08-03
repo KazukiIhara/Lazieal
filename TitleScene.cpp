@@ -103,11 +103,11 @@ void cTitleScene::Draw() {
 	//teapot_->Draw();
 
 	// MultiMaterial描画
-	multiMaterial_->Draw();
+	//multiMaterial_->Draw();
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
 
 	// suzanne描画
-	//suzanne_->DrawUnUV();
+	suzanne_->DrawUnUV();
 }

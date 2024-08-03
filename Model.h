@@ -45,11 +45,11 @@ public: // メンバ関数
 
 private: // メンバ関数
 #pragma region Vertex
-	/*頂点リソースの作成*/
+	// 頂点リソースの作成
 	void CreateVertexResource();
-	/*頂点バッファビューの作成*/
+	// 頂点バッファービューの作成
 	void CreateVertexBufferView();
-	/*頂点データの書き込み*/
+	// 頂点データの書き込み
 	void MapVertexData();
 #pragma endregion
 

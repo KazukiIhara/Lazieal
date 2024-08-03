@@ -56,6 +56,12 @@ public: // Setter
 	void SetTranslate(const Vector3& translate) {
 		this->transform_.translate = translate;
 	}
+	// トランスフォームのセット
+	void SetTransform(const cWorldTransform& transform) {
+		this->transform_.scale = transform.scale;
+		this->transform_.rotate = transform.rotate;
+		this->transform_.translate = transform.translate;
+	}
 public: // Getter
 	// 拡縮のゲッター
 	const Vector3& GetScale() const {

@@ -157,6 +157,8 @@ void cModel::CreateVertexResource() {
 	}
 }
 
+
+
 void cModel::CreateVertexBufferView() {
 	for (size_t i = 0; i < modelData.meshes.size(); ++i) {
 		D3D12_VERTEX_BUFFER_VIEW vertexBufferView;

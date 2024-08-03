@@ -18,6 +18,13 @@ void cTextureManager::Initialize() {
 }
 
 void cTextureManager::Load(const std::string& filePath) {
+	// テクスチャがすでに読み込まれているかチェック
+	auto it = textures_.find(filePath);
+	if (it != textures_.end()) {
+		// すでに読み込まれている場合、早期リターン
+		return;
+	}
+
 	// 今回ぶち込むテクスチャーの箱
 	Texture& texture = textures_[filePath];
 	DirectX::ScratchImage mipImage_ = LoadTexture(filePath);
