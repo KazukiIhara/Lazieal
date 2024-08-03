@@ -1,5 +1,5 @@
 // This
-#include "DebugCamera.h"
+#include "Camera.h"
 
 // C++
 #include <cassert>
@@ -7,7 +7,7 @@
 // MyHedder
 #include "WinAPI.h"
 
-void cDebugCamera::Initialize(cWorldTransform* transform) {
+void cCamera::Initialize(cWorldTransform* transform) {
 	assert(transform);
 
 	transform_ = transform;
@@ -18,7 +18,7 @@ void cDebugCamera::Initialize(cWorldTransform* transform) {
 	worldPos_ = ExtractionWorldPos(worldMatrix_);
 }
 
-void cDebugCamera::Update() {
+void cCamera::Update() {
 	worldMatrix_ = MakeAffineMatrix(transform_->scale, transform_->rotate, transform_->translate);
 	Matrix4x4 viewMatrix = Inverse(worldMatrix_);
 	Matrix4x4 projectionMatrix = MakePerspectiveFovMatrix(fovY_, aspectRaito_, nearClipRange_, farClipRange_);

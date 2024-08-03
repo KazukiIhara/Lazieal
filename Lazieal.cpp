@@ -12,7 +12,8 @@
 #include "ImGuiManager.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
-#include "DebugCamera.h"
+#include "ModelManager.h"
+#include "Camera.h"
 #include "Object3dSystem.h"
 #include "AbstractSceneFactory.h"
 
@@ -20,6 +21,8 @@
 cDirectXCommon* cLazieal::directX_ = nullptr;
 cSrvManager* cLazieal::srvManager_ = nullptr;
 cTextureManager* cLazieal::textureManager_ = nullptr;
+cPipelineManager* cLazieal::pipelineManager_ = nullptr;
+cModelManager* cLazieal::modelManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
 
 void cLazieal::Initialize() {
@@ -83,9 +86,16 @@ void cLazieal::Initialize() {
 	pipelineManager_->Initialize();
 #pragma endregion
 
+#pragma region ModelManager
+	// ModelManagerの生成
+	modelManager_ = new cModelManager();
+	// ModelManagerの初期化
+	modelManager_->Initialize();
+#pragma endregion
+
 #pragma region DebugCamera
 	// DebugCameraを生成
-	debugCamera_ = new cDebugCamera();
+	debugCamera_ = new cCamera();
 	// DebugCameraのトランスフォームを初期化
 	debugCameraTransform_.Initialize();
 	// DebugCameraを初期化
@@ -119,13 +129,17 @@ void cLazieal::Finalize() {
 	// DebugCameraの開放
 	delete debugCamera_;
 
+	// ModelManagerの終了と開放
+	modelManager_->Finalize();
+	delete modelManager_;
+
 	// PipelineManagerの解放
 	delete pipelineManager_;
 
 	// TextureManagerの開放
 	delete textureManager_;
 
-	// ImGuiManagerの開放
+	// ImGuiManagerの終了と開放
 	imguiManager_->Finalize();
 	delete imguiManager_;
 
@@ -210,6 +224,18 @@ std::unordered_map<std::string, cTextureManager::Texture>& cLazieal::GetTexture(
 	return textureManager_->GetTexture();
 }
 
+ID3D12PipelineState* cLazieal::GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode) {
+	return pipelineManager_->GetPipelineState(pipelineState, blendMode);
+}
+
+cModel* cLazieal::FindModel(const std::string& filePath) {
+	return modelManager_->Find(filePath);
+}
+
 void cLazieal::PreDrawObject3D() {
 	object3dSystem_->PreDraw();
+}
+
+cCamera* cLazieal::GetDefaultCamera() {
+	return object3dSystem_->GetDefaultCamera();
 }

@@ -1,4 +1,6 @@
+// This
 #include "ModelManager.h"
+
 
 void cModelManager::Initialize() {
 	// 配列をクリア

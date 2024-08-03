@@ -6,7 +6,7 @@
 #include "WorldTransform.h"
 #include "MathFunction.h"
 
-class cDebugCamera {
+class cCamera {
 public:
 	// 初期化
 	void Initialize(cWorldTransform* transform);
@@ -29,13 +29,13 @@ public:
 
 private:
 	// カメラのトランスフォームを受け取る箱
-	cWorldTransform* transform_;
+	cWorldTransform* transform_{};
 	// カメラのワールドマトリックス
-	Matrix4x4 worldMatrix_;
+	Matrix4x4 worldMatrix_{};
 	// カメラのワールドポジション
-	Vector3 worldPos_;
+	Vector3 worldPos_{};
 	// ビュープロジェクションマトリックス
-	Matrix4x4 viewProjectionMatrix_;
+	Matrix4x4 viewProjectionMatrix_{};
 	// 水平方向視野角
 	float fovY_ = 0.45f;
 	// アスペクト比
