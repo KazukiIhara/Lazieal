@@ -2,9 +2,11 @@
 
 // C++
 #include <string>
+#include <unordered_map>
 
 // MyHedder
 #include "WorldTransform.h"
+#include "TextureManager.h"
 
 // 前方宣言
 class cWinAPI;
@@ -42,14 +44,28 @@ public: // 公開メンバ関数
 	// 描画後処理
 	void PostDraw();
 public: // 静的メンバ関数
+#pragma region DirectXCommon
+	// デバイス取得
+	static ID3D12Device* GetDirectXDevice();
+	// コマンドリスト取得関数
+	static ID3D12GraphicsCommandList* GetDirectXCommandList();
+#pragma endregion
+#pragma region SrvManager
+	// ディスクリプターテーブルのセット
+	static void SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex);
+#pragma endregion
+
+
 #pragma region Texture
 	// 画像読み込み関数
 	static void LoadTexture(const std::string& filePath);
+	// 画像取得関数
+	static std::unordered_map<std::string, cTextureManager::Texture>& GetTexture();
 #pragma endregion
 
 #pragma region Object3d
-	// 3dオブジェクト描画前処理
-	static void PreDrawObject3D();
+		// 3dオブジェクト描画前処理
+		static void PreDrawObject3D();
 #pragma endregion
 
 
@@ -60,9 +76,9 @@ private: // 汎用クラスのポインタ
 	// WinAPI
 	cWinAPI* win_ = nullptr;
 	// DirectXCommon
-	cDirectXCommon* directX_ = nullptr;
+	static cDirectXCommon* directX_;
 	// SrvManager
-	cSrvManager* srvManager_ = nullptr;
+	static cSrvManager* srvManager_;
 	// ImGuiManager
 	cImGuiManager* imguiManager_ = nullptr;
 	// TextureManager

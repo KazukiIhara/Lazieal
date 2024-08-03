@@ -17,6 +17,8 @@
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
+cDirectXCommon* cLazieal::directX_ = nullptr;
+cSrvManager* cLazieal::srvManager_ = nullptr;
 cTextureManager* cLazieal::textureManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
 
@@ -188,8 +190,24 @@ void cLazieal::PostDraw() {
 	directX_->PostDraw();
 }
 
+ID3D12Device* cLazieal::GetDirectXDevice() {
+	return directX_->GetDevice();
+}
+
+ID3D12GraphicsCommandList* cLazieal::GetDirectXCommandList() {
+	return directX_->GetCommandList();
+}
+
+void cLazieal::SetGraphicsRootDescriptorTable(UINT rootParameterIndex, uint32_t srvIndex) {
+	srvManager_->SetGraphicsRootDescriptorTable(rootParameterIndex, srvIndex);
+}
+
 void cLazieal::LoadTexture(const std::string& filePath) {
 	textureManager_->Load(filePath);
+}
+
+std::unordered_map<std::string, cTextureManager::Texture>& cLazieal::GetTexture() {
+	return textureManager_->GetTexture();
 }
 
 void cLazieal::PreDrawObject3D() {

@@ -59,7 +59,7 @@ private: // メンバ関数
 
 private: // メンバ変数
 #pragma region モデル
-	/*モデルデータを受け取る箱*/
+	// モデルデータ
 	sModelData modelData;
 #pragma endregion
 
