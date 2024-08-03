@@ -71,6 +71,8 @@ public: // 静的メンバ関数
 #pragma endregion
 
 #pragma region ModelManager
+	// モデルの読み込み
+	static void LoadModel(const std::string& filePath);
 	// モデルの検索
 	static cModel* FindModel(const std::string& filePath);
 #pragma endregion

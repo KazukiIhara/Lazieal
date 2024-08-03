@@ -228,6 +228,10 @@ ID3D12PipelineState* cLazieal::GetPipelineState(cPipelineManager::ePipelineState
 	return pipelineManager_->GetPipelineState(pipelineState, blendMode);
 }
 
+void cLazieal::LoadModel(const std::string& filePath) {
+	modelManager_->Load(filePath);
+}
+
 cModel* cLazieal::FindModel(const std::string& filePath) {
 	return modelManager_->Find(filePath);
 }

@@ -5,8 +5,9 @@
 
 // MyHedder
 #include "BaseScene.h"
+#include "Object3d.h"
 
-class cTitleScene :public cBaseScene {
+class cTitleScene:public cBaseScene {
 public: // 公開メンバ関数
 	// コンストラクタ
 	cTitleScene();
@@ -22,6 +23,9 @@ public: // 公開メンバ関数
 	void Draw()override;
 
 private:
+
+	// ティーポット
+	cObject3D* teapot_ = nullptr;
 
 };
 

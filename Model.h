@@ -17,7 +17,6 @@ public: // 構造体
 	// マテリアルデータ
 	struct sMaterialData {
 		std::string textureFilePath;
-		uint32_t srvIndex;
 		Vector4 color;
 	};
 

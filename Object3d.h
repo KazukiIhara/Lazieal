@@ -24,7 +24,7 @@ public:
 	// 更新
 	void Update();
 	// 描画
-	void Draw(cPipelineManager::eBlendMode blendMode);
+	void Draw(cPipelineManager::eBlendMode blendMode = cPipelineManager::kBlendModeNormal);
 
 private:
 

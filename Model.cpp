@@ -96,9 +96,11 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 		aiMaterial* material = scene->mMaterials[materialIndex];
 		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
 			aiString textureFilePath;
+
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 			modelData.material.textureFilePath = directoryPath + "/" + textureFilePath.C_Str();
 			modelData.material.color = { 1.0f,1.0f,1.0f,1.0f };
+			cLazieal::LoadTexture(modelData.material.textureFilePath);
 		}
 	}
 }
