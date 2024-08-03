@@ -64,10 +64,9 @@ public: // 静的メンバ関数
 #pragma endregion
 
 #pragma region Object3d
-		// 3dオブジェクト描画前処理
-		static void PreDrawObject3D();
+	// 3dオブジェクト描画前処理
+	static void PreDrawObject3D();
 #pragma endregion
-
 
 private: // メンバ変数
 	// 終了リクエスト

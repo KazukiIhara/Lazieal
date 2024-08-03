@@ -14,7 +14,6 @@
 // 3Dモデル
 class cModel {
 public: // 構造体
-
 	// マテリアルデータ
 	struct sMaterialData {
 		std::string textureFilePath;
@@ -36,7 +35,7 @@ public: // メンバ関数
 	// 描画
 	void Draw();
 	// モデルの読み込み
-	void LoadModel(const std::string& filename, const std::string& directoryPath = "Game/Resources");
+	void LoadModel(const std::string& filename, const std::string& directoryPath = "Resources");
 
 private: // メンバ関数
 #pragma region Vertex

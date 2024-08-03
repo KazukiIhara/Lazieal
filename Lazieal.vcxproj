@@ -22,6 +22,7 @@
     <ClCompile Include="MathFunction.cpp" />
     <ClCompile Include="MathOperator.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="Object3dSystem.cpp" />
     <ClCompile Include="PipelineManager.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
@@ -46,6 +47,7 @@
     <ClInclude Include="MathOperator.h" />
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Object3dSystem.h" />
     <ClInclude Include="ObjectStruct.h" />
     <ClInclude Include="PipelineManager.h" />

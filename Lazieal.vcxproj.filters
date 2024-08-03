@@ -59,6 +59,9 @@
     <ClCompile Include="Model.cpp">
       <Filter>Engine\Object\3d\Model</Filter>
     </ClCompile>
+    <ClCompile Include="ModelManager.cpp">
+      <Filter>Engine\Base\Manager\ModelManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -166,6 +169,9 @@
     <Filter Include="Engine\Object\3d\Struct">
       <UniqueIdentifier>{062f4045-0b95-44f6-ba15-e9b1e7fb6669}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Base\Manager\ModelManager">
+      <UniqueIdentifier>{5b49591f-f00c-4da8-8687-4bddcc684f02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -245,6 +251,9 @@
     </ClInclude>
     <ClInclude Include="ObjectStruct.h">
       <Filter>Engine\Object\3d\Struct</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelManager.h">
+      <Filter>Engine\Base\Manager\ModelManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
