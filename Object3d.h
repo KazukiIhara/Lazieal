@@ -75,6 +75,11 @@ public: // Getter
 	const Vector3& GetTranslate() const {
 		return transform_.translate;
 	}
+	// オブジェクトの名前のゲッター
+	const std::string& GetName()const {
+		return objectname_;
+	}
+
 private:/*メンバ変数*/
 #pragma region Model
 	cModel* model = nullptr;
@@ -103,5 +108,5 @@ private:/*メンバ変数*/
 	// PunctualLightを受け取る箱
 	cPunctualLight punctualLight_;
 #pragma endregion
-
+	std::string objectname_{};
 };

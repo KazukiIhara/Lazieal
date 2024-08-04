@@ -15,6 +15,7 @@
 #include "ModelManager.h"
 #include "Camera.h"
 #include "Object3dSystem.h"
+#include "Object3d.h"
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
@@ -257,4 +258,16 @@ void cLazieal::PreDrawObject3DUnUV() {
 
 cCamera* cLazieal::GetDefaultCamera() {
 	return object3dSystem_->GetDefaultCamera();
+}
+
+void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d) {
+	// デバッグ用UIを表示
+	ImGui::Begin(object3d->GetName().c_str());
+
+	ImGui::DragFloat3("scale", &transform.scale.x, 0.01f);
+	ImGui::DragFloat3("rotate", &transform.rotate.x, 0.003f);
+	ImGui::DragFloat3("translate", &transform.translate.x, 0.01f);
+
+	object3d->SetTransform(transform);
+	ImGui::End();
 }

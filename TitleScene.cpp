@@ -54,6 +54,7 @@ void cTitleScene::Initialize() {
 
 #pragma endregion
 #pragma region MultiMaterial
+	// モデル読み込み
 	cLazieal::LoadModel("multiMaterial");
 
 	// マルチマテリアルのトランスフォーム
@@ -65,8 +66,21 @@ void cTitleScene::Initialize() {
 	multiMaterial_ = new cObject3D();
 	multiMaterial_->Initialize();
 	multiMaterial_->SetModel("multiMaterial");
-	multiMaterial_->SetTranslate(multiMaterialTransform_.translate);
-	multiMaterial_->SetRotate(multiMaterialTransform_.rotate);
+	multiMaterial_->SetTransform(multiMaterialTransform_);
+
+#pragma endregion
+#pragma region Bunny
+	cLazieal::LoadModel("bunny");
+
+	// バニーのトランスフォーム
+	bunnyTransform_.Initialize();
+	bunnyTransform_.translate = { 0.0f,0.0f,10.0f };
+	bunnyTransform_.rotate = { 0.0f, 1.0f, 0.0f };
+
+	bunny_ = new cObject3D();
+	bunny_->Initialize();
+	bunny_->SetModel("bunny");
+	bunny_->SetTransform(bunnyTransform_);
 
 #pragma endregion
 
@@ -79,11 +93,14 @@ void cTitleScene::Finalize() {
 	delete teapot_;
 	delete suzanne_;
 	delete multiMaterial_;
+	delete bunny_;
 }
 
 void cTitleScene::Update() {
 	// デモウィンドウを描画
 	ImGui::ShowDemoWindow();
+
+	cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
 
 	// ティーポット更新
 	teapot_->Update();
@@ -91,7 +108,8 @@ void cTitleScene::Update() {
 	multiMaterial_->Update();
 	// suzanne更新
 	suzanne_->Update();
-
+	// bunny
+	bunny_->Update();
 }
 
 void cTitleScene::Draw() {
@@ -100,14 +118,17 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject3D();
 
 	// ティーポット描画
-	//teapot_->Draw();
+	teapot_->Draw();
 
 	// MultiMaterial描画
 	//multiMaterial_->Draw();
+
+	// bunny描画
+	//bunny_->Draw();
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
 
 	// suzanne描画
-	suzanne_->DrawUnUV();
+	//suzanne_->DrawUnUV();
 }

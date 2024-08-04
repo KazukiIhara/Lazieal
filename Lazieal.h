@@ -20,6 +20,7 @@ class cPipelineManager;
 class cModelManager;
 class cModel;
 class cObject3dSystem;
+class cObject3D;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -86,6 +87,12 @@ public: // 静的メンバ関数
 	// 3dオブジェクトのデフォルトカメラ取得
 	static cCamera* GetDefaultCamera();
 #pragma endregion
+
+#pragma region ImGui
+	// 3dオブジェクトデバッグ用
+	static void ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d);
+#pragma endregion
+
 
 private: // メンバ変数
 	// 終了リクエスト

@@ -7,7 +7,7 @@
 #include "BaseScene.h"
 #include "Object3d.h"
 
-class cTitleScene:public cBaseScene {
+class cTitleScene :public cBaseScene {
 public: // 公開メンバ関数
 	// コンストラクタ
 	cTitleScene();
@@ -36,5 +36,8 @@ private:
 	cWorldTransform multiMaterialTransform_{};
 	cObject3D* multiMaterial_ = nullptr;
 
+	// バニー
+	cWorldTransform bunnyTransform_{};
+	cObject3D* bunny_ = nullptr;
 };
 

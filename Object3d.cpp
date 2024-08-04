@@ -176,5 +176,6 @@ Microsoft::WRL::ComPtr<ID3D12Resource> cObject3D::CreateBufferResource(ID3D12Dev
 }
 
 void cObject3D::SetModel(const std::string& filePath) {
+	objectname_ = filePath;
 	model = cLazieal::FindModel(filePath);
 }
