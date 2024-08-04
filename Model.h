@@ -43,6 +43,11 @@ public: // メンバ関数
 	// モデルの読み込み
 	void LoadModel(const std::string& filename, const std::string& directoryPath = "Resources");
 
+	// UVTransformのセット
+	void SetUVTransform(const std::vector<sUVTransform>& uvTransforms) {
+		uvTransforms_ = uvTransforms;
+	}
+
 	// マテリアルのセット
 	void SetMaterials(const std::vector<sMaterial3D>& materials) {
 		materials_ = materials;
@@ -50,6 +55,11 @@ public: // メンバ関数
 	// マテリアルのゲッター
 	std::vector<sMaterial3D> GetMaterials() {
 		return materials_;
+	}
+
+	// UVTransformのゲッター
+	std::vector<sUVTransform> GetUVTransforms() {
+		return uvTransforms_;
 	}
 
 private: // メンバ関数
@@ -84,7 +94,6 @@ private: // メンバ変数
 	std::vector<sVertexData3D*> vertexData_;
 	// UVなし頂点データ
 	std::vector<sVertexData3DUnUV*> vertexDataUnUV_;
-
 	/*VBV*/
 	std::vector<D3D12_VERTEX_BUFFER_VIEW> vertexBufferViews_;
 #pragma endregion

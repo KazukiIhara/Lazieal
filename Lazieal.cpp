@@ -265,22 +265,57 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 	ImGui::Begin(object3d->GetName().c_str());
 
 	// Transform
-	ImGui::DragFloat3("scale", &transform.scale.x, 0.01f);
-	ImGui::DragFloat3("rotate", &transform.rotate.x, 0.003f);
-	ImGui::DragFloat3("translate", &transform.translate.x, 0.01f);
-	object3d->SetTransform(transform);
+	if (ImGui::BeginTabBar("Transform")) {
+		if (ImGui::BeginTabItem("Transform")) {
+
+			ImGui::DragFloat3("scale", &transform.scale.x, 0.01f);
+			ImGui::DragFloat3("rotate", &transform.rotate.x, 0.003f);
+			ImGui::DragFloat3("translate", &transform.translate.x, 0.01f);
+			object3d->SetTransform(transform);
+
+			ImGui::EndTabItem();
+		}
+		ImGui::EndTabBar();
+	}
 
 	// Material
 	std::vector<sMaterial3D> materials = object3d->GetModel()->GetMaterials();
+	// UvTransform
+	std::vector<sUVTransform> uvTransform = object3d->GetModel()->GetUVTransforms();
 
-	for (auto& material : materials) {
-		ImGui::ColorEdit4("color", &material.color.x);
-		ImGui::Checkbox("enableLighting", reinterpret_cast<bool*>(&material.enbleLighting));
-		ImGui::DragFloat4("uvTransformMatrix", &material.uvTransformMatrix.m[0][0], 0.01f);
-		ImGui::DragFloat("shininess", &material.shininess, 0.01f);
+	if (ImGui::BeginTabBar("Material")) {
+		for (size_t i = 0; i < materials.size(); ++i) {
+			std::string label = "Material " + std::to_string(i + 1);
+
+			if (ImGui::BeginTabItem(label.c_str())) {
+				label = "color " + std::to_string(i + 1);
+				ImGui::ColorEdit4(label.c_str(), &materials[i].color.x);
+
+				label = "enableLighting " + std::to_string(i + 1);
+				ImGui::Checkbox(label.c_str(), reinterpret_cast<bool*>(&materials[i].enbleLighting));
+
+				label = "UVScale " + std::to_string(i + 1);
+				ImGui::DragFloat3(label.c_str(), &uvTransform[i].scale.x, 0.01f);
+
+				label = "UVRotateZ " + std::to_string(i + 1);
+				ImGui::DragFloat(label.c_str(), &uvTransform[i].rotateZ, 0.01f);
+
+				label = "UVTranslate " + std::to_string(i + 1);
+				ImGui::DragFloat3(label.c_str(), &uvTransform[i].translate.x, 0.01f);
+
+				label = "shininess " + std::to_string(i + 1);
+				ImGui::DragFloat(label.c_str(), &materials[i].shininess, 0.01f);
+
+
+				ImGui::EndTabItem();
+			}
+		}
+		ImGui::EndTabBar();
+
 	}
 
 	object3d->GetModel()->SetMaterials(materials);
+	object3d->GetModel()->SetUVTransform(uvTransform);
 
 	ImGui::End();
 }

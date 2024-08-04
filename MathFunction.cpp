@@ -178,35 +178,37 @@ Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float botto
 	return result;
 }
 
-// ヘルパー関数：行列を分解
-void DecomposeUVMatrix(const Matrix4x4& matrix, Vector3& scale, float& rotateZ, Vector3& translate) {
-	scale.x = std::sqrt(matrix.m[0][0] * matrix.m[0][0] + matrix.m[0][1] * matrix.m[0][1]);
-	scale.y = std::sqrt(matrix.m[1][0] * matrix.m[1][0] + matrix.m[1][1] * matrix.m[1][1]);
-	scale.z = 1.0f; // UVマトリックスは2Dなので、zスケールは1.0と仮定
-
-	rotateZ = std::atan2(matrix.m[1][0], matrix.m[0][0]);
-
+void DecomposeUVMatrix(const Matrix4x4& matrix, Vector3& scale, float& rotateZ, Vector2& translate) {
+	// Extract translation
 	translate.x = matrix.m[3][0];
 	translate.y = matrix.m[3][1];
-	translate.z = 0.0f; // UVマトリックスは2Dなので、z平行移動は0.0と仮定
+
+	// Extract rotation
+	rotateZ = std::atan2(matrix.m[1][0], matrix.m[0][0]);
+
+	// Extract scale
+	scale.x = matrix.m[0][0] / std::cos(rotateZ);
+	scale.y = matrix.m[1][1] / std::cos(rotateZ);
+	scale.z = 1.0f; // UV matrix is 2D, so z-scale is assumed to be 1.0
 }
 
-// ヘルパー関数：行列を合成
-Matrix4x4 ComposeUVMatrix(const Vector3& scale, float rotateZ, const Vector3& translate) {
+Matrix4x4 ComposeUVMatrix(const Vector3& scale, float rotateZ, const Vector2& translate) {
 	Matrix4x4 matrix;
 
 	float cosZ = std::cos(rotateZ);
 	float sinZ = std::sin(rotateZ);
 
+	// Apply scale and rotation
 	matrix.m[0][0] = scale.x * cosZ;
 	matrix.m[0][1] = scale.x * -sinZ;
 	matrix.m[1][0] = scale.y * sinZ;
 	matrix.m[1][1] = scale.y * cosZ;
 
+	// Apply translation
 	matrix.m[3][0] = translate.x;
 	matrix.m[3][1] = translate.y;
 
-	// 他の要素は単位行列のまま
+	// Set other elements to identity matrix values
 	matrix.m[0][2] = matrix.m[0][3] = 0.0f;
 	matrix.m[1][2] = matrix.m[1][3] = 0.0f;
 	matrix.m[2][0] = matrix.m[2][1] = matrix.m[2][2] = matrix.m[2][3] = 0.0f;

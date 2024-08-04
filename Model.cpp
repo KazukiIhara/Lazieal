@@ -24,6 +24,8 @@ void cModel::Initialize(const std::string& filename) {
 		material.shininess = 40.0f;
 		material.uvTransformMatrix = MakeIdentityMatrix4x4();
 		materials_.push_back(material);
+		sUVTransform identity = { {1.0f,1.0f,1.0f},0.0f,{0.0f,0.0f,0.0f} };
+		uvTransforms_.push_back(identity);
 	}
 
 #pragma region 頂点データ
@@ -50,6 +52,7 @@ void cModel::Update() {
 		materialData_[i]->color = materials_[i].color;
 		materialData_[i]->enbleLighting = materials_[i].enbleLighting;
 		materialData_[i]->shininess = materials_[i].shininess;
+		materials_[i].uvTransformMatrix = MakeAffineMatrix(uvTransforms_[i].scale, Vector3(0.0f, 0.0f, uvTransforms_[i].rotateZ), uvTransforms_[i].translate);
 		materialData_[i]->uvTransformMatrix = materials_[i].uvTransformMatrix;
 	}
 }
@@ -70,6 +73,7 @@ void cModel::Draw() {
 		}
 	}
 }
+
 void cModel::LoadModel(const std::string& filename, const std::string& directoryPath) {
 	std::string fileDirectoryPath = directoryPath + "/" + filename;
 
@@ -156,8 +160,6 @@ void cModel::CreateVertexResource() {
 		vertexResources_.push_back(vertexResource);
 	}
 }
-
-
 
 void cModel::CreateVertexBufferView() {
 	for (size_t i = 0; i < modelData.meshes.size(); ++i) {

@@ -100,7 +100,7 @@ void cTitleScene::Update() {
 	// デモウィンドウを描画
 	ImGui::ShowDemoWindow();
 
-	cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
+	cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
 
 	// ティーポット更新
 	teapot_->Update();
@@ -118,10 +118,10 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject3D();
 
 	// ティーポット描画
-	teapot_->Draw();
+	//teapot_->Draw();
 
 	// MultiMaterial描画
-	//multiMaterial_->Draw();
+	multiMaterial_->Draw();
 
 	// bunny描画
 	//bunny_->Draw();
