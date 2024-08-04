@@ -79,6 +79,9 @@ public: // Getter
 	const std::string& GetName()const {
 		return objectname_;
 	}
+	cModel* GetModel() {
+		return model;
+	}
 
 private:/*メンバ変数*/
 #pragma region Model

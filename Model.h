@@ -43,6 +43,15 @@ public: // メンバ関数
 	// モデルの読み込み
 	void LoadModel(const std::string& filename, const std::string& directoryPath = "Resources");
 
+	// マテリアルのセット
+	void SetMaterials(const std::vector<sMaterial3D>& materials) {
+		materials_ = materials;
+	}
+	// マテリアルのゲッター
+	std::vector<sMaterial3D> GetMaterials() {
+		return materials_;
+	}
+
 private: // メンバ関数
 #pragma region Vertex
 	// 頂点リソースの作成

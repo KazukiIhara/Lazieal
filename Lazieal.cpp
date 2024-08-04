@@ -264,10 +264,23 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 	// デバッグ用UIを表示
 	ImGui::Begin(object3d->GetName().c_str());
 
+	// Transform
 	ImGui::DragFloat3("scale", &transform.scale.x, 0.01f);
 	ImGui::DragFloat3("rotate", &transform.rotate.x, 0.003f);
 	ImGui::DragFloat3("translate", &transform.translate.x, 0.01f);
-
 	object3d->SetTransform(transform);
+
+	// Material
+	std::vector<sMaterial3D> materials = object3d->GetModel()->GetMaterials();
+
+	for (auto& material : materials) {
+		ImGui::ColorEdit4("color", &material.color.x);
+		ImGui::Checkbox("enableLighting", reinterpret_cast<bool*>(&material.enbleLighting));
+		ImGui::DragFloat4("uvTransformMatrix", &material.uvTransformMatrix.m[0][0], 0.01f);
+		ImGui::DragFloat("shininess", &material.shininess, 0.01f);
+	}
+
+	object3d->GetModel()->SetMaterials(materials);
+
 	ImGui::End();
 }
