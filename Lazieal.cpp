@@ -280,7 +280,7 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 
 	// Material
 	std::vector<sMaterial3D> materials = object3d->GetModel()->GetMaterials();
-	// UvTransform
+	// UvTransform　Matrixがマテリアルの中に含まれているが、行列の計算をModelクラス内で行うため別途送る
 	std::vector<sUVTransform> uvTransform = object3d->GetModel()->GetUVTransforms();
 
 	if (ImGui::BeginTabBar("Material")) {
