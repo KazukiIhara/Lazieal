@@ -304,7 +304,7 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 				ImGui::DragFloat3(label.c_str(), &uvTransform[i].translate.x, 0.01f);
 
 				label = "shininess " + std::to_string(i + 1);
-				ImGui::DragFloat(label.c_str(), &materials[i].shininess, 0.01f);
+				ImGui::DragFloat(label.c_str(), &materials[i].shininess, 1.0f);
 
 
 				ImGui::EndTabItem();
