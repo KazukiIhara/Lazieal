@@ -149,6 +149,130 @@ void cModel::LoadModel(const std::string& filename, const std::string& directory
 	}
 }
 
+// 球体の頂点データを生成する関数
+void cModel::GenerateSphere(const std::string& textureFilePath) {
+
+	// テクスチャをロード
+	cLazieal::LoadTexture(textureFilePath);
+
+	const float kLonEvery = std::numbers::pi_v<float> *2.0f / float(kSubdivision);
+	const float kLatEvery = std::numbers::pi_v<float> / float(kSubdivision);
+
+	sMeshData meshData;
+	meshData.material.textureFilePath = textureFilePath;
+	meshData.material.haveUV_ = true;
+	meshData.vertices.resize(kSubdivision * kSubdivision * 6);
+	for (uint32_t latIndex = 0; latIndex < kSubdivision; ++latIndex) {
+		float lat = -std::numbers::pi_v<float> / 2.0f + kLatEvery * latIndex;
+		for (uint32_t lonIndex = 0; lonIndex < kSubdivision; ++lonIndex) {
+			uint32_t start = (latIndex * kSubdivision + lonIndex) * 6;
+			float lon = lonIndex * kLonEvery;
+
+			// a
+			meshData.vertices[start].position.x = std::cosf(lat) * std::cosf(lon);
+			meshData.vertices[start].position.y = std::sinf(lat);
+			meshData.vertices[start].position.z = std::cosf(lat) * std::sinf(lon);
+			meshData.vertices[start].position.w = 1.0f;
+			meshData.vertices[start].texcoord = { float(lonIndex) / float(kSubdivision), 1.0f - float(latIndex) / float(kSubdivision) };
+
+			meshData.vertices[start].normal.x = meshData.vertices[start].position.x;
+			meshData.vertices[start].normal.y = meshData.vertices[start].position.y;
+			meshData.vertices[start].normal.z = meshData.vertices[start].position.z;
+
+			// b
+			meshData.vertices[start + 1].position.x = std::cosf(lat + kLatEvery) * std::cosf(lon);
+			meshData.vertices[start + 1].position.y = std::sinf(lat + kLatEvery);
+			meshData.vertices[start + 1].position.z = std::cosf(lat + kLatEvery) * std::sinf(lon);
+			meshData.vertices[start + 1].position.w = 1.0f;
+			meshData.vertices[start + 1].texcoord = { float(lonIndex) / float(kSubdivision), 1.0f - float(latIndex + 1.0f) / float(kSubdivision) };
+
+			meshData.vertices[start + 1].normal.x = meshData.vertices[start + 1].position.x;
+			meshData.vertices[start + 1].normal.y = meshData.vertices[start + 1].position.y;
+			meshData.vertices[start + 1].normal.z = meshData.vertices[start + 1].position.z;
+
+			// c
+			meshData.vertices[start + 2].position.x = std::cosf(lat) * std::cosf(lon + kLonEvery);
+			meshData.vertices[start + 2].position.y = std::sinf(lat);
+			meshData.vertices[start + 2].position.z = std::cosf(lat) * std::sinf(lon + kLonEvery);
+			meshData.vertices[start + 2].position.w = 1.0f;
+			meshData.vertices[start + 2].texcoord = { float(lonIndex + 1.0f) / float(kSubdivision), 1.0f - float(latIndex) / float(kSubdivision) };
+
+			meshData.vertices[start + 2].normal.x = meshData.vertices[start + 2].position.x;
+			meshData.vertices[start + 2].normal.y = meshData.vertices[start + 2].position.y;
+			meshData.vertices[start + 2].normal.z = meshData.vertices[start + 2].position.z;
+
+			// b
+			meshData.vertices[start + 3].position.x = std::cosf(lat + kLatEvery) * std::cosf(lon);
+			meshData.vertices[start + 3].position.y = std::sinf(lat + kLatEvery);
+			meshData.vertices[start + 3].position.z = std::cosf(lat + kLatEvery) * std::sinf(lon);
+			meshData.vertices[start + 3].position.w = 1.0f;
+			meshData.vertices[start + 3].texcoord = { float(lonIndex) / float(kSubdivision), 1.0f - float(latIndex + 1.0f) / float(kSubdivision) };
+
+			meshData.vertices[start + 3].normal.x = meshData.vertices[start + 3].position.x;
+			meshData.vertices[start + 3].normal.y = meshData.vertices[start + 3].position.y;
+			meshData.vertices[start + 3].normal.z = meshData.vertices[start + 3].position.z;
+
+			// d
+			meshData.vertices[start + 4].position.x = std::cosf(lat + kLatEvery) * std::cosf(lon + kLonEvery);
+			meshData.vertices[start + 4].position.y = std::sinf(lat + kLatEvery);
+			meshData.vertices[start + 4].position.z = std::cosf(lat + kLatEvery) * std::sinf(lon + kLonEvery);
+			meshData.vertices[start + 4].position.w = 1.0f;
+			meshData.vertices[start + 4].texcoord = { float(lonIndex + 1.0f) / float(kSubdivision), 1.0f - float(latIndex + 1.0f) / float(kSubdivision) };
+
+			meshData.vertices[start + 4].normal.x = meshData.vertices[start + 4].position.x;
+			meshData.vertices[start + 4].normal.y = meshData.vertices[start + 4].position.y;
+			meshData.vertices[start + 4].normal.z = meshData.vertices[start + 4].position.z;
+
+			// c
+			meshData.vertices[start + 5].position.x = std::cosf(lat) * std::cosf(lon + kLonEvery);
+			meshData.vertices[start + 5].position.y = std::sinf(lat);
+			meshData.vertices[start + 5].position.z = std::cosf(lat) * std::sinf(lon + kLonEvery);
+			meshData.vertices[start + 5].position.w = 1.0f;
+			meshData.vertices[start + 5].texcoord = { float(lonIndex + 1.0f) / float(kSubdivision), 1.0f - float(latIndex) / float(kSubdivision) };
+
+			meshData.vertices[start + 5].normal.x = meshData.vertices[start + 5].position.x;
+			meshData.vertices[start + 5].normal.y = meshData.vertices[start + 5].position.y;
+			meshData.vertices[start + 5].normal.z = meshData.vertices[start + 5].position.z;
+		}
+	}
+
+	modelData.meshes.push_back(meshData);
+}
+
+
+void cModel::CreateSphere(const std::string& textureFilePath) {
+
+	// スフィアの頂点作成
+	GenerateSphere(textureFilePath);
+
+	// マテリアル初期化
+	sMaterial3D material;
+	material.color = { 1.0f,1.0f,1.0f,1.0f };
+	material.enbleLighting = true;
+	material.shininess = 40.0f;
+	material.uvTransformMatrix = MakeIdentityMatrix4x4();
+	materials_.push_back(material);
+
+	sUVTransform identity = { {1.0f,1.0f,1.0f},0.0f,{0.0f,0.0f,0.0f} };
+	uvTransforms_.push_back(identity);
+
+#pragma region 頂点データ
+	/*頂点リソースの作成*/
+	CreateVertexResource();
+	/*頂点バッファビューの作成*/
+	CreateVertexBufferView();
+	/*頂点データの書き込み*/
+	MapVertexData();
+#pragma endregion
+
+#pragma region マテリアルデータ
+	/*マテリアル用のリソース作成*/
+	CreateMaterialResource();
+	/*マテリアルにデータを書き込む*/
+	MapMaterialData();
+#pragma endregion
+}
+
 void cModel::CreateVertexResource() {
 	for (auto& mesh : modelData.meshes) {
 		Microsoft::WRL::ComPtr<ID3D12Resource> vertexResource;

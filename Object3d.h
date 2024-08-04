@@ -87,6 +87,12 @@ private:/*メンバ変数*/
 #pragma region Model
 	cModel* model = nullptr;
 #pragma endregion
+#pragma region Sphere用
+
+#pragma endregion
+
+	cModel* sphere = nullptr;
+
 #pragma region Camera
 	// カメラを受け取る箱
 	cCamera* camera_ = nullptr;

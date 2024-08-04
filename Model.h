@@ -43,6 +43,12 @@ public: // メンバ関数
 	// モデルの読み込み
 	void LoadModel(const std::string& filename, const std::string& directoryPath = "Resources");
 
+	// 球体の頂点作成
+	void GenerateSphere(const std::string& textureFilePath);
+
+	// 球体作成
+	void CreateSphere(const std::string& textureFilePath);
+
 	// UVTransformのセット
 	void SetUVTransform(const std::vector<sUVTransform>& uvTransforms) {
 		uvTransforms_ = uvTransforms;
@@ -108,5 +114,10 @@ private: // メンバ変数
 	/*uvTransform*/
 	std::vector<sUVTransform> uvTransforms_;
 #pragma endregion
+
+	/*球の分割数*/
+	const uint32_t kSubdivision = 16;
+	/*球の頂点定数*/
+	const uint32_t sphereVertexNum = kSubdivision * kSubdivision * 6;
 
 };

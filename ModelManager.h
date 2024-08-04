@@ -14,6 +14,8 @@ public:
 	void Initialize();
 	// モデル読み込み
 	void Load(const std::string& filePath);
+	// 球体作成
+	void CreateSphere(const std::string& textureFilePath, const std::string& directoryPath = "Resources");
 	// モデルの検索
 	cModel* Find(const std::string& filePath);
 	// 終了

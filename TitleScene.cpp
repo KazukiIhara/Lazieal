@@ -84,6 +84,21 @@ void cTitleScene::Initialize() {
 
 #pragma endregion
 
+#pragma region Sphere
+
+	cLazieal::CreateSphere("uvChecker.png");
+
+	// スフィアのトランスフォーム
+	sphereTransform_.Initialize();
+	sphereTransform_.translate = { 0.0f,0.0f,10.0f };
+
+	sphere_ = new cObject3D();
+	sphere_->Initialize();
+	sphere_->SetModel("Sphere_uvChecker.png");
+	sphere_->SetTransform(sphereTransform_);
+
+#pragma endregion
+
 }
 
 void cTitleScene::Finalize() {
@@ -94,12 +109,12 @@ void cTitleScene::Finalize() {
 	delete suzanne_;
 	delete multiMaterial_;
 	delete bunny_;
+	delete sphere_;
 }
 
 void cTitleScene::Update() {
-	// デモウィンドウを描画
-	ImGui::ShowDemoWindow();
 
+	// デバッグUI表示
 	cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
 
 	// ティーポット更新
@@ -110,6 +125,8 @@ void cTitleScene::Update() {
 	suzanne_->Update();
 	// bunny
 	bunny_->Update();
+	// Sphere更新
+	sphere_->Update();
 }
 
 void cTitleScene::Draw() {
@@ -121,10 +138,13 @@ void cTitleScene::Draw() {
 	//teapot_->Draw();
 
 	// MultiMaterial描画
-	multiMaterial_->Draw();
+	//multiMaterial_->Draw();
 
 	// bunny描画
 	//bunny_->Draw();
+
+	// Sphere描画
+	sphere_->Draw();
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();

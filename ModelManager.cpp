@@ -20,6 +20,13 @@ void cModelManager::Load(const std::string& filePath) {
 	models_.insert(std::make_pair(filePath, std::move(model)));
 }
 
+void cModelManager::CreateSphere(const std::string& textureFile, const std::string& directoryPath) {
+	std::unique_ptr<cModel> model = std::make_unique<cModel>();
+	model->CreateSphere(directoryPath + "/" + textureFile);
+	// モデルをmapコンテナに格納する
+	models_.insert(std::make_pair("Sphere_" + textureFile, std::move(model)));
+}
+
 cModel* cModelManager::Find(const std::string& filePath) {
 	// 読み込み済みモデルを検索
 	if (models_.contains(filePath)) {

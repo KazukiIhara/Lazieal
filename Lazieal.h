@@ -75,6 +75,8 @@ public: // 静的メンバ関数
 #pragma region ModelManager
 	// モデルの読み込み
 	static void LoadModel(const std::string& filePath);
+	// 球体の作成
+	static void CreateSphere(const std::string& textureFilePath);
 	// モデルの検索
 	static cModel* FindModel(const std::string& filePath);
 #pragma endregion

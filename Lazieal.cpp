@@ -244,6 +244,10 @@ void cLazieal::LoadModel(const std::string& filePath) {
 	modelManager_->Load(filePath);
 }
 
+void cLazieal::CreateSphere(const std::string& textureFilePath) {
+	modelManager_->CreateSphere(textureFilePath);
+}
+
 cModel* cLazieal::FindModel(const std::string& filePath) {
 	return modelManager_->Find(filePath);
 }
