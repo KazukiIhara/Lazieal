@@ -45,6 +45,7 @@ public:
 		sPointLight pointLight;
 		sSpotLight spotLight;
 	};
+
 public:
 	cPunctualLightSetting();
 	~cPunctualLightSetting();
