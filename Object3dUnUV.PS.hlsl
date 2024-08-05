@@ -1,19 +1,13 @@
-
-#include "Object3D.hlsli"
+#include "Object3DUnUV.hlsli"
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<PunctualLight> gPunctualLight : register(b1);
-Texture2D<float32_t4> gTexture : register(t0);
-SamplerState gSampler : register(s0);
 
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
     
-    float4 transformedUV = mul(float32_t4(input.texcoord, 0.0f, 1.0f), gMaterial.uvTransform);
-    float32_t4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-
     float32_t3 toEye = normalize(gPunctualLight.camera.worldPosition - input.worldPosition);
     
     // DirectionalLight    
@@ -41,11 +35,6 @@ PixelShaderOutput main(VertexShaderOutput input)
     float32_t cosAngle = dot(spotLightDirectionOnSurface, gPunctualLight.spotLight.direction);
     float32_t falloffFactor = saturate((cosAngle - gPunctualLight.spotLight.cosAngle) / (gPunctualLight.spotLight.cosFalloffStart - gPunctualLight.spotLight.cosAngle));
     
-    // Textureのaの値が0.5以下の時にPixelを廃却
-    if (textureColor.a <= 0.5)
-    {
-        discard;
-    }
     
     if (gMaterial.enbleLighting != 0)
     {
@@ -62,13 +51,13 @@ PixelShaderOutput main(VertexShaderOutput input)
         // 拡散反射
         // DirectionalLight
         float32_t3 diffuseDirectionalLight =
-        gMaterial.color.rgb * textureColor.rgb * gPunctualLight.directionalLight.color.rgb * cos * gPunctualLight.directionalLight.intensity;
+        gMaterial.color.rgb * gPunctualLight.directionalLight.color.rgb * cos * gPunctualLight.directionalLight.intensity;
         // PointLight
         float32_t3 diffusePointLight =
-        gMaterial.color.rgb * textureColor.rgb * gPunctualLight.pointLight.color.rgb * cosPointLight * gPunctualLight.pointLight.intensity * pointLightFactor;
+        gMaterial.color.rgb *  gPunctualLight.pointLight.color.rgb * cosPointLight * gPunctualLight.pointLight.intensity * pointLightFactor;
         // SpotLight
         float32_t3 diffuseSpotLight =
-        gMaterial.color.rgb * textureColor.rgb * gPunctualLight.spotLight.color.rgb * spotLightCos * gPunctualLight.spotLight.intensity * spotLightAttenuationFactor * falloffFactor;
+        gMaterial.color.rgb *  gPunctualLight.spotLight.color.rgb * spotLightCos * gPunctualLight.spotLight.intensity * spotLightAttenuationFactor * falloffFactor;
         // 鏡面反射
         // DirectionalLight
         float32_t3 specularDirectionalLight = gPunctualLight.directionalLight.color.rgb * gPunctualLight.directionalLight.intensity * specularPow * float32_t3(1.0f, 1.0f, 1.0f);
@@ -82,12 +71,12 @@ PixelShaderOutput main(VertexShaderOutput input)
         
 
         // アルファ値は今まで通り
-        output.color.a = gMaterial.color.a * textureColor.a;
+        output.color.a = gMaterial.color.a;
    
     }
     else
     {
-        output.color = gMaterial.color * textureColor;
+        output.color = gMaterial.color;
     }
     
     // output.colorのa値が0の時にPixelを廃却

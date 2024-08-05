@@ -1,7 +1,6 @@
 // This
 #include "ModelManager.h"
 
-
 void cModelManager::Initialize() {
 	// 配列をクリア
 	models_.clear();
@@ -19,6 +18,13 @@ void cModelManager::Load(const std::string& filePath) {
 
 	// モデルをmapコンテナに格納する
 	models_.insert(std::make_pair(filePath, std::move(model)));
+}
+
+void cModelManager::CreateSphere(const std::string& textureFile, const std::string& directoryPath) {
+	std::unique_ptr<cModel> model = std::make_unique<cModel>();
+	model->CreateSphere(directoryPath + "/" + textureFile);
+	// モデルをmapコンテナに格納する
+	models_.insert(std::make_pair("Sphere_" + textureFile, std::move(model)));
 }
 
 cModel* cModelManager::Find(const std::string& filePath) {

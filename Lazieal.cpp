@@ -15,6 +15,8 @@
 #include "ModelManager.h"
 #include "Camera.h"
 #include "Object3dSystem.h"
+#include "Object2dSystem.h"
+#include "Object3d.h"
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
@@ -24,6 +26,7 @@ cTextureManager* cLazieal::textureManager_ = nullptr;
 cPipelineManager* cLazieal::pipelineManager_ = nullptr;
 cModelManager* cLazieal::modelManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
+cObject2DSystem* cLazieal::object2dSystem_ = nullptr;
 
 void cLazieal::Initialize() {
 	// デバッグ用文字
@@ -113,6 +116,15 @@ void cLazieal::Initialize() {
 	object3dSystem_->SetDefaultCamera(debugCamera_);
 #pragma endregion
 
+#pragma region Object2dSystem
+	// Object2dSystemの生成
+	object2dSystem_ = new cObject2DSystem();
+	// DirectXCommonのインスタンスをセット
+	object2dSystem_->SetDirectXCommon(directX_);
+	// GraphicsPipelineManagerのインスタンスをセット
+	object2dSystem_->SetPipelineManager(pipelineManager_);
+#pragma endregion
+
 }
 
 void cLazieal::Finalize() {
@@ -164,6 +176,17 @@ void cLazieal::Update() {
 
 	// ImGui開始処理
 	imguiManager_->BeginFrame();
+
+#pragma region ImGuiDebugCamera
+	ImGui::SetNextWindowSize(ImVec2(400.0f, 80.0f));
+	ImGui::Begin("DebugCamera");
+	ImGui::DragFloat3("Rotate", &debugCameraTransform_.rotate.x, 0.001f);
+	ImGui::DragFloat3("Translate", &debugCameraTransform_.translate.x, 0.01f);
+	ImGui::End();
+#pragma endregion
+
+	// デバッグカメラの更新
+	debugCamera_->Update();
 
 }
 
@@ -224,12 +247,20 @@ std::unordered_map<std::string, cTextureManager::Texture>& cLazieal::GetTexture(
 	return textureManager_->GetTexture();
 }
 
+const DirectX::TexMetadata& cLazieal::GetTextureMetaData(const std::string& filePath) {
+	return textureManager_->GetMetaData(filePath);
+}
+
 ID3D12PipelineState* cLazieal::GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode) {
 	return pipelineManager_->GetPipelineState(pipelineState, blendMode);
 }
 
 void cLazieal::LoadModel(const std::string& filePath) {
 	modelManager_->Load(filePath);
+}
+
+void cLazieal::CreateSphere(const std::string& textureFilePath) {
+	modelManager_->CreateSphere(textureFilePath);
 }
 
 cModel* cLazieal::FindModel(const std::string& filePath) {
@@ -240,6 +271,74 @@ void cLazieal::PreDrawObject3D() {
 	object3dSystem_->PreDraw();
 }
 
+void cLazieal::PreDrawObject3DUnUV() {
+	object3dSystem_->PreDrawUnUV();
+}
+
 cCamera* cLazieal::GetDefaultCamera() {
 	return object3dSystem_->GetDefaultCamera();
+}
+
+void cLazieal::PreDrawObject2D() {
+	object2dSystem_->PreDraw();
+}
+
+void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d) {
+	// デバッグ用UIを表示
+	ImGui::Begin(object3d->GetName().c_str());
+
+	// Transform
+	if (ImGui::BeginTabBar("Transform")) {
+		if (ImGui::BeginTabItem("Transform")) {
+
+			ImGui::DragFloat3("scale", &transform.scale.x, 0.01f);
+			ImGui::DragFloat3("rotate", &transform.rotate.x, 0.003f);
+			ImGui::DragFloat3("translate", &transform.translate.x, 0.01f);
+			object3d->SetTransform(transform);
+
+			ImGui::EndTabItem();
+		}
+		ImGui::EndTabBar();
+	}
+
+	// Material
+	std::vector<sMaterial3D> materials = object3d->GetModel()->GetMaterials();
+	// UvTransform　Matrixがマテリアルの中に含まれているが、行列の計算をModelクラス内で行うため別途送る
+	std::vector<sUVTransform> uvTransform = object3d->GetModel()->GetUVTransforms();
+
+	if (ImGui::BeginTabBar("Material")) {
+		for (size_t i = 0; i < materials.size(); ++i) {
+			std::string label = "Material " + std::to_string(i + 1);
+
+			if (ImGui::BeginTabItem(label.c_str())) {
+				label = "color " + std::to_string(i + 1);
+				ImGui::ColorEdit4(label.c_str(), &materials[i].color.x);
+
+				label = "enableLighting " + std::to_string(i + 1);
+				ImGui::Checkbox(label.c_str(), reinterpret_cast<bool*>(&materials[i].enbleLighting));
+
+				label = "UVScale " + std::to_string(i + 1);
+				ImGui::DragFloat2(label.c_str(), &uvTransform[i].scale.x, 0.01f);
+
+				label = "UVRotateZ " + std::to_string(i + 1);
+				ImGui::DragFloat(label.c_str(), &uvTransform[i].rotateZ, 0.01f);
+
+				label = "UVTranslate " + std::to_string(i + 1);
+				ImGui::DragFloat2(label.c_str(), &uvTransform[i].translate.x, 0.01f);
+
+				label = "shininess " + std::to_string(i + 1);
+				ImGui::DragFloat(label.c_str(), &materials[i].shininess, 1.0f);
+
+
+				ImGui::EndTabItem();
+			}
+		}
+		ImGui::EndTabBar();
+
+	}
+
+	object3d->GetModel()->SetMaterials(materials);
+	object3d->GetModel()->SetUVTransform(uvTransform);
+
+	ImGui::End();
 }

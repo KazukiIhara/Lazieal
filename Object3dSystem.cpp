@@ -17,3 +17,10 @@ void cObject3dSystem::PreDraw() {
 	// 形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	directX_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
+
+void cObject3dSystem::PreDrawUnUV() {
+	// RootSignatureを設定。PSOに設定しているけど別途設定が必要
+	directX_->GetCommandList()->SetGraphicsRootSignature(pipelineManager_->GetRootSignature(cPipelineManager::kObject3dUnUV));
+	// 形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
+	directX_->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+}

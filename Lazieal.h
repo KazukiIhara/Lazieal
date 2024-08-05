@@ -9,6 +9,12 @@
 #include "TextureManager.h"
 #include "PipelineManager.h"
 
+#pragma once
+// Include
+
+// MyHedder
+#include "MathFunction.h"
+
 // 前方宣言
 class cWinAPI;
 class cDirectXCommon;
@@ -20,6 +26,8 @@ class cPipelineManager;
 class cModelManager;
 class cModel;
 class cObject3dSystem;
+class cObject2DSystem;
+class cObject3D;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -64,7 +72,10 @@ public: // 静的メンバ関数
 	static void LoadTexture(const std::string& filePath);
 	// 画像取得関数
 	static std::unordered_map<std::string, cTextureManager::Texture>& GetTexture();
+	// メタデータ取得
+	static const DirectX::TexMetadata& GetTextureMetaData(const std::string& filePath);
 #pragma endregion
+
 #pragma region PipelineManager
 	// パイプライン取得関数
 	static ID3D12PipelineState* GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode);
@@ -73,6 +84,8 @@ public: // 静的メンバ関数
 #pragma region ModelManager
 	// モデルの読み込み
 	static void LoadModel(const std::string& filePath);
+	// 球体の作成
+	static void CreateSphere(const std::string& textureFilePath);
 	// モデルの検索
 	static cModel* FindModel(const std::string& filePath);
 #pragma endregion
@@ -80,9 +93,22 @@ public: // 静的メンバ関数
 #pragma region Object3d
 	// 3dオブジェクト描画前処理
 	static void PreDrawObject3D();
+	// UVなし3Dオブジェクト描画前処理
+	static void PreDrawObject3DUnUV();
 	// 3dオブジェクトのデフォルトカメラ取得
 	static cCamera* GetDefaultCamera();
 #pragma endregion
+#pragma region Object2d
+	// 2dオブジェクト描画前処理
+	static void PreDrawObject2D();
+
+#pragma endregion
+
+#pragma region ImGui
+	// 3dオブジェクトデバッグ用
+	static void ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d);
+#pragma endregion
+
 
 private: // メンバ変数
 	// 終了リクエスト
@@ -108,6 +134,8 @@ private: // 汎用クラスのポインタ
 	cCamera* debugCamera_ = nullptr;
 	// Object3dSystem
 	static cObject3dSystem* object3dSystem_;
+	// Object2dSystem
+	static cObject2DSystem* object2dSystem_;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

@@ -25,7 +25,7 @@ public:
 	void Update();
 	// 描画
 	void Draw(cPipelineManager::eBlendMode blendMode = cPipelineManager::kBlendModeNormal);
-
+	void DrawUnUV(cPipelineManager::eBlendMode blendMode = cPipelineManager::kBlendModeNormal);
 private:
 
 #pragma region WVP
@@ -35,10 +35,6 @@ private:
 	void MapWVPData();
 #pragma endregion
 
-#pragma region Light
-	void CreatePunctualLightResource();
-	void MapPunctualLightData();
-#pragma endregion	
 	/*バッファリソースを作成する*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
 public: // Setter
@@ -56,6 +52,16 @@ public: // Setter
 	void SetTranslate(const Vector3& translate) {
 		this->transform_.translate = translate;
 	}
+	// トランスフォームのセット
+	void SetTransform(const cWorldTransform& transform) {
+		this->transform_.scale = transform.scale;
+		this->transform_.rotate = transform.rotate;
+		this->transform_.translate = transform.translate;
+	}
+	// ライトのセット
+	void SetPunctualLight(const cPunctualLight& punctualLight) {
+		punctualLight_ = punctualLight;
+	}
 public: // Getter
 	// 拡縮のゲッター
 	const Vector3& GetScale() const {
@@ -69,10 +75,19 @@ public: // Getter
 	const Vector3& GetTranslate() const {
 		return transform_.translate;
 	}
+	// オブジェクトの名前のゲッター
+	const std::string& GetName()const {
+		return objectname_;
+	}
+	cModel* GetModel() {
+		return model;
+	}
+
 private:/*メンバ変数*/
 #pragma region Model
 	cModel* model = nullptr;
 #pragma endregion
+
 #pragma region Camera
 	// カメラを受け取る箱
 	cCamera* camera_ = nullptr;
@@ -90,12 +105,10 @@ private:/*メンバ変数*/
 #pragma endregion
 
 #pragma region PunctualLight
-	// PunctualLight用のリソース
-	Microsoft::WRL::ComPtr<ID3D12Resource> punctualLightResource_ = nullptr;
-	// シェーダーに送るライトのデータ
-	cPunctualLight::sPunctualLight* punctualLightData_ = nullptr;
-	// PunctualLightを受け取る箱
-	cPunctualLight punctualLight_;
+	// ライトを受け取る箱
+	cPunctualLight punctualLight_{};
 #pragma endregion
 
+
+	std::string objectname_{};
 };

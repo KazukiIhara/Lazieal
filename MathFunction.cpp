@@ -177,3 +177,50 @@ Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float botto
 	};
 	return result;
 }
+
+Matrix4x4 MakeUVMatrix(const Vector2& scale, const float& rotateZ, const Vector2& translate) {
+	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(rotateZ);
+	Matrix4x4 scaleMatrix = MakeScaleMatrix(Vector3(scale.x, scale.y, 1.0f));
+	Matrix4x4 translateMatrix = MakeTranslateMatrix(Vector3(translate.x, translate.y, 0.0f));
+	return scaleMatrix * rotateZMatrix * translateMatrix;
+}
+
+void DecomposeUVMatrix(const Matrix4x4& matrix, Vector3& scale, float& rotateZ, Vector2& translate) {
+	// Extract translation
+	translate.x = matrix.m[3][0];
+	translate.y = matrix.m[3][1];
+
+	// Extract rotation
+	rotateZ = std::atan2(matrix.m[1][0], matrix.m[0][0]);
+
+	// Extract scale
+	scale.x = matrix.m[0][0] / std::cos(rotateZ);
+	scale.y = matrix.m[1][1] / std::cos(rotateZ);
+	scale.z = 1.0f; // UV matrix is 2D, so z-scale is assumed to be 1.0
+}
+
+Matrix4x4 ComposeUVMatrix(const Vector3& scale, float rotateZ, const Vector2& translate) {
+	Matrix4x4 matrix;
+
+	float cosZ = std::cos(rotateZ);
+	float sinZ = std::sin(rotateZ);
+
+	// Apply scale and rotation
+	matrix.m[0][0] = scale.x * cosZ;
+	matrix.m[0][1] = scale.x * -sinZ;
+	matrix.m[1][0] = scale.y * sinZ;
+	matrix.m[1][1] = scale.y * cosZ;
+
+	// Apply translation
+	matrix.m[3][0] = translate.x;
+	matrix.m[3][1] = translate.y;
+
+	// Set other elements to identity matrix values
+	matrix.m[0][2] = matrix.m[0][3] = 0.0f;
+	matrix.m[1][2] = matrix.m[1][3] = 0.0f;
+	matrix.m[2][0] = matrix.m[2][1] = matrix.m[2][2] = matrix.m[2][3] = 0.0f;
+	matrix.m[3][2] = 0.0f;
+	matrix.m[3][3] = 1.0f;
+
+	return matrix;
+}

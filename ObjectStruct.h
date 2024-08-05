@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 // Include
 
 // MyHedder
@@ -10,9 +11,9 @@
 
 // UVTransform
 struct sUVTransform {
-	Vector3 scale;
+	Vector2 scale;
 	float rotateZ;
-	Vector3 translate;
+	Vector2 translate;
 };
 
 
@@ -41,6 +42,12 @@ struct sMaterial3D {
 	float padding[3];
 	Matrix4x4 uvTransformMatrix;
 	float shininess;
+};
+
+// UVなし3D頂点データ用構造体
+struct sVertexData3DUnUV {
+	Vector4 position;
+	Vector3 normal;
 };
 
 // トランスフォーメーション構造体
