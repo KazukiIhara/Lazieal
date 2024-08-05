@@ -7,50 +7,15 @@
 // DirectX
 #include <d3d12.h>
 
+// MyHedder
+#include "PunctualLightSetting.h"
+
 class cPunctualLight {
 public: // 構造体
-	// ディレクショナルライト
-	struct sDirectionalLight {
-		Vector4 color; //ライトの色
-		Vector3 direction; //ライトの向き
-		float intensity; //輝度
-	};
-
-	// ポイントライト
-	struct sPointLight {
-		Vector4 color;
-		Vector3 position;
-		float intensity;
-		float radius;
-		float decay;
-		float padding[2];
-	};
-
-	// スポットライト
-	struct sSpotLight {
-		Vector4 color;
-		Vector3 position;
-		float intensity;
-		Vector3 direction;
-		float distance;
-		float decay;
-		float cosFalloffStart;
-		float cosAngle;
-		float padding;
-	};
-
 	// シェーダーに送るカメラ座標
 	struct sCameraForGPU {
 		Vector3 worldPosition;
 		float padding;
-	};
-
-	// PunctualLight
-	struct sPunctualLight {
-		sDirectionalLight directionalLight;
-		sPointLight pointLight;
-		sSpotLight spotLight;
-		sCameraForGPU camera;
 	};
 
 public: // メンバ関数
@@ -59,17 +24,19 @@ public: // メンバ関数
 	void Update();
 	void TransferLight();
 
+	void SetPunctualLightSetting(const cPunctualLightSetting::sPunctualLight& punctualLightSetting);
 	void SetCameraPosition(const Vector3& cameraPosition);
-
-	const sPunctualLight &GetPunctualLight()const {
-		return punctualLight;
-	}
 
 private: // 非公開メンバ関数
 #pragma region Light
 	void CreatePunctualLightResource();
 	void MapPunctualLightData();
 #pragma endregion	
+#pragma region Camera
+	void CreateCameraResource();
+	void MapCameraData();
+#pragma endregion
+
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
 
 private: // メンバ変数
@@ -77,8 +44,15 @@ private: // メンバ変数
 	// PunctualLight用のリソース
 	Microsoft::WRL::ComPtr<ID3D12Resource> punctualLightResource_ = nullptr;
 	// シェーダーに送るライトのデータ
-	sPunctualLight* punctualLightData_ = nullptr;
+	cPunctualLightSetting::sPunctualLight* punctualLightData_ = nullptr;
 	// PunctualLight
-	sPunctualLight punctualLight;
+	cPunctualLightSetting::sPunctualLight punctualLight{};
+
+	// Camera用リソース
+	Microsoft::WRL::ComPtr<ID3D12Resource> cameraResource_ = nullptr;
+	// Camera用データ
+	sCameraForGPU* cameraData_ = nullptr;
+	// カメラを受け取る箱
+	sCameraForGPU camera;
 
 };

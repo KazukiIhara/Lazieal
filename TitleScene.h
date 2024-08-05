@@ -39,7 +39,7 @@ private: // 非公開メンバ関数
 
 private: // 非公開メンバ変数
 #pragma region PunctualLight
-	cPunctualLight::sPunctualLight punctualLightSetting_{};
+	cPunctualLightSetting punctualLightSetting_{};
 	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
 

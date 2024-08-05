@@ -77,6 +77,9 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\Lazieal\2d\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="PunctualLightSetting.cpp">
+      <Filter>Engine\Lazieal\PunctualLight\Setting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -211,6 +214,9 @@
     <Filter Include="Engine\ShaderFiles\Object2d">
       <UniqueIdentifier>{1dcd6975-2020-4180-94d1-7bf1b3ebe5f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lazieal\PunctualLight\Setting">
+      <UniqueIdentifier>{8cf1ac73-765f-4f79-8896-456263739856}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -308,6 +314,9 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Engine\Lazieal\2d\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="PunctualLightSetting.h">
+      <Filter>Engine\Lazieal\PunctualLight\Setting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

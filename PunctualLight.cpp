@@ -1,38 +1,15 @@
 #include "PunctualLight.h"
 
-
 #include "Lazieal.h"
 
 void cPunctualLight::Initialize() {
-	// DirectionalLightの初期化
-	punctualLight.directionalLight.color = { 1.0f,1.0f,1.0f,1.0f };
-	punctualLight.directionalLight.direction = { 0.0f,-1.0f,0.0f };
-	punctualLight.directionalLight.intensity = 1.0f;
-
-	// PointLightの初期化
-	punctualLight.pointLight.color = { 1.0f,1.0f,1.0f,1.0f };
-	punctualLight.pointLight.intensity = 0.0f;
-	punctualLight.pointLight.position = { 0.0f,2.0f,0.0f };
-	punctualLight.pointLight.radius = 10.0f;
-	punctualLight.pointLight.decay = 5.0f;
-
-	// SpotLightの初期化
-	punctualLight.spotLight.color = { 1.0f,1.0f,1.0f,1.0f };
-	punctualLight.spotLight.position = { 2.0f,1.25f,0.0f };
-	punctualLight.spotLight.distance = 7.0f;
-	punctualLight.spotLight.direction = Normalize({ -1.0f,-1.0f,0.0f });
-	punctualLight.spotLight.intensity = 0.0f;
-	punctualLight.spotLight.decay = 2.0f;
-	punctualLight.spotLight.cosFalloffStart = 0.1f;
-	punctualLight.spotLight.cosAngle = std::cos(std::numbers::pi_v<float> / 3.0f);
-
-	// Cameraの初期化
-	punctualLight.camera.worldPosition = { 0.0f,0.0f,0.0f };
 
 	// リソース作成
 	CreatePunctualLightResource();
+	CreateCameraResource();
 	// データ書き込み
 	MapPunctualLightData();
+	MapCameraData();
 }
 
 void cPunctualLight::Update() {
@@ -59,27 +36,31 @@ void cPunctualLight::Update() {
 	punctualLightData_->spotLight.position = punctualLight.spotLight.position;
 
 	// カメラ
-
-	punctualLightData_->camera.worldPosition.x = punctualLight.camera.worldPosition.x;
-	punctualLightData_->camera.worldPosition.y = punctualLight.camera.worldPosition.y;
-	punctualLightData_->camera.worldPosition.z = punctualLight.camera.worldPosition.z;
+	cameraData_->worldPosition.x = camera.worldPosition.x;
+	cameraData_->worldPosition.y = camera.worldPosition.y;
+	cameraData_->worldPosition.z = camera.worldPosition.z;
 
 }
 
 void cPunctualLight::TransferLight() {
 	// 定数バッファを転送
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
+	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(3, cameraResource_->GetGPUVirtualAddress());
+}
+
+void cPunctualLight::SetPunctualLightSetting(const cPunctualLightSetting::sPunctualLight& punctualLightSetting) {
+	punctualLight = punctualLightSetting;
 }
 
 void cPunctualLight::SetCameraPosition(const Vector3& cameraPosition) {
-	punctualLight.camera.worldPosition.x = cameraPosition.x;
-	punctualLight.camera.worldPosition.y = cameraPosition.y;
-	punctualLight.camera.worldPosition.z = cameraPosition.z;
+	camera.worldPosition.x = cameraPosition.x;
+	camera.worldPosition.y = cameraPosition.y;
+	camera.worldPosition.z = cameraPosition.z;
 }
 
 void cPunctualLight::CreatePunctualLightResource() {
 	// WVP用のリソースを作る
-	punctualLightResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(cPunctualLight::sPunctualLight));
+	punctualLightResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(cPunctualLightSetting::sPunctualLight));
 }
 
 void cPunctualLight::MapPunctualLightData() {
@@ -110,11 +91,22 @@ void cPunctualLight::MapPunctualLightData() {
 	punctualLightData_->spotLight.intensity = punctualLight.spotLight.intensity;
 	punctualLightData_->spotLight.position = punctualLight.spotLight.position;
 
-	// カメラ
-	punctualLightData_->camera.worldPosition.x = punctualLight.camera.worldPosition.x;
-	punctualLightData_->camera.worldPosition.y = punctualLight.camera.worldPosition.y;
-	punctualLightData_->camera.worldPosition.z = punctualLight.camera.worldPosition.z;
+}
 
+void cPunctualLight::CreateCameraResource() {
+	cameraResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(sCameraForGPU));
+}
+
+void cPunctualLight::MapCameraData() {
+	// データを書き込む
+	cameraData_ = nullptr;
+	// 書き込むためのアドレスを取得
+	cameraResource_->Map(0, nullptr, reinterpret_cast<void**>(&cameraData_));
+
+	// カメラ
+	cameraData_->worldPosition.x = camera.worldPosition.x;
+	cameraData_->worldPosition.y = camera.worldPosition.y;
+	cameraData_->worldPosition.z = camera.worldPosition.z;
 }
 
 Microsoft::WRL::ComPtr<ID3D12Resource> cPunctualLight::CreateBufferResource(ID3D12Device* device, size_t sizeInBytes) {

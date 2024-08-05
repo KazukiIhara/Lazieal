@@ -103,7 +103,5 @@ private:/*メンバ変数*/
 	// ライトを受け取る箱
 	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
-
-
 	std::string objectname_{};
 };

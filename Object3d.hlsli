@@ -71,5 +71,4 @@ struct PunctualLight
     DirectionalLight directionalLight;
     PointLight pointLight;
     SpotLight spotLight;
-    Camera camera;
 };

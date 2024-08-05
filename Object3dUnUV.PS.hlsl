@@ -2,13 +2,13 @@
 
 ConstantBuffer<Material> gMaterial : register(b0);
 ConstantBuffer<PunctualLight> gPunctualLight : register(b1);
-
+ConstantBuffer<Camera> gCamera : register(b2);
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
     
-    float32_t3 toEye = normalize(gPunctualLight.camera.worldPosition - input.worldPosition);
+    float32_t3 toEye = normalize(gCamera.worldPosition - input.worldPosition);
     
     // DirectionalLight    
     float32_t3 halfVector = normalize(-gPunctualLight.directionalLight.direction + toEye);

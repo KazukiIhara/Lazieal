@@ -29,6 +29,7 @@
     <ClCompile Include="Object3dSystem.cpp" />
     <ClCompile Include="PipelineManager.cpp" />
     <ClCompile Include="PunctualLight.cpp" />
+    <ClCompile Include="PunctualLightSetting.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -60,6 +61,7 @@
     <ClInclude Include="ObjectStruct.h" />
     <ClInclude Include="PipelineManager.h" />
     <ClInclude Include="PunctualLight.h" />
+    <ClInclude Include="PunctualLightSetting.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Sprite.h" />

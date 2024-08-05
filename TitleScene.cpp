@@ -19,10 +19,13 @@ void cTitleScene::Initialize() {
 	cLogger::Log("TitleScene,Initialized\n");
 
 #pragma region PunctualLight
+	// ライト初期化
+	punctualLightSetting_.Initialize();
+
 	punctualLight_ = new cPunctualLight();
-	punctualLight_->Initialize();
-	punctualLightSetting_ = punctualLight_->GetPunctualLight();
 	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+	punctualLight_->SetPunctualLightSetting(punctualLightSetting_.punctualLight);
+	punctualLight_->Initialize();
 
 #pragma endregion
 
@@ -199,6 +202,7 @@ void cTitleScene::Update() {
 #pragma region PunctualLight
 	// ライトの更新
 	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+	punctualLight_->SetPunctualLightSetting(punctualLightSetting_.punctualLight);
 	punctualLight_->Update();
 #pragma endregion
 
