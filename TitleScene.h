@@ -7,7 +7,17 @@
 #include "BaseScene.h"
 #include "Object3d.h"
 
-class cTitleScene:public cBaseScene {
+class cTitleScene :public cBaseScene {
+public:
+	enum Object {
+		teapot,
+		suzanne,
+		multiMaterial,
+		bunny,
+		sphere,
+	};
+	static const uint32_t kObjectNum = 5;
+
 public: // 公開メンバ関数
 	// コンストラクタ
 	cTitleScene();
@@ -21,6 +31,9 @@ public: // 公開メンバ関数
 	void Update()override;
 	// 描画
 	void Draw()override;
+
+private: // 非公開メンバ関数
+	void SwitchShowObjects();
 
 private:
 
@@ -43,5 +56,8 @@ private:
 	// スフィア
 	cWorldTransform sphereTransform_{};
 	cObject3D* sphere_ = nullptr;
+
+	bool isShow[kObjectNum]{};
+
 };
 

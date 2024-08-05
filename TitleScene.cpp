@@ -115,7 +115,26 @@ void cTitleScene::Finalize() {
 void cTitleScene::Update() {
 
 	// デバッグUI表示
-	cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
+#pragma region ImGuiDebug
+	SwitchShowObjects();
+
+	if (isShow[teapot]) {
+		cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
+	}
+	if (isShow[multiMaterial]) {
+		cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
+	}
+	if (isShow[suzanne]) {
+		cLazieal::ImGuiDebug3dObject(suzanneTransform_, suzanne_);
+	}
+	if (isShow[bunny]) {
+		cLazieal::ImGuiDebug3dObject(bunnyTransform_, bunny_);
+	}
+	if (isShow[sphere]) {
+		cLazieal::ImGuiDebug3dObject(sphereTransform_, sphere_);
+	}
+#pragma endregion
+
 
 	// ティーポット更新
 	teapot_->Update();
@@ -135,20 +154,36 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject3D();
 
 	// ティーポット描画
-	//teapot_->Draw();
-
+	if (isShow[teapot]) {
+		teapot_->Draw();
+	}
 	// MultiMaterial描画
-	//multiMaterial_->Draw();
-
+	if (isShow[multiMaterial]) {
+		multiMaterial_->Draw();
+	}
 	// bunny描画
-	//bunny_->Draw();
-
+	if (isShow[bunny]) {
+		bunny_->Draw();
+	}
 	// Sphere描画
-	sphere_->Draw();
+	if (isShow[sphere]) {
+		sphere_->Draw();
+	}
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
-
 	// suzanne描画
-	//suzanne_->DrawUnUV();
+	if (isShow[suzanne]) {
+		suzanne_->DrawUnUV();
+	}
+}
+
+void cTitleScene::SwitchShowObjects() {
+	ImGui::Begin("Objects");
+	ImGui::Checkbox("teapot", &isShow[teapot]);
+	ImGui::Checkbox("suzanne", &isShow[suzanne]);
+	ImGui::Checkbox("multiMaterial", &isShow[multiMaterial]);
+	ImGui::Checkbox("bunny", &isShow[bunny]);
+	ImGui::Checkbox("sphere", &isShow[sphere]);
+	ImGui::End();
 }
