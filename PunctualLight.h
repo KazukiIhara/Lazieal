@@ -55,9 +55,15 @@ public: // 構造体
 
 public: // メンバ関数
 	// 初期化
-	void Initialize(Vector3* cameraPosition);
+	void Initialize();
 	void Update();
 	void TransferLight();
+
+	void SetCameraPosition(const Vector3& cameraPosition);
+
+	const sPunctualLight &GetPunctualLight()const {
+		return punctualLight;
+	}
 
 private: // 非公開メンバ関数
 #pragma region Light

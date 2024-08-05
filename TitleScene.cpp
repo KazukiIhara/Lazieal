@@ -18,6 +18,14 @@ void cTitleScene::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Initialized\n");
 
+#pragma region PunctualLight
+	punctualLight_ = new cPunctualLight();
+	punctualLight_->Initialize();
+	punctualLightSetting_ = punctualLight_->GetPunctualLight();
+	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+
+#pragma endregion
+
 #pragma region Teapot
 	// モデル読み込み
 	cLazieal::LoadModel("teapot");
@@ -30,6 +38,7 @@ void cTitleScene::Initialize() {
 	// ティーポット初期化
 	teapot_ = new cObject3D();
 	teapot_->Initialize();
+	teapot_->SetPunctualLight(punctualLight_);
 	teapot_->SetModel("teapot");
 	teapot_->SetTranslate(teapotTransform_.translate);
 	teapot_->SetRotate(teapotTransform_.rotate);
@@ -49,6 +58,7 @@ void cTitleScene::Initialize() {
 	suzanne_ = new cObject3D();
 	suzanne_->Initialize();
 	suzanne_->SetModel("suzanne");
+	suzanne_->SetPunctualLight(punctualLight_);
 	suzanne_->SetTranslate(suzanneTransform_.translate);
 	suzanne_->SetRotate(suzanneTransform_.rotate);
 
@@ -65,6 +75,7 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMesh_ = new cObject3D();
 	multiMesh_->Initialize();
+	multiMesh_->SetPunctualLight(punctualLight_);
 	multiMesh_->SetModel("multiMesh");
 	multiMesh_->SetTransform(multiMeshTransform_);
 
@@ -82,6 +93,7 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMaterial_ = new cObject3D();
 	multiMaterial_->Initialize();
+	multiMaterial_->SetPunctualLight(punctualLight_);
 	multiMaterial_->SetModel("multiMaterial");
 	multiMaterial_->SetTransform(multiMaterialTransform_);
 
@@ -96,6 +108,7 @@ void cTitleScene::Initialize() {
 
 	bunny_ = new cObject3D();
 	bunny_->Initialize();
+	bunny_->SetPunctualLight(punctualLight_);
 	bunny_->SetModel("bunny");
 	bunny_->SetTransform(bunnyTransform_);
 
@@ -110,6 +123,7 @@ void cTitleScene::Initialize() {
 
 	sphere_ = new cObject3D();
 	sphere_->Initialize();
+	sphere_->SetPunctualLight(punctualLight_);
 	sphere_->SetModel("Sphere_uvChecker.png");
 	sphere_->SetTransform(sphereTransform_);
 
@@ -129,6 +143,8 @@ void cTitleScene::Initialize() {
 void cTitleScene::Finalize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Finalized\n");
+
+	delete punctualLight_;
 
 	delete teapot_;
 	delete suzanne_;
@@ -151,7 +167,7 @@ void cTitleScene::Update() {
 		cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
 	}
 	if (isShow[multiMesh]) {
-		cLazieal::ImGuiDebug3dObject(multiMeshTransform_,multiMesh_);
+		cLazieal::ImGuiDebug3dObject(multiMeshTransform_, multiMesh_);
 	}
 	if (isShow[multiMaterial]) {
 		cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
@@ -180,6 +196,12 @@ void cTitleScene::Update() {
 
 #pragma endregion
 
+#pragma region PunctualLight
+	// ライトの更新
+	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+	punctualLight_->Update();
+#pragma endregion
+
 #pragma region 3dObject
 	// ティーポット更新
 	teapot_->Update();
@@ -199,12 +221,9 @@ void cTitleScene::Update() {
 	// uvChecker更新
 	uvChecker_->Update();
 #pragma endregion
-
-
 }
 
 void cTitleScene::Draw() {
-
 	// 3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3D();
 

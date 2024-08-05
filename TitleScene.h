@@ -39,7 +39,8 @@ private: // 非公開メンバ関数
 
 private: // 非公開メンバ変数
 #pragma region PunctualLight
-	cPunctualLight punctualLight_{};
+	cPunctualLight::sPunctualLight punctualLightSetting_{};
+	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
 
 #pragma region 3dModel
@@ -78,7 +79,6 @@ private: // 非公開メンバ変数
 	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
 #pragma endregion
-
 
 };
 

@@ -3,7 +3,7 @@
 
 #include "Lazieal.h"
 
-void cPunctualLight::Initialize(Vector3* cameraPosition) {
+void cPunctualLight::Initialize() {
 	// DirectionalLightの初期化
 	punctualLight.directionalLight.color = { 1.0f,1.0f,1.0f,1.0f };
 	punctualLight.directionalLight.direction = { 0.0f,-1.0f,0.0f };
@@ -27,9 +27,7 @@ void cPunctualLight::Initialize(Vector3* cameraPosition) {
 	punctualLight.spotLight.cosAngle = std::cos(std::numbers::pi_v<float> / 3.0f);
 
 	// Cameraの初期化
-	punctualLight.camera.worldPosition.x = cameraPosition->x;
-	punctualLight.camera.worldPosition.y = cameraPosition->y;
-	punctualLight.camera.worldPosition.z = cameraPosition->z;
+	punctualLight.camera.worldPosition = { 0.0f,0.0f,0.0f };
 
 	// リソース作成
 	CreatePunctualLightResource();
@@ -61,6 +59,7 @@ void cPunctualLight::Update() {
 	punctualLightData_->spotLight.position = punctualLight.spotLight.position;
 
 	// カメラ
+
 	punctualLightData_->camera.worldPosition.x = punctualLight.camera.worldPosition.x;
 	punctualLightData_->camera.worldPosition.y = punctualLight.camera.worldPosition.y;
 	punctualLightData_->camera.worldPosition.z = punctualLight.camera.worldPosition.z;
@@ -70,6 +69,12 @@ void cPunctualLight::Update() {
 void cPunctualLight::TransferLight() {
 	// 定数バッファを転送
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
+}
+
+void cPunctualLight::SetCameraPosition(const Vector3& cameraPosition) {
+	punctualLight.camera.worldPosition.x = cameraPosition.x;
+	punctualLight.camera.worldPosition.y = cameraPosition.y;
+	punctualLight.camera.worldPosition.z = cameraPosition.z;
 }
 
 void cPunctualLight::CreatePunctualLightResource() {
