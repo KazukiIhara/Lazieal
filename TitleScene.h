@@ -36,7 +36,7 @@ public: // 公開メンバ関数
 private: // 非公開メンバ関数
 	void SwitchShowObjects();
 
-private:
+private: // 非公開メンバ変数
 #pragma region 3dModel
 	// ティーポット
 	cWorldTransform teapotTransform_{};
@@ -58,14 +58,18 @@ private:
 	cWorldTransform sphereTransform_{};
 	cObject3D* sphere_ = nullptr;
 
+	// 描画フラグ
 	bool isShow[kObjectNum]{};
 #pragma endregion
 
+#pragma region Sprite
 	// uvChecker
 	Vector2 uvCheckerPosition_{};
 	float uvCheckerRotate_{};
 	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
+#pragma endregion
+
 
 };
 
