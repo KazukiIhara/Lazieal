@@ -6,6 +6,7 @@
 // MyHedder
 #include "BaseScene.h"
 #include "Object3d.h"
+#include "Sprite.h"
 
 class cTitleScene :public cBaseScene {
 public:
@@ -36,7 +37,7 @@ private: // 非公開メンバ関数
 	void SwitchShowObjects();
 
 private:
-
+#pragma region 3dModel
 	// ティーポット
 	cWorldTransform teapotTransform_{};
 	cObject3D* teapot_ = nullptr;
@@ -58,6 +59,9 @@ private:
 	cObject3D* sphere_ = nullptr;
 
 	bool isShow[kObjectNum]{};
+#pragma endregion
+	Vector2 uvCheckerPosition_{};
+	cSprite* uvChecker_ = nullptr;
 
 };
 

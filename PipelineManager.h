@@ -26,7 +26,8 @@ public: // 列挙型
 	// パイプラインの種類
 	enum ePipelineState {
 		kObject3d,
-		kObject3dUnUV
+		kObject3dUnUV,
+		kObject2d,
 	};
 
 public: // インスタンスセット関数
@@ -103,11 +104,26 @@ public: // 公開メンバ変数
 	void CompileObject3DUnUVShaders();
 #pragma endregion
 
+#pragma region Object2D
+	// ルートシグネイチャを作成する関数
+	void CreateObject2DRootSignature();
+	// パイプラインを生成する関数
+	void CreateObject2DGrapchicsPipelineStateObject();
+	// DepthStencilStateの設定
+	D3D12_DEPTH_STENCIL_DESC Object2DDepthStecilDescSetting();
+	// InputLayoutの設定
+	D3D12_INPUT_LAYOUT_DESC Object2DInputLayoutSetting();
+	// RasterizerStateの設定
+	D3D12_RASTERIZER_DESC Object2DRasterizerStateSetting();
+	// シェーダーたちをコンパイルする関数
+	void CompileObject2DShaders();
+#pragma endregion
+
 private: // 静的メンバ変数
 	// ブレンドモードの数
 	static const uint32_t kBlendModeNum = 6;
 	// パイプラインの種類の数
-	static const uint32_t kPipelineStateNum = 2;
+	static const uint32_t kPipelineStateNum = 3;
 
 private: // メンバ変数
 
@@ -137,6 +153,13 @@ private: // メンバ変数
 	Microsoft::WRL::ComPtr<ID3DBlob> object3DUnUVVertexShaderBlob_;
 	// Object3D用UnUvピクセルシェーダー
 	Microsoft::WRL::ComPtr<ID3DBlob> object3DUnUVPixelShaderBlob_;
+#pragma endregion
+
+#pragma region Object2d
+	// Object2D用頂点シェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object2DVertexShaderBlob_;
+	// Object2D用ピクセルシェーダー
+	Microsoft::WRL::ComPtr<ID3DBlob> object2DPixelShaderBlob_;
 #pragma endregion
 
 private: // インスタンスを受け取るポインタ

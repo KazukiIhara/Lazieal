@@ -26,6 +26,7 @@ class cPipelineManager;
 class cModelManager;
 class cModel;
 class cObject3dSystem;
+class cObject2DSystem;
 class cObject3D;
 class cAbstractSceneFactory;
 
@@ -71,6 +72,8 @@ public: // 静的メンバ関数
 	static void LoadTexture(const std::string& filePath);
 	// 画像取得関数
 	static std::unordered_map<std::string, cTextureManager::Texture>& GetTexture();
+	// メタデータ取得
+	static const DirectX::TexMetadata& GetTextureMetaData(const std::string& filePath);
 #pragma endregion
 
 #pragma region PipelineManager
@@ -94,6 +97,11 @@ public: // 静的メンバ関数
 	static void PreDrawObject3DUnUV();
 	// 3dオブジェクトのデフォルトカメラ取得
 	static cCamera* GetDefaultCamera();
+#pragma endregion
+#pragma region Object2d
+	// 2dオブジェクト描画前処理
+	static void PreDrawObject2D();
+
 #pragma endregion
 
 #pragma region ImGui
@@ -126,6 +134,8 @@ private: // 汎用クラスのポインタ
 	cCamera* debugCamera_ = nullptr;
 	// Object3dSystem
 	static cObject3dSystem* object3dSystem_;
+	// Object2dSystem
+	static cObject2DSystem* object2dSystem_;
 	// シーンファクトリー
 	cAbstractSceneFactory* sceneFactory_ = nullptr;
 };

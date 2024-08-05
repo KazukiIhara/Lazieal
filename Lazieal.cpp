@@ -15,6 +15,7 @@
 #include "ModelManager.h"
 #include "Camera.h"
 #include "Object3dSystem.h"
+#include "Object2dSystem.h"
 #include "Object3d.h"
 #include "AbstractSceneFactory.h"
 
@@ -25,6 +26,7 @@ cTextureManager* cLazieal::textureManager_ = nullptr;
 cPipelineManager* cLazieal::pipelineManager_ = nullptr;
 cModelManager* cLazieal::modelManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
+cObject2DSystem* cLazieal::object2dSystem_ = nullptr;
 
 void cLazieal::Initialize() {
 	// デバッグ用文字
@@ -112,6 +114,15 @@ void cLazieal::Initialize() {
 	object3dSystem_->SetPipelineManager(pipelineManager_);
 	// デフォルトカメラをセット
 	object3dSystem_->SetDefaultCamera(debugCamera_);
+#pragma endregion
+
+#pragma region Object2dSystem
+	// Object2dSystemの生成
+	object2dSystem_ = new cObject2DSystem();
+	// DirectXCommonのインスタンスをセット
+	object2dSystem_->SetDirectXCommon(directX_);
+	// GraphicsPipelineManagerのインスタンスをセット
+	object2dSystem_->SetPipelineManager(pipelineManager_);
 #pragma endregion
 
 }
@@ -236,6 +247,10 @@ std::unordered_map<std::string, cTextureManager::Texture>& cLazieal::GetTexture(
 	return textureManager_->GetTexture();
 }
 
+const DirectX::TexMetadata& cLazieal::GetTextureMetaData(const std::string& filePath) {
+	return textureManager_->GetMetaData(filePath);
+}
+
 ID3D12PipelineState* cLazieal::GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode) {
 	return pipelineManager_->GetPipelineState(pipelineState, blendMode);
 }
@@ -262,6 +277,10 @@ void cLazieal::PreDrawObject3DUnUV() {
 
 cCamera* cLazieal::GetDefaultCamera() {
 	return object3dSystem_->GetDefaultCamera();
+}
+
+void cLazieal::PreDrawObject2D() {
+	object2dSystem_->PreDraw();
 }
 
 void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d) {

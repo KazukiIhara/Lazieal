@@ -208,6 +208,9 @@
     <Filter Include="Engine\Lazieal\2d\System">
       <UniqueIdentifier>{ba89d7d8-280d-437f-a5a3-5667d0d33fae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ShaderFiles\Object2d">
+      <UniqueIdentifier>{1dcd6975-2020-4180-94d1-7bf1b3ebe5f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -314,6 +317,9 @@
     <None Include="Object3dUnUV.hlsli">
       <Filter>Engine\ShaderFiles\Object3dUnUV</Filter>
     </None>
+    <None Include="Object2d.hlsli">
+      <Filter>Engine\ShaderFiles\Object2d</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Object3d.PS.hlsl">
@@ -327,6 +333,12 @@
     </FxCompile>
     <FxCompile Include="Object3dUnUV.VS.hlsl">
       <Filter>Engine\ShaderFiles\Object3dUnUV</Filter>
+    </FxCompile>
+    <FxCompile Include="Object2d.VS.hlsl">
+      <Filter>Engine\ShaderFiles\Object2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Object2d.PS.hlsl">
+      <Filter>Engine\ShaderFiles\Object2d</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

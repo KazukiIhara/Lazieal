@@ -85,7 +85,6 @@ void cTitleScene::Initialize() {
 #pragma endregion
 
 #pragma region Sphere
-
 	cLazieal::CreateSphere("uvChecker.png");
 
 	// スフィアのトランスフォーム
@@ -97,6 +96,13 @@ void cTitleScene::Initialize() {
 	sphere_->SetModel("Sphere_uvChecker.png");
 	sphere_->SetTransform(sphereTransform_);
 
+#pragma endregion
+
+#pragma region uvChecker
+	uvCheckerPosition_ = { 0.0f,0.0f };
+	uvChecker_ = new cSprite();
+	uvChecker_->Initialize("Resources/uvChecker.png");
+	uvChecker_->SetPosition(uvCheckerPosition_);
 #pragma endregion
 
 }
@@ -135,7 +141,7 @@ void cTitleScene::Update() {
 	}
 #pragma endregion
 
-
+#pragma region 3dObject
 	// ティーポット更新
 	teapot_->Update();
 	// MultiMaterial
@@ -146,6 +152,14 @@ void cTitleScene::Update() {
 	bunny_->Update();
 	// Sphere更新
 	sphere_->Update();
+#pragma endregion
+
+#pragma region 2dObject
+	// uvChecker更新
+	uvChecker_->Update();
+#pragma endregion
+
+
 }
 
 void cTitleScene::Draw() {
@@ -176,6 +190,12 @@ void cTitleScene::Draw() {
 	if (isShow[suzanne]) {
 		suzanne_->DrawUnUV();
 	}
+
+	// 2Dオブジェクト描画前処理
+	cLazieal::PreDrawObject2D();
+	
+	// uvChecker描画
+	uvChecker_->Draw();
 }
 
 void cTitleScene::SwitchShowObjects() {
