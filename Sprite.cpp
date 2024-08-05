@@ -106,8 +106,10 @@ void cSprite::Update() {
 	worldTransform_.Update();
 	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(cWinAPI::kClientWidth), float(cWinAPI::kClientHeight), 0.0f, 100.0f);
 	*wvpData_ = worldTransform_.worldMatrix_ * projectionMatrix;
+
 	// マテリアルデータの更新
-	materialData_->uvTransformMatrix = MakeIdentityMatrix4x4();
+	material_.uvTransformMatrix = MakeUVMatrix(uvTransform.scale, uvTransform.rotateZ, uvTransform.translate_);
+	materialData_->uvTransformMatrix = material_.uvTransformMatrix;
 
 }
 

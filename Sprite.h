@@ -134,6 +134,7 @@ private: // メンバ関数
 	/*データを書き込む*/
 	void MapWVPData();
 #pragma endregion
+
 #pragma region BufferResource
 	/*バッファリソースを作成する*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
@@ -146,17 +147,14 @@ private:/*メンバ変数*/
 
 	// TextureHandle
 	std::string textureFilePath_;
-
 	// 座標
 	Vector2 position = { 0.0f,0.0f };
 	// 回転
 	float rotation = 0.0f;
 	// サイズ
 	Vector2 size = { 100.0f,100.0f };
-
 	// アンカーポイント
 	Vector2 anchorPoint = { 0.0f,0.0f };
-
 	// 左右フリップ
 	bool isFlipX_ = false;
 	// 上下フリップ
@@ -166,6 +164,9 @@ private:/*メンバ変数*/
 	Vector2 textureLeftTop = { 0.0f,0.0f };
 	// テクスチャ切り出しサイズ
 	Vector2	textureSize = { 100.0f,100.0f };
+
+	// uvTransform
+	sUVTransform uvTransform = { {1.0f,1.0f},0.0f,{1.0f,1.0f} };
 
 #pragma region 頂点
 	/*頂点リソース*/

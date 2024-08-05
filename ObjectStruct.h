@@ -11,9 +11,9 @@
 
 // UVTransform
 struct sUVTransform {
-	Vector3 scale;
+	Vector2 scale;
 	float rotateZ;
-	Vector3 translate;
+	Vector2 translate;
 };
 
 

@@ -63,6 +63,4 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRaito, float nearClip
 
 Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float nearClip, float farClip);
 
-void DecomposeUVMatrix(const Matrix4x4& matrix, Vector3& scale, float& rotateZ, Vector2& translate);
-
-Matrix4x4 ComposeUVMatrix(const Vector3& scale, float rotateZ, const Vector2& translate);
+Matrix4x4 MakeUVMatrix(const Vector2& scale, const float& rotateZ, const Vector2& translate);

@@ -178,6 +178,13 @@ Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float botto
 	return result;
 }
 
+Matrix4x4 MakeUVMatrix(const Vector2& scale, const float& rotateZ, const Vector2& translate) {
+	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(rotateZ);
+	Matrix4x4 scaleMatrix = MakeScaleMatrix(Vector3(scale.x, scale.y, 1.0f));
+	Matrix4x4 translateMatrix = MakeTranslateMatrix(Vector3(translate.x, translate.y, 0.0f));
+	return scaleMatrix * rotateZMatrix * translateMatrix;
+}
+
 void DecomposeUVMatrix(const Matrix4x4& matrix, Vector3& scale, float& rotateZ, Vector2& translate) {
 	// Extract translation
 	translate.x = matrix.m[3][0];
