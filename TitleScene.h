@@ -75,8 +75,7 @@ private: // 非公開メンバ変数
 
 #pragma region Sprite
 	// uvChecker
-	Vector2 uvCheckerPosition_{};
-	float uvCheckerRotate_{};
+	sTransform2D uvCheckerTransform_{};
 	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
 #pragma endregion

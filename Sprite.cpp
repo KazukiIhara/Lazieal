@@ -96,11 +96,11 @@ void cSprite::Update() {
 
 
 	// 座標を反映
-	worldTransform_.translate = { position.x,position.y,0.0f };
+	worldTransform_.translate = { transform.position.x,transform.position.y,0.0f };
 	// 回転を反映
-	worldTransform_.rotate = { 0.0f,0.0f,rotation };
+	worldTransform_.rotate = { 0.0f,0.0f,transform.rotate };
 	// サイズを反映
-	worldTransform_.scale = { size.x,size.y,1.0f };
+	worldTransform_.scale = { transform.size.x,transform.size.y,1.0f };
 
 	// ワールド行列の更新
 	worldTransform_.Update();
@@ -246,5 +246,5 @@ void cSprite::AdjustTextureSize() {
 	textureSize.x = static_cast<float>(metaData.width);
 	textureSize.y = static_cast<float>(metaData.height);
 	// 画面サイズをテクスチャサイズに合わせる
-	size = textureSize;
+	transform.size = textureSize;
 }

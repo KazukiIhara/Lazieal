@@ -62,6 +62,13 @@ struct sTransformationMatrix {
 /// 2D
 /// 
 
+// 2DTransform
+struct sTransform2D {
+	Vector2 size;
+	float rotate;
+	Vector2 position;
+};
+
 // 頂点データ用構造体
 struct sVertexData2D {
 	Vector4 position;
