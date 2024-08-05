@@ -63,6 +63,8 @@ private:
 
 	// uvChecker
 	Vector2 uvCheckerPosition_{};
+	float uvCheckerRotate_{};
+	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
 
 };

@@ -318,13 +318,13 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 				ImGui::Checkbox(label.c_str(), reinterpret_cast<bool*>(&materials[i].enbleLighting));
 
 				label = "UVScale " + std::to_string(i + 1);
-				ImGui::DragFloat3(label.c_str(), &uvTransform[i].scale.x, 0.01f);
+				ImGui::DragFloat2(label.c_str(), &uvTransform[i].scale.x, 0.01f);
 
 				label = "UVRotateZ " + std::to_string(i + 1);
 				ImGui::DragFloat(label.c_str(), &uvTransform[i].rotateZ, 0.01f);
 
 				label = "UVTranslate " + std::to_string(i + 1);
-				ImGui::DragFloat3(label.c_str(), &uvTransform[i].translate.x, 0.01f);
+				ImGui::DragFloat2(label.c_str(), &uvTransform[i].translate.x, 0.01f);
 
 				label = "shininess " + std::to_string(i + 1);
 				ImGui::DragFloat(label.c_str(), &materials[i].shininess, 1.0f);

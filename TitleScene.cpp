@@ -100,6 +100,8 @@ void cTitleScene::Initialize() {
 
 #pragma region uvChecker
 	uvCheckerPosition_ = { 0.0f,0.0f };
+	uvCheckerRotate_ = 0.0f;
+	uvCheckerUVTransform_ = { { 1.0f,1.0f }, 0.0f, { 0.0f,0.0f } };
 	uvChecker_ = new cSprite();
 	uvChecker_->Initialize("Resources/uvChecker.png");
 	uvChecker_->SetPosition(uvCheckerPosition_);
@@ -142,6 +144,18 @@ void cTitleScene::Update() {
 	if (isShow[sphere]) {
 		cLazieal::ImGuiDebug3dObject(sphereTransform_, sphere_);
 	}
+
+	ImGui::Begin("Sprite");
+	ImGui::DragFloat2("Position", &uvCheckerPosition_.x, 1.0f);
+	ImGui::DragFloat("Rotate", &uvCheckerRotate_, 0.01f);
+	ImGui::DragFloat2("uvScale", &uvCheckerUVTransform_.scale.x, 0.01f);
+	ImGui::DragFloat("uvRotate", &uvCheckerUVTransform_.rotateZ, 0.01f);
+	ImGui::DragFloat2("uvTranslate", &uvCheckerUVTransform_.translate.x, 0.01f);
+
+	uvChecker_->SetPosition(uvCheckerPosition_);
+	uvChecker_->SetRotation(uvCheckerRotate_);
+	uvChecker_->SetUVTransform(uvCheckerUVTransform_);
+	ImGui::End();
 
 #pragma endregion
 

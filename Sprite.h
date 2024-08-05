@@ -81,6 +81,10 @@ public: // メンバ関数
 	void SetSize(const Vector2& size) {
 		this->size = size;
 	}
+	// uvTransform
+	void SetUVTransform(const sUVTransform& uvTransform) {
+		this->uvTransform = uvTransform;
+	}
 	// アンカーポイント
 	void SetAnchorPoint(const Vector2& anchorPoint) {
 		this->anchorPoint = anchorPoint;
@@ -164,7 +168,6 @@ private:/*メンバ変数*/
 	Vector2 textureLeftTop = { 0.0f,0.0f };
 	// テクスチャ切り出しサイズ
 	Vector2	textureSize = { 100.0f,100.0f };
-
 	// uvTransform
 	sUVTransform uvTransform = { {1.0f,1.0f},0.0f,{1.0f,1.0f} };
 
