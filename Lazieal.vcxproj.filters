@@ -68,6 +68,15 @@
     <ClCompile Include="PunctualLight.cpp">
       <Filter>Engine\Lazieal\PunctualLight</Filter>
     </ClCompile>
+    <ClCompile Include="Object2dSystem.cpp">
+      <Filter>Engine\Lazieal\2d\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Object2d.cpp">
+      <Filter>Engine\Lazieal\2d\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\Lazieal\2d\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -142,9 +151,6 @@
     <Filter Include="Engine\Lazieal\3d\System">
       <UniqueIdentifier>{a3db4257-7497-4f3f-80b3-c2b1b7f478b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Lazieal\3d\Struct">
-      <UniqueIdentifier>{062f4045-0b95-44f6-ba15-e9b1e7fb6669}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Lazieal\3d\Object">
       <UniqueIdentifier>{0aa91e38-cdf2-4b0d-a8d9-d0e56123ff25}</UniqueIdentifier>
     </Filter>
@@ -186,6 +192,21 @@
     </Filter>
     <Filter Include="Engine\ShaderFiles\Object3dUnUV">
       <UniqueIdentifier>{fe5475fa-14cd-4f08-b09a-267100baf54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\struct">
+      <UniqueIdentifier>{c5fbb2e4-d0ba-4375-9865-de8af0d70a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\2d">
+      <UniqueIdentifier>{874091f4-729c-453e-b70e-eac208acbfbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\2d\Object">
+      <UniqueIdentifier>{21f47998-6d7e-416c-83c0-969b8f96168d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\2d\Sprite">
+      <UniqueIdentifier>{52a91454-7b2a-4514-905a-91d49196cd70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Lazieal\2d\System">
+      <UniqueIdentifier>{ba89d7d8-280d-437f-a5a3-5667d0d33fae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -264,9 +285,6 @@
     <ClInclude Include="Model.h">
       <Filter>Engine\Lazieal\3d\Model</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectStruct.h">
-      <Filter>Engine\Lazieal\3d\Struct</Filter>
-    </ClInclude>
     <ClInclude Include="ModelManager.h">
       <Filter>Engine\Lazieal\Manager\ModelManager</Filter>
     </ClInclude>
@@ -275,6 +293,18 @@
     </ClInclude>
     <ClInclude Include="PunctualLight.h">
       <Filter>Engine\Lazieal\PunctualLight</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectStruct.h">
+      <Filter>Engine\Lazieal\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="Object2dSystem.h">
+      <Filter>Engine\Lazieal\2d\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Object2d.h">
+      <Filter>Engine\Lazieal\2d\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Lazieal\2d\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

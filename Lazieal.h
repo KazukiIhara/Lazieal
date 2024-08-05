@@ -9,6 +9,12 @@
 #include "TextureManager.h"
 #include "PipelineManager.h"
 
+#pragma once
+// Include
+
+// MyHedder
+#include "MathFunction.h"
+
 // 前方宣言
 class cWinAPI;
 class cDirectXCommon;

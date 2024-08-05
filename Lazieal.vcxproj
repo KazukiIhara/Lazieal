@@ -23,12 +23,15 @@
     <ClCompile Include="MathOperator.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelManager.cpp" />
+    <ClCompile Include="Object2d.cpp" />
+    <ClCompile Include="Object2dSystem.cpp" />
     <ClCompile Include="Object3d.cpp" />
     <ClCompile Include="Object3dSystem.cpp" />
     <ClCompile Include="PipelineManager.cpp" />
     <ClCompile Include="PunctualLight.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SrvManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
@@ -50,6 +53,8 @@
     <ClInclude Include="Matrix4x4.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
+    <ClInclude Include="Object2d.h" />
+    <ClInclude Include="Object2dSystem.h" />
     <ClInclude Include="Object3d.h" />
     <ClInclude Include="Object3dSystem.h" />
     <ClInclude Include="ObjectStruct.h" />
@@ -57,6 +62,7 @@
     <ClInclude Include="PunctualLight.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SrvManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TitleScene.h" />
