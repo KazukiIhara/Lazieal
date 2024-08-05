@@ -149,7 +149,6 @@ void cTitleScene::Initialize() {
 #pragma region SoundData
 	// 音声読み込み
 	soundData = cLazieal::LoadSoundWave("Resources/Alarm01.wav");
-	cLazieal::PlaySoundWave(soundData);
 #pragma endregion
 
 }
@@ -177,6 +176,12 @@ void cTitleScene::Finalize() {
 void cTitleScene::Update() {
 
 #pragma region ImGuiDebug
+
+	ImGui::Begin("Sound");
+	if (ImGui::Button("PlaySound")) {
+		cLazieal::PlaySoundWave(soundData);
+	}
+	ImGui::End();
 
 	// オブジェクトの表示切替
 	SwitchShowObjects();
