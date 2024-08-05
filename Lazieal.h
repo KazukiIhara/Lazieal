@@ -107,6 +107,8 @@ public: // 静的メンバ関数
 #pragma region ImGui
 	// 3dオブジェクトデバッグ用
 	static void ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d);
+	// 2dスプライトデバッグ用
+	static void ImGuiDebug2dSprite();
 #pragma endregion
 
 

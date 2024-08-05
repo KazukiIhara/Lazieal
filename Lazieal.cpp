@@ -342,3 +342,7 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 
 	ImGui::End();
 }
+
+void cLazieal::ImGuiDebug2dSprite() {
+
+}
