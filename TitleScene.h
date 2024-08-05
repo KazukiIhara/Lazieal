@@ -13,11 +13,12 @@ public:
 	enum Object {
 		teapot,
 		suzanne,
+		multiMesh,
 		multiMaterial,
 		bunny,
 		sphere,
 	};
-	static const uint32_t kObjectNum = 5;
+	static const uint32_t kObjectNum = 6;
 
 public: // 公開メンバ関数
 	// コンストラクタ
@@ -37,6 +38,10 @@ private: // 非公開メンバ関数
 	void SwitchShowObjects();
 
 private: // 非公開メンバ変数
+#pragma region PunctualLight
+	cPunctualLight punctualLight_{};
+#pragma endregion
+
 #pragma region 3dModel
 	// ティーポット
 	cWorldTransform teapotTransform_{};
@@ -45,6 +50,10 @@ private: // 非公開メンバ変数
 	// スザンヌ
 	cWorldTransform suzanneTransform_{};
 	cObject3D* suzanne_ = nullptr;
+
+	// マルチメッシュ
+	cWorldTransform multiMeshTransform_{};
+	cObject3D* multiMesh_ = nullptr;
 
 	// マルチマテリアル
 	cWorldTransform multiMaterialTransform_{};

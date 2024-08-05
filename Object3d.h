@@ -35,10 +35,6 @@ private:
 	void MapWVPData();
 #pragma endregion
 
-#pragma region Light
-	void CreatePunctualLightResource();
-	void MapPunctualLightData();
-#pragma endregion	
 	/*バッファリソースを作成する*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
 public: // Setter
@@ -61,6 +57,10 @@ public: // Setter
 		this->transform_.scale = transform.scale;
 		this->transform_.rotate = transform.rotate;
 		this->transform_.translate = transform.translate;
+	}
+	// ライトのセット
+	void SetPunctualLight(const cPunctualLight& punctualLight) {
+		punctualLight_ = punctualLight;
 	}
 public: // Getter
 	// 拡縮のゲッター
@@ -105,12 +105,10 @@ private:/*メンバ変数*/
 #pragma endregion
 
 #pragma region PunctualLight
-	// PunctualLight用のリソース
-	Microsoft::WRL::ComPtr<ID3D12Resource> punctualLightResource_ = nullptr;
-	// シェーダーに送るライトのデータ
-	cPunctualLight::sPunctualLight* punctualLightData_ = nullptr;
-	// PunctualLightを受け取る箱
-	cPunctualLight punctualLight_;
+	// ライトを受け取る箱
+	cPunctualLight punctualLight_{};
 #pragma endregion
+
+
 	std::string objectname_{};
 };

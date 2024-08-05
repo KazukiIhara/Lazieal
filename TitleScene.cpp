@@ -53,6 +53,23 @@ void cTitleScene::Initialize() {
 	suzanne_->SetRotate(suzanneTransform_.rotate);
 
 #pragma endregion
+#pragma region MultiMesh
+	// モデル読み込み
+	cLazieal::LoadModel("multiMesh");
+
+	// マルチマテリアルのトランスフォーム
+	multiMeshTransform_.Initialize();
+	multiMeshTransform_.translate = { 0.0f,0.0f,10.0f };
+	multiMeshTransform_.rotate = { 0.0f,1.0f,0.0f };
+
+	// マルチマテリアル初期化
+	multiMesh_ = new cObject3D();
+	multiMesh_->Initialize();
+	multiMesh_->SetModel("multiMesh");
+	multiMesh_->SetTransform(multiMeshTransform_);
+
+#pragma endregion
+
 #pragma region MultiMaterial
 	// モデル読み込み
 	cLazieal::LoadModel("multiMaterial");
@@ -115,6 +132,7 @@ void cTitleScene::Finalize() {
 
 	delete teapot_;
 	delete suzanne_;
+	delete multiMesh_;
 	delete multiMaterial_;
 	delete bunny_;
 	delete sphere_;
@@ -131,6 +149,9 @@ void cTitleScene::Update() {
 
 	if (isShow[teapot]) {
 		cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
+	}
+	if (isShow[multiMesh]) {
+		cLazieal::ImGuiDebug3dObject(multiMeshTransform_,multiMesh_);
 	}
 	if (isShow[multiMaterial]) {
 		cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
@@ -162,6 +183,8 @@ void cTitleScene::Update() {
 #pragma region 3dObject
 	// ティーポット更新
 	teapot_->Update();
+	// MultiMesh
+	multiMesh_->Update();
 	// MultiMaterial
 	multiMaterial_->Update();
 	// suzanne更新
@@ -188,6 +211,10 @@ void cTitleScene::Draw() {
 	// ティーポット描画
 	if (isShow[teapot]) {
 		teapot_->Draw();
+	}
+	// MultiMesh
+	if (isShow[multiMesh]) {
+		multiMesh_->Draw();
 	}
 	// MultiMaterial描画
 	if (isShow[multiMaterial]) {
@@ -221,6 +248,7 @@ void cTitleScene::SwitchShowObjects() {
 	ImGui::Begin("Objects");
 	ImGui::Checkbox("teapot", &isShow[teapot]);
 	ImGui::Checkbox("suzanne", &isShow[suzanne]);
+	ImGui::Checkbox("multiMesh", &isShow[multiMesh]);
 	ImGui::Checkbox("multiMaterial", &isShow[multiMaterial]);
 	ImGui::Checkbox("bunny", &isShow[bunny]);
 	ImGui::Checkbox("sphere", &isShow[sphere]);

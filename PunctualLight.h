@@ -1,6 +1,12 @@
 #pragma once
 #include "MathFunction.h"
 
+// C++
+#include <wrl.h>
+
+// DirectX
+#include <d3d12.h>
+
 class cPunctualLight {
 public: // 構造体
 	// ディレクショナルライト
@@ -30,13 +36,13 @@ public: // 構造体
 		float decay;
 		float cosFalloffStart;
 		float cosAngle;
-		float padding; 
+		float padding;
 	};
 
 	// シェーダーに送るカメラ座標
 	struct sCameraForGPU {
 		Vector3 worldPosition;
-		float padding; 
+		float padding;
 	};
 
 	// PunctualLight
@@ -50,7 +56,23 @@ public: // 構造体
 public: // メンバ関数
 	// 初期化
 	void Initialize(Vector3* cameraPosition);
+	void Update();
+	void TransferLight();
 
-public: // メンバ変数
+private: // 非公開メンバ関数
+#pragma region Light
+	void CreatePunctualLightResource();
+	void MapPunctualLightData();
+#pragma endregion	
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateBufferResource(ID3D12Device* device, size_t sizeInBytes);
+
+private: // メンバ変数
+
+	// PunctualLight用のリソース
+	Microsoft::WRL::ComPtr<ID3D12Resource> punctualLightResource_ = nullptr;
+	// シェーダーに送るライトのデータ
+	sPunctualLight* punctualLightData_ = nullptr;
+	// PunctualLight
 	sPunctualLight punctualLight;
+
 };

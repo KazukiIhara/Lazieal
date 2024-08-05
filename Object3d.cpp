@@ -18,13 +18,6 @@ void cObject3D::Initialize() {
 	// データを書き込む
 	MapWVPData();
 #pragma endregion
-
-#pragma region ライト
-	// ライト用のリソース作成
-	CreatePunctualLightResource();
-	// ライトのデータを書き込む
-	MapPunctualLightData();
-#pragma endregion
 }
 
 void cObject3D::Update() {
@@ -39,33 +32,6 @@ void cObject3D::Update() {
 	transformationData_->World = transform_.worldMatrix_;
 	transformationData_->WorldInverseTransepose = MakeInverseTransposeMatrix(transform_.worldMatrix_);
 
-	// DirectionalLight
-	punctualLightData_->directionalLight.color = punctualLight_.punctualLight.directionalLight.color;
-	punctualLightData_->directionalLight.direction = punctualLight_.punctualLight.directionalLight.direction;
-	punctualLightData_->directionalLight.intensity = punctualLight_.punctualLight.directionalLight.intensity;
-
-	// PointLight
-	punctualLightData_->pointLight.color = punctualLight_.punctualLight.pointLight.color;
-	punctualLightData_->pointLight.decay = punctualLight_.punctualLight.pointLight.decay;
-	punctualLightData_->pointLight.intensity = punctualLight_.punctualLight.pointLight.intensity;
-	punctualLightData_->pointLight.position = punctualLight_.punctualLight.pointLight.position;
-	punctualLightData_->pointLight.radius = punctualLight_.punctualLight.pointLight.radius;
-
-	// SpotLight
-	punctualLightData_->spotLight.color = punctualLight_.punctualLight.spotLight.color;
-	punctualLightData_->spotLight.cosAngle = punctualLight_.punctualLight.spotLight.cosAngle;
-	punctualLightData_->spotLight.cosFalloffStart = punctualLight_.punctualLight.spotLight.cosFalloffStart;
-	punctualLightData_->spotLight.decay = punctualLight_.punctualLight.spotLight.decay;
-	punctualLightData_->spotLight.direction = punctualLight_.punctualLight.spotLight.direction;
-	punctualLightData_->spotLight.distance = punctualLight_.punctualLight.spotLight.distance;
-	punctualLightData_->spotLight.intensity = punctualLight_.punctualLight.spotLight.intensity;
-	punctualLightData_->spotLight.position = punctualLight_.punctualLight.spotLight.position;
-
-	// カメラ
-	punctualLightData_->camera.worldPosition.x = punctualLight_.punctualLight.camera.worldPosition.x;
-	punctualLightData_->camera.worldPosition.y = punctualLight_.punctualLight.camera.worldPosition.y;
-	punctualLightData_->camera.worldPosition.z = punctualLight_.punctualLight.camera.worldPosition.z;
-
 }
 
 void cObject3D::Draw(cPipelineManager::eBlendMode blendMode) {
@@ -74,7 +40,7 @@ void cObject3D::Draw(cPipelineManager::eBlendMode blendMode) {
 	// wvp用のCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
 	// PunctualLight
-	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
+	punctualLight_.TransferLight();
 
 	// 3Dモデルが割り当てられていれば描画する
 	if (model) {
@@ -88,8 +54,7 @@ void cObject3D::DrawUnUV(cPipelineManager::eBlendMode blendMode) {
 	// wvp用のCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
 	// PunctualLight
-	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(2, punctualLightResource_->GetGPUVirtualAddress());
-
+	punctualLight_.TransferLight();
 	// 3Dモデルが割り当てられていれば描画する
 	if (model) {
 		model->Draw();
@@ -110,40 +75,6 @@ void cObject3D::MapWVPData() {
 	transformationData_->WVP = MakeIdentityMatrix4x4();
 	transformationData_->World = MakeIdentityMatrix4x4();
 	transformationData_->WorldInverseTransepose = MakeIdentityMatrix4x4();
-}
-
-void cObject3D::CreatePunctualLightResource() {
-	// WVP用のリソースを作る
-	punctualLightResource_ = CreateBufferResource(cLazieal::GetDirectXDevice(), sizeof(cPunctualLight::sPunctualLight));
-}
-
-void cObject3D::MapPunctualLightData() {
-	// データを書き込む
-	punctualLightData_ = nullptr;
-	// 書き込むためのアドレスを取得
-	punctualLightResource_->Map(0, nullptr, reinterpret_cast<void**>(&punctualLightData_));
-
-	// DirectionalLight
-	punctualLightData_->directionalLight.color = punctualLight_.punctualLight.directionalLight.color;
-	punctualLightData_->directionalLight.direction = punctualLight_.punctualLight.directionalLight.direction;
-	punctualLightData_->directionalLight.intensity = punctualLight_.punctualLight.directionalLight.intensity;
-
-	// PointLight
-	punctualLightData_->pointLight.color = punctualLight_.punctualLight.pointLight.color;
-	punctualLightData_->pointLight.decay = punctualLight_.punctualLight.pointLight.decay;
-	punctualLightData_->pointLight.intensity = punctualLight_.punctualLight.pointLight.intensity;
-	punctualLightData_->pointLight.position = punctualLight_.punctualLight.pointLight.position;
-	punctualLightData_->pointLight.radius = punctualLight_.punctualLight.pointLight.radius;
-
-	// SpotLight
-	punctualLightData_->spotLight.color = punctualLight_.punctualLight.spotLight.color;
-	punctualLightData_->spotLight.cosAngle = punctualLight_.punctualLight.spotLight.cosAngle;
-	punctualLightData_->spotLight.cosFalloffStart = punctualLight_.punctualLight.spotLight.cosFalloffStart;
-	punctualLightData_->spotLight.decay = punctualLight_.punctualLight.spotLight.decay;
-	punctualLightData_->spotLight.direction = punctualLight_.punctualLight.spotLight.direction;
-	punctualLightData_->spotLight.distance = punctualLight_.punctualLight.spotLight.distance;
-	punctualLightData_->spotLight.intensity = punctualLight_.punctualLight.spotLight.intensity;
-	punctualLightData_->spotLight.position = punctualLight_.punctualLight.spotLight.position;
 }
 
 Microsoft::WRL::ComPtr<ID3D12Resource> cObject3D::CreateBufferResource(ID3D12Device* device, size_t sizeInBytes) {
