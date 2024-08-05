@@ -44,10 +44,9 @@ void cTitleScene::Initialize() {
 	// ティーポット初期化
 	teapot_ = new cObject3D();
 	teapot_->Initialize();
-	teapot_->SetPunctualLight(punctualLight_);
 	teapot_->SetModel("teapot");
-	teapot_->SetTranslate(teapotTransform_.translate);
-	teapot_->SetRotate(teapotTransform_.rotate);
+	teapot_->SetPunctualLight(punctualLight_);
+	teapot_->SetTransform(teapotTransform_);
 
 #pragma endregion
 
@@ -65,8 +64,7 @@ void cTitleScene::Initialize() {
 	suzanne_->Initialize();
 	suzanne_->SetModel("suzanne");
 	suzanne_->SetPunctualLight(punctualLight_);
-	suzanne_->SetTranslate(suzanneTransform_.translate);
-	suzanne_->SetRotate(suzanneTransform_.rotate);
+	suzanne_->SetTransform(suzanneTransform_);
 
 #pragma endregion
 
@@ -82,8 +80,8 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMesh_ = new cObject3D();
 	multiMesh_->Initialize();
-	multiMesh_->SetPunctualLight(punctualLight_);
 	multiMesh_->SetModel("multiMesh");
+	multiMesh_->SetPunctualLight(punctualLight_);
 	multiMesh_->SetTransform(multiMeshTransform_);
 
 #pragma endregion
@@ -100,8 +98,8 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMaterial_ = new cObject3D();
 	multiMaterial_->Initialize();
-	multiMaterial_->SetPunctualLight(punctualLight_);
 	multiMaterial_->SetModel("multiMaterial");
+	multiMaterial_->SetPunctualLight(punctualLight_);
 	multiMaterial_->SetTransform(multiMaterialTransform_);
 
 #pragma endregion
