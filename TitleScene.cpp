@@ -116,12 +116,15 @@ void cTitleScene::Finalize() {
 	delete multiMaterial_;
 	delete bunny_;
 	delete sphere_;
+
+	delete uvChecker_;
 }
 
 void cTitleScene::Update() {
 
-	// デバッグUI表示
 #pragma region ImGuiDebug
+
+	// オブジェクトの表示切替
 	SwitchShowObjects();
 
 	if (isShow[teapot]) {
@@ -139,6 +142,7 @@ void cTitleScene::Update() {
 	if (isShow[sphere]) {
 		cLazieal::ImGuiDebug3dObject(sphereTransform_, sphere_);
 	}
+
 #pragma endregion
 
 #pragma region 3dObject
@@ -186,6 +190,7 @@ void cTitleScene::Draw() {
 
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
+
 	// suzanne描画
 	if (isShow[suzanne]) {
 		suzanne_->DrawUnUV();
@@ -193,7 +198,7 @@ void cTitleScene::Draw() {
 
 	// 2Dオブジェクト描画前処理
 	cLazieal::PreDrawObject2D();
-	
+
 	// uvChecker描画
 	uvChecker_->Draw();
 }

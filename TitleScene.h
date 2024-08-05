@@ -60,6 +60,8 @@ private:
 
 	bool isShow[kObjectNum]{};
 #pragma endregion
+
+	// uvChecker
 	Vector2 uvCheckerPosition_{};
 	cSprite* uvChecker_ = nullptr;
 
