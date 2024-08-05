@@ -108,7 +108,7 @@ void cSprite::Update() {
 	*wvpData_ = worldTransform_.worldMatrix_ * projectionMatrix;
 
 	// マテリアルデータの更新
-	material_.uvTransformMatrix = MakeUVMatrix(uvTransform.scale, uvTransform.rotateZ, uvTransform.translate_);
+	material_.uvTransformMatrix = MakeUVMatrix(uvTransform.scale, uvTransform.rotateZ, uvTransform.translate);
 	materialData_->uvTransformMatrix = material_.uvTransformMatrix;
 
 }
