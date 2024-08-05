@@ -18,6 +18,9 @@ void cTitleScene::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Initialized\n");
 
+	// 各シーンの先頭でサウンドマネージャを初期化
+	cLazieal::InitializeSoundManager();
+
 #pragma region PunctualLight
 	// ライト初期化
 	punctualLightSetting_.Initialize();
@@ -66,6 +69,7 @@ void cTitleScene::Initialize() {
 	suzanne_->SetRotate(suzanneTransform_.rotate);
 
 #pragma endregion
+
 #pragma region MultiMesh
 	// モデル読み込み
 	cLazieal::LoadModel("multiMesh");
@@ -101,6 +105,7 @@ void cTitleScene::Initialize() {
 	multiMaterial_->SetTransform(multiMaterialTransform_);
 
 #pragma endregion
+
 #pragma region Bunny
 	cLazieal::LoadModel("bunny");
 
@@ -141,6 +146,12 @@ void cTitleScene::Initialize() {
 	uvChecker_->SetPosition(uvCheckerPosition_);
 #pragma endregion
 
+#pragma region SoundData
+	// 音声読み込み
+	soundData = cLazieal::LoadSoundWave("Resources/Alarm01.wav");
+	cLazieal::PlaySoundWave(soundData);
+#pragma endregion
+
 }
 
 void cTitleScene::Finalize() {
@@ -157,6 +168,10 @@ void cTitleScene::Finalize() {
 	delete sphere_;
 
 	delete uvChecker_;
+
+	// 音声データを解放する前にサウンドマネージャの終了処理
+	cLazieal::FinalizeSoundManager();
+	cLazieal::UnloadSound(&soundData);
 }
 
 void cTitleScene::Update() {

@@ -32,6 +32,7 @@
     <ClCompile Include="PunctualLightSetting.cpp" />
     <ClCompile Include="SceneFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SrvManager.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="PunctualLightSetting.h" />
     <ClInclude Include="SceneFactory.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SrvManager.h" />
     <ClInclude Include="TextureManager.h" />

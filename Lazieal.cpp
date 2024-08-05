@@ -12,6 +12,7 @@
 #include "ImGuiManager.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
+#include "SoundManager.h"
 #include "ModelManager.h"
 #include "Camera.h"
 #include "Object3dSystem.h"
@@ -24,6 +25,7 @@ cDirectXCommon* cLazieal::directX_ = nullptr;
 cSrvManager* cLazieal::srvManager_ = nullptr;
 cTextureManager* cLazieal::textureManager_ = nullptr;
 cPipelineManager* cLazieal::pipelineManager_ = nullptr;
+cSoundManager* cLazieal::soundManager_ = nullptr;
 cModelManager* cLazieal::modelManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
 cObject2DSystem* cLazieal::object2dSystem_ = nullptr;
@@ -89,6 +91,12 @@ void cLazieal::Initialize() {
 	pipelineManager_->Initialize();
 #pragma endregion
 
+#pragma region SoundManager
+	// SoundManagerの生成
+	soundManager_ = new cSoundManager();
+#pragma endregion
+
+
 #pragma region ModelManager
 	// ModelManagerの生成
 	modelManager_ = new cModelManager();
@@ -144,6 +152,9 @@ void cLazieal::Finalize() {
 	// ModelManagerの終了と開放
 	modelManager_->Finalize();
 	delete modelManager_;
+
+	// SoundManagerの解放
+	delete soundManager_;
 
 	// PipelineManagerの解放
 	delete pipelineManager_;
@@ -253,6 +264,26 @@ const DirectX::TexMetadata& cLazieal::GetTextureMetaData(const std::string& file
 
 ID3D12PipelineState* cLazieal::GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode) {
 	return pipelineManager_->GetPipelineState(pipelineState, blendMode);
+}
+
+void cLazieal::InitializeSoundManager() {
+	soundManager_->Initialize();
+}
+
+void cLazieal::FinalizeSoundManager() {
+	soundManager_->Finalize();
+}
+
+cSoundManager::SoundData cLazieal::LoadSoundWave(const char* fileName) {
+	return soundManager_->SoundLoadWave(fileName);
+}
+
+void cLazieal::UnloadSound(cSoundManager::SoundData* soundData) {
+	soundManager_->SoundUnload(soundData);
+}
+
+void cLazieal::PlaySoundWave(const cSoundManager::SoundData& soundData) {
+	soundManager_->SoundPlayWave(soundData);
 }
 
 void cLazieal::LoadModel(const std::string& filePath) {

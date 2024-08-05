@@ -80,6 +80,9 @@
     <ClCompile Include="PunctualLightSetting.cpp">
       <Filter>Engine\Lazieal\PunctualLight\Setting</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Engine\Lazieal\Manager\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -217,6 +220,9 @@
     <Filter Include="Engine\Lazieal\PunctualLight\Setting">
       <UniqueIdentifier>{8cf1ac73-765f-4f79-8896-456263739856}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Lazieal\Manager\SoundManager">
+      <UniqueIdentifier>{61255ae6-782a-4f85-afc1-f42e0fe79516}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lazieal.h">
@@ -317,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="PunctualLightSetting.h">
       <Filter>Engine\Lazieal\PunctualLight\Setting</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Engine\Lazieal\Manager\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

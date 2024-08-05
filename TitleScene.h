@@ -7,6 +7,7 @@
 #include "BaseScene.h"
 #include "Object3d.h"
 #include "Sprite.h"
+#include "SoundManager.h"
 
 class cTitleScene :public cBaseScene {
 public:
@@ -78,6 +79,9 @@ private: // 非公開メンバ変数
 	float uvCheckerRotate_{};
 	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
+#pragma endregion
+#pragma region SoundData
+	cSoundManager::SoundData soundData{};
 #pragma endregion
 
 };

@@ -348,12 +348,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object3DRasterizerStateSetting() {
 
 void cPipelineManager::CompileObject3DShaders() {
 	object3DVertexShaderBlob_ = nullptr;
-	object3DVertexShaderBlob_ = CompileShader(L"Object3d.VS.hlsl",
+	object3DVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3d.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DVertexShaderBlob_ != nullptr);
 
 	object3DPixelShaderBlob_ = nullptr;
-	object3DPixelShaderBlob_ = CompileShader(L"Object3d.PS.hlsl",
+	object3DPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3d.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DPixelShaderBlob_ != nullptr);
 }
@@ -491,12 +491,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object3DUnUVRasterizerStateSetting() {
 
 void cPipelineManager::CompileObject3DUnUVShaders() {
 	object3DUnUVVertexShaderBlob_ = nullptr;
-	object3DUnUVVertexShaderBlob_ = CompileShader(L"Object3dUnUV.VS.hlsl",
+	object3DUnUVVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3dUnUV.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DUnUVVertexShaderBlob_ != nullptr);
 
 	object3DUnUVPixelShaderBlob_ = nullptr;
-	object3DUnUVPixelShaderBlob_ = CompileShader(L"Object3dUnUV.PS.hlsl",
+	object3DUnUVPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3dUnUV.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DUnUVPixelShaderBlob_ != nullptr);
 }
@@ -648,12 +648,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object2DRasterizerStateSetting() {
 void cPipelineManager::CompileObject2DShaders() {
 	// Sprite用シェーダー
 	object2DVertexShaderBlob_ = nullptr;
-	object2DVertexShaderBlob_ = CompileShader(L"object2D.VS.hlsl",
+	object2DVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object2D.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object2DVertexShaderBlob_ != nullptr);
 
 	object2DPixelShaderBlob_ = nullptr;
-	object2DPixelShaderBlob_ = CompileShader(L"object2D.PS.hlsl",
+	object2DPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object2D.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object2DPixelShaderBlob_ != nullptr);
 }

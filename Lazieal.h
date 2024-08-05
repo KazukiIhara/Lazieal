@@ -8,6 +8,7 @@
 #include "WorldTransform.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
+#include "SoundManager.h"
 
 #pragma once
 // Include
@@ -23,6 +24,7 @@ class cSrvManager;
 class cImGuiManager;
 class cTextureManager;
 class cPipelineManager;
+class cSoundManager;
 class cModelManager;
 class cModel;
 class cObject3dSystem;
@@ -81,6 +83,21 @@ public: // 静的メンバ関数
 	static ID3D12PipelineState* GetPipelineState(cPipelineManager::ePipelineState pipelineState, cPipelineManager::eBlendMode blendMode);
 #pragma endregion
 
+#pragma region SoundManager
+	// サウンドマネージャの初期化
+	static void InitializeSoundManager();
+	// サウンドマネージャの終了
+	static void FinalizeSoundManager();
+	// サウンド読み込み
+	static cSoundManager::SoundData LoadSoundWave(const char* fileName);
+	// サウンド解放
+	static void UnloadSound(cSoundManager::SoundData* soundData);
+	// サウンド再生
+	static void PlaySoundWave(const cSoundManager::SoundData& soundData);
+
+#pragma endregion
+
+
 #pragma region ModelManager
 	// モデルの読み込み
 	static void LoadModel(const std::string& filePath);
@@ -98,6 +115,7 @@ public: // 静的メンバ関数
 	// 3dオブジェクトのデフォルトカメラ取得
 	static cCamera* GetDefaultCamera();
 #pragma endregion
+
 #pragma region Object2d
 	// 2dオブジェクト描画前処理
 	static void PreDrawObject2D();
@@ -128,8 +146,10 @@ private: // 汎用クラスのポインタ
 	static cTextureManager* textureManager_;
 	// ModelManager
 	static cModelManager* modelManager_;
-	// グラフィックパイプライン
+	// GraphicsPipelineManager
 	static cPipelineManager* pipelineManager_;
+	// SoundManager
+	static cSoundManager* soundManager_;
 	// デバッグカメラのトランスフォーム
 	cWorldTransform debugCameraTransform_{};
 	// デバッグカメラ
