@@ -59,7 +59,7 @@ public: // Setter
 		this->transform_.translate = transform.translate;
 	}
 	// ライトのセット
-	void SetPunctualLight(const cPunctualLight& punctualLight) {
+	void SetPunctualLight(cPunctualLight* punctualLight) {
 		punctualLight_ = punctualLight;
 	}
 public: // Getter
@@ -88,11 +88,6 @@ private:/*メンバ変数*/
 	cModel* model = nullptr;
 #pragma endregion
 
-#pragma region Camera
-	// カメラを受け取る箱
-	cCamera* camera_ = nullptr;
-#pragma endregion
-
 #pragma region 変換
 	/*WVP用のリソース*/
 	Microsoft::WRL::ComPtr<ID3D12Resource> transformationResource_ = nullptr;
@@ -101,14 +96,12 @@ private:/*メンバ変数*/
 	/*トランスフォーム*/
 	cWorldTransform transform_;
 	/*ビュープロジェクションを受け取る箱*/
-	Matrix4x4* viewProjection_;
+	Matrix4x4* viewProjection_ = nullptr;
 #pragma endregion
 
 #pragma region PunctualLight
 	// ライトを受け取る箱
-	cPunctualLight punctualLight_{};
+	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
-
-
 	std::string objectname_{};
 };

@@ -39,6 +39,9 @@ public: // メンバ関数
 	const Vector2& GetSize()const {
 		return size;
 	}
+	const sUVTransform& GetUVTransform()const {
+		return uvTransform;
+	}
 	// アンカーポイント
 	const Vector2& GetAnchorPoint()const {
 		return anchorPoint;

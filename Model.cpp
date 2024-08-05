@@ -65,7 +65,7 @@ void cModel::Draw() {
 		cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(0, materialResources_[i]->GetGPUVirtualAddress());
 		if (modelData.meshes[i].material.haveUV_) {
 			// SRVセット
-			cLazieal::SetGraphicsRootDescriptorTable(3, cLazieal::GetTexture()[modelData.meshes[i].material.textureFilePath].srvIndex);
+			cLazieal::SetGraphicsRootDescriptorTable(4, cLazieal::GetTexture()[modelData.meshes[i].material.textureFilePath].srvIndex);
 			// 描画！(DrawCall/ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 			cLazieal::GetDirectXCommandList()->DrawInstanced(UINT(modelData.meshes[i].vertices.size()), 1, 0, 0);
 		} else {

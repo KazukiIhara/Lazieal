@@ -7,6 +7,7 @@
 #include "BaseScene.h"
 #include "Object3d.h"
 #include "Sprite.h"
+#include "SoundManager.h"
 
 class cTitleScene :public cBaseScene {
 public:
@@ -39,7 +40,8 @@ private: // 非公開メンバ関数
 
 private: // 非公開メンバ変数
 #pragma region PunctualLight
-	cPunctualLight punctualLight_{};
+	cPunctualLightSetting punctualLightSetting_{};
+	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
 
 #pragma region 3dModel
@@ -78,7 +80,9 @@ private: // 非公開メンバ変数
 	sUVTransform uvCheckerUVTransform_{};
 	cSprite* uvChecker_ = nullptr;
 #pragma endregion
-
+#pragma region SoundData
+	cSoundManager::SoundData soundData{};
+#pragma endregion
 
 };
 

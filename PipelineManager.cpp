@@ -203,7 +203,7 @@ void cPipelineManager::CreateObject3DRootSignature() {
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	// RootParameter作成。
-	D3D12_ROOT_PARAMETER rootParameters[4] = {};
+	D3D12_ROOT_PARAMETER rootParameters[5] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0;					//レジスタ番号0とバインド
@@ -216,10 +216,14 @@ void cPipelineManager::CreateObject3DRootSignature() {
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
 	rootParameters[2].Descriptor.ShaderRegister = 1;					//レジスタ番号1とバインド
 
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange;
-	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//CBVを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
+	rootParameters[3].Descriptor.ShaderRegister = 2;					//レジスタ番号1とバインド
+
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[4].DescriptorTable.pDescriptorRanges = descriptorRange;
+	rootParameters[4].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange);
 
 
 
@@ -344,12 +348,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object3DRasterizerStateSetting() {
 
 void cPipelineManager::CompileObject3DShaders() {
 	object3DVertexShaderBlob_ = nullptr;
-	object3DVertexShaderBlob_ = CompileShader(L"Object3d.VS.hlsl",
+	object3DVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3d.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DVertexShaderBlob_ != nullptr);
 
 	object3DPixelShaderBlob_ = nullptr;
-	object3DPixelShaderBlob_ = CompileShader(L"Object3d.PS.hlsl",
+	object3DPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3d.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DPixelShaderBlob_ != nullptr);
 }
@@ -363,7 +367,7 @@ void cPipelineManager::CreateObject3DUnUVRootSignature() {
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	// RootParameter作成。
-	D3D12_ROOT_PARAMETER rootParameters[3] = {};
+	D3D12_ROOT_PARAMETER rootParameters[4] = {};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0;					//レジスタ番号0とバインド
@@ -375,6 +379,10 @@ void cPipelineManager::CreateObject3DUnUVRootSignature() {
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//CBVを使う
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
 	rootParameters[2].Descriptor.ShaderRegister = 1;					//レジスタ番号1とバインド
+
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;	//CBVを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	//PixelShaderで使う
+	rootParameters[3].Descriptor.ShaderRegister = 2;					//レジスタ番号1とバインド
 
 
 	descriptionRootSignature.pParameters = rootParameters;				//ルートパラメータ配列へのポインタ
@@ -483,12 +491,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object3DUnUVRasterizerStateSetting() {
 
 void cPipelineManager::CompileObject3DUnUVShaders() {
 	object3DUnUVVertexShaderBlob_ = nullptr;
-	object3DUnUVVertexShaderBlob_ = CompileShader(L"Object3dUnUV.VS.hlsl",
+	object3DUnUVVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3dUnUV.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DUnUVVertexShaderBlob_ != nullptr);
 
 	object3DUnUVPixelShaderBlob_ = nullptr;
-	object3DUnUVPixelShaderBlob_ = CompileShader(L"Object3dUnUV.PS.hlsl",
+	object3DUnUVPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object3dUnUV.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object3DUnUVPixelShaderBlob_ != nullptr);
 }
@@ -640,12 +648,12 @@ D3D12_RASTERIZER_DESC cPipelineManager::Object2DRasterizerStateSetting() {
 void cPipelineManager::CompileObject2DShaders() {
 	// Sprite用シェーダー
 	object2DVertexShaderBlob_ = nullptr;
-	object2DVertexShaderBlob_ = CompileShader(L"object2D.VS.hlsl",
+	object2DVertexShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object2D.VS.hlsl",
 		L"vs_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object2DVertexShaderBlob_ != nullptr);
 
 	object2DPixelShaderBlob_ = nullptr;
-	object2DPixelShaderBlob_ = CompileShader(L"object2D.PS.hlsl",
+	object2DPixelShaderBlob_ = CompileShader(L"Resources/ShaderFiles/Object2D.PS.hlsl",
 		L"ps_6_0", dxcUtils, dxcCompiler, includeHandler);
 	assert(object2DPixelShaderBlob_ != nullptr);
 }

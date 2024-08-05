@@ -18,6 +18,20 @@ void cTitleScene::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Initialized\n");
 
+	// 各シーンの先頭でサウンドマネージャを初期化
+	cLazieal::InitializeSoundManager();
+
+#pragma region PunctualLight
+	// ライト初期化
+	punctualLightSetting_.Initialize();
+
+	punctualLight_ = new cPunctualLight();
+	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+	punctualLight_->SetPunctualLightSetting(punctualLightSetting_.punctualLight);
+	punctualLight_->Initialize();
+
+#pragma endregion
+
 #pragma region Teapot
 	// モデル読み込み
 	cLazieal::LoadModel("teapot");
@@ -30,6 +44,7 @@ void cTitleScene::Initialize() {
 	// ティーポット初期化
 	teapot_ = new cObject3D();
 	teapot_->Initialize();
+	teapot_->SetPunctualLight(punctualLight_);
 	teapot_->SetModel("teapot");
 	teapot_->SetTranslate(teapotTransform_.translate);
 	teapot_->SetRotate(teapotTransform_.rotate);
@@ -49,10 +64,12 @@ void cTitleScene::Initialize() {
 	suzanne_ = new cObject3D();
 	suzanne_->Initialize();
 	suzanne_->SetModel("suzanne");
+	suzanne_->SetPunctualLight(punctualLight_);
 	suzanne_->SetTranslate(suzanneTransform_.translate);
 	suzanne_->SetRotate(suzanneTransform_.rotate);
 
 #pragma endregion
+
 #pragma region MultiMesh
 	// モデル読み込み
 	cLazieal::LoadModel("multiMesh");
@@ -65,6 +82,7 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMesh_ = new cObject3D();
 	multiMesh_->Initialize();
+	multiMesh_->SetPunctualLight(punctualLight_);
 	multiMesh_->SetModel("multiMesh");
 	multiMesh_->SetTransform(multiMeshTransform_);
 
@@ -82,10 +100,12 @@ void cTitleScene::Initialize() {
 	// マルチマテリアル初期化
 	multiMaterial_ = new cObject3D();
 	multiMaterial_->Initialize();
+	multiMaterial_->SetPunctualLight(punctualLight_);
 	multiMaterial_->SetModel("multiMaterial");
 	multiMaterial_->SetTransform(multiMaterialTransform_);
 
 #pragma endregion
+
 #pragma region Bunny
 	cLazieal::LoadModel("bunny");
 
@@ -96,6 +116,7 @@ void cTitleScene::Initialize() {
 
 	bunny_ = new cObject3D();
 	bunny_->Initialize();
+	bunny_->SetPunctualLight(punctualLight_);
 	bunny_->SetModel("bunny");
 	bunny_->SetTransform(bunnyTransform_);
 
@@ -110,6 +131,7 @@ void cTitleScene::Initialize() {
 
 	sphere_ = new cObject3D();
 	sphere_->Initialize();
+	sphere_->SetPunctualLight(punctualLight_);
 	sphere_->SetModel("Sphere_uvChecker.png");
 	sphere_->SetTransform(sphereTransform_);
 
@@ -124,11 +146,18 @@ void cTitleScene::Initialize() {
 	uvChecker_->SetPosition(uvCheckerPosition_);
 #pragma endregion
 
+#pragma region SoundData
+	// 音声読み込み
+	soundData = cLazieal::LoadSoundWave("Resources/Alarm01.wav");
+#pragma endregion
+
 }
 
 void cTitleScene::Finalize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Finalized\n");
+
+	delete punctualLight_;
 
 	delete teapot_;
 	delete suzanne_;
@@ -138,11 +167,21 @@ void cTitleScene::Finalize() {
 	delete sphere_;
 
 	delete uvChecker_;
+
+	// 音声データを解放する前にサウンドマネージャの終了処理
+	cLazieal::FinalizeSoundManager();
+	cLazieal::UnloadSound(&soundData);
 }
 
 void cTitleScene::Update() {
 
 #pragma region ImGuiDebug
+
+	ImGui::Begin("Sound");
+	if (ImGui::Button("PlaySound")) {
+		cLazieal::PlaySoundWave(soundData);
+	}
+	ImGui::End();
 
 	// オブジェクトの表示切替
 	SwitchShowObjects();
@@ -151,7 +190,7 @@ void cTitleScene::Update() {
 		cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
 	}
 	if (isShow[multiMesh]) {
-		cLazieal::ImGuiDebug3dObject(multiMeshTransform_,multiMesh_);
+		cLazieal::ImGuiDebug3dObject(multiMeshTransform_, multiMesh_);
 	}
 	if (isShow[multiMaterial]) {
 		cLazieal::ImGuiDebug3dObject(multiMaterialTransform_, multiMaterial_);
@@ -178,6 +217,60 @@ void cTitleScene::Update() {
 	uvChecker_->SetUVTransform(uvCheckerUVTransform_);
 	ImGui::End();
 
+
+	ImGui::Begin("PunctualLightSetting");
+	if (ImGui::BeginTabBar("DirectionalLight")) {
+		if (ImGui::BeginTabItem("DirectionalLight")) {
+
+			ImGui::ColorEdit4("Color", &punctualLightSetting_.punctualLight.directionalLight.color.x);
+			ImGui::DragFloat3("Direction", &punctualLightSetting_.punctualLight.directionalLight.direction.x, 0.01f);
+			punctualLightSetting_.punctualLight.directionalLight.direction = Normalize(punctualLightSetting_.punctualLight.directionalLight.direction);
+			ImGui::DragFloat("intensity", &punctualLightSetting_.punctualLight.directionalLight.intensity, 0.01f);
+			ImGui::EndTabItem();
+		}
+		ImGui::EndTabBar();
+	}
+
+	if (ImGui::BeginTabBar("PointLight")) {
+		if (ImGui::BeginTabItem("PointLight")) {
+
+			ImGui::ColorEdit4("Color", &punctualLightSetting_.punctualLight.pointLight.color.x);
+			ImGui::DragFloat3("Position", &punctualLightSetting_.punctualLight.pointLight.position.x, 0.01f);
+			ImGui::DragFloat("intensity", &punctualLightSetting_.punctualLight.pointLight.intensity, 0.01f);
+			ImGui::DragFloat("radius", &punctualLightSetting_.punctualLight.pointLight.radius, 0.01f);
+			ImGui::DragFloat("decay", &punctualLightSetting_.punctualLight.pointLight.decay, 0.01f);
+			ImGui::EndTabItem();
+		}
+		ImGui::EndTabBar();
+	}
+
+	if (ImGui::BeginTabBar("SpotLight")) {
+		if (ImGui::BeginTabItem("SpotLight")) {
+
+			ImGui::ColorEdit4("Color", &punctualLightSetting_.punctualLight.spotLight.color.x);
+			ImGui::DragFloat3("Position", &punctualLightSetting_.punctualLight.spotLight.position.x, 0.01f);
+			ImGui::DragFloat("intensity", &punctualLightSetting_.punctualLight.spotLight.intensity, 0.01f);
+			ImGui::DragFloat3("Direction", &punctualLightSetting_.punctualLight.spotLight.direction.x, 0.01f);
+			punctualLightSetting_.punctualLight.spotLight.direction = Normalize(punctualLightSetting_.punctualLight.spotLight.direction);
+			ImGui::DragFloat("distance", &punctualLightSetting_.punctualLight.spotLight.decay, 0.01f);
+			ImGui::DragFloat("decay", &punctualLightSetting_.punctualLight.spotLight.distance, 0.01f);
+			ImGui::DragFloat("cosFalloffStart", &punctualLightSetting_.punctualLight.spotLight.cosFalloffStart, 0.01f);
+			ImGui::DragFloat("cosAngle", &punctualLightSetting_.punctualLight.spotLight.cosAngle, 0.01f);
+			ImGui::EndTabItem();
+		}
+		ImGui::EndTabBar();
+	}
+
+
+	ImGui::End();
+
+#pragma endregion
+
+#pragma region PunctualLight
+	// ライトの更新
+	punctualLight_->SetCameraPosition(*cLazieal::GetDefaultCamera()->GetWorldPos());
+	punctualLight_->SetPunctualLightSetting(punctualLightSetting_.punctualLight);
+	punctualLight_->Update();
 #pragma endregion
 
 #pragma region 3dObject
@@ -199,12 +292,9 @@ void cTitleScene::Update() {
 	// uvChecker更新
 	uvChecker_->Update();
 #pragma endregion
-
-
 }
 
 void cTitleScene::Draw() {
-
 	// 3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3D();
 

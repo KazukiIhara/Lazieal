@@ -5,12 +5,9 @@
 #include "Lazieal.h"
 
 void cObject3D::Initialize() {
-	// デフォルトカメラセット
-	camera_ = cLazieal::GetDefaultCamera();
+
 	// ViewProjection初期化
-	viewProjection_ = camera_->GetViewProjectionMatrix();
-	// ライト初期化
-	punctualLight_.Initialize(camera_->GetWorldPos());
+	viewProjection_ = cLazieal::GetDefaultCamera()->GetViewProjectionMatrix();
 
 #pragma region 変換データ
 	// wvp用のリソース作成
@@ -40,7 +37,7 @@ void cObject3D::Draw(cPipelineManager::eBlendMode blendMode) {
 	// wvp用のCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
 	// PunctualLight
-	punctualLight_.TransferLight();
+	punctualLight_->TransferLight();
 
 	// 3Dモデルが割り当てられていれば描画する
 	if (model) {
@@ -54,7 +51,7 @@ void cObject3D::DrawUnUV(cPipelineManager::eBlendMode blendMode) {
 	// wvp用のCBufferの場所を設定
 	cLazieal::GetDirectXCommandList()->SetGraphicsRootConstantBufferView(1, transformationResource_->GetGPUVirtualAddress());
 	// PunctualLight
-	punctualLight_.TransferLight();
+	punctualLight_->TransferLight();
 	// 3Dモデルが割り当てられていれば描画する
 	if (model) {
 		model->Draw();
