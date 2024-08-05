@@ -138,12 +138,10 @@ void cTitleScene::Initialize() {
 #pragma endregion
 
 #pragma region uvChecker
-	uvCheckerPosition_ = { 0.0f,0.0f };
-	uvCheckerRotate_ = 0.0f;
 	uvCheckerUVTransform_ = { { 1.0f,1.0f }, 0.0f, { 0.0f,0.0f } };
 	uvChecker_ = new cSprite();
 	uvChecker_->Initialize("Resources/uvChecker.png");
-	uvChecker_->SetPosition(uvCheckerPosition_);
+	uvCheckerTransform_ = uvChecker_->GetTransform();
 #pragma endregion
 
 #pragma region SoundData
@@ -206,19 +204,23 @@ void cTitleScene::Update() {
 	}
 
 	ImGui::Begin("Sprite");
-	ImGui::DragFloat2("Position", &uvCheckerPosition_.x, 1.0f);
-	ImGui::DragFloat("Rotate", &uvCheckerRotate_, 0.01f);
+	ImGui::DragFloat2("Size", &uvCheckerTransform_.size.x, 0.01f);
+	ImGui::DragFloat("Rotate", &uvCheckerTransform_.rotate, 0.01f);
+	ImGui::DragFloat2("Position", &uvCheckerTransform_.position.x, 1.0f);
+
 	ImGui::DragFloat2("uvScale", &uvCheckerUVTransform_.scale.x, 0.01f);
 	ImGui::DragFloat("uvRotate", &uvCheckerUVTransform_.rotateZ, 0.01f);
 	ImGui::DragFloat2("uvTranslate", &uvCheckerUVTransform_.translate.x, 0.01f);
 
-	uvChecker_->SetPosition(uvCheckerPosition_);
-	uvChecker_->SetRotation(uvCheckerRotate_);
+	uvChecker_->SetSize(uvCheckerTransform_.size);
+	uvChecker_->SetRotation(uvCheckerTransform_.rotate);
+	uvChecker_->SetPosition(uvCheckerTransform_.position);
 	uvChecker_->SetUVTransform(uvCheckerUVTransform_);
 	ImGui::End();
 
 
 	ImGui::Begin("PunctualLightSetting");
+
 	if (ImGui::BeginTabBar("DirectionalLight")) {
 		if (ImGui::BeginTabItem("DirectionalLight")) {
 

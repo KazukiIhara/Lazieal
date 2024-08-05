@@ -25,11 +25,15 @@ public: // メンバ関数
 	}
 	// 座標
 	const Vector2& GetPosition()const {
-		return position;
+		return transform.position;
 	}
 	// 回転
 	const float& GetRotation()const {
-		return rotation;
+		return transform.rotate;
+	}
+	// Transform
+	const sTransform2D& GetTransform()const {
+		return transform;
 	}
 	// 色
 	const Vector4& GetColor()const {
@@ -37,7 +41,7 @@ public: // メンバ関数
 	}
 	// サイズ
 	const Vector2& GetSize()const {
-		return size;
+		return transform.size;
 	}
 	const sUVTransform& GetUVTransform()const {
 		return uvTransform;
@@ -70,11 +74,11 @@ public: // メンバ関数
 	}
 	// 座標
 	void SetPosition(const Vector2& position) {
-		this->position = position;
+		this->transform.position = position;
 	}
 	// 回転
 	void SetRotation(const float& rotation) {
-		this->rotation = rotation;
+		this->transform.rotate = rotation;
 	}
 	// 色
 	void SetColor(const Vector4& color) {
@@ -82,7 +86,7 @@ public: // メンバ関数
 	}
 	// サイズ
 	void SetSize(const Vector2& size) {
-		this->size = size;
+		this->transform.size = size;
 	}
 	// uvTransform
 	void SetUVTransform(const sUVTransform& uvTransform) {
@@ -154,12 +158,13 @@ private:/*メンバ変数*/
 
 	// TextureHandle
 	std::string textureFilePath_;
-	// 座標
-	Vector2 position = { 0.0f,0.0f };
-	// 回転
-	float rotation = 0.0f;
-	// サイズ
-	Vector2 size = { 100.0f,100.0f };
+
+	sTransform2D transform{
+		{1.0f,1.0f},
+		0.0f,
+		{0.0f,0.0f}
+	};
+
 	// アンカーポイント
 	Vector2 anchorPoint = { 0.0f,0.0f };
 	// 左右フリップ

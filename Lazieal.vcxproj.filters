@@ -71,9 +71,6 @@
     <ClCompile Include="Object2dSystem.cpp">
       <Filter>Engine\Lazieal\2d\System</Filter>
     </ClCompile>
-    <ClCompile Include="Object2d.cpp">
-      <Filter>Engine\Lazieal\2d\Object</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Engine\Lazieal\2d\Sprite</Filter>
     </ClCompile>
@@ -205,9 +202,6 @@
     <Filter Include="Engine\Lazieal\2d">
       <UniqueIdentifier>{874091f4-729c-453e-b70e-eac208acbfbc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Lazieal\2d\Object">
-      <UniqueIdentifier>{21f47998-6d7e-416c-83c0-969b8f96168d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Lazieal\2d\Sprite">
       <UniqueIdentifier>{52a91454-7b2a-4514-905a-91d49196cd70}</UniqueIdentifier>
     </Filter>
@@ -314,9 +308,6 @@
     </ClInclude>
     <ClInclude Include="Object2dSystem.h">
       <Filter>Engine\Lazieal\2d\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Object2d.h">
-      <Filter>Engine\Lazieal\2d\Object</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Engine\Lazieal\2d\Sprite</Filter>
