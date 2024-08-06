@@ -80,6 +80,9 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Engine\Lazieal\Manager\SoundManager</Filter>
     </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>Engine\Lazieal\Scene\BaseScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

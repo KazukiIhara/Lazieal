@@ -88,6 +88,10 @@ public: // メンバ関数
 	void SetSize(const Vector2& size) {
 		this->transform.size = size;
 	}
+	// トランスフォーム
+	void SetTransform(const sTransform2D& transform) {
+		this->transform = transform;
+	}
 	// uvTransform
 	void SetUVTransform(const sUVTransform& uvTransform) {
 		this->uvTransform = uvTransform;

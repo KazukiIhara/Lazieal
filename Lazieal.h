@@ -5,15 +5,11 @@
 #include <unordered_map>
 
 // MyHedder
+#include "ObjectStruct.h"
 #include "WorldTransform.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
 #include "SoundManager.h"
-
-#pragma once
-// Include
-
-// MyHedder
 #include "MathFunction.h"
 
 // 前方宣言
@@ -30,6 +26,7 @@ class cModel;
 class cObject3dSystem;
 class cObject2DSystem;
 class cObject3D;
+class cSprite;
 class cAbstractSceneFactory;
 
 // フレームワーク
@@ -126,7 +123,7 @@ public: // 静的メンバ関数
 	// 3dオブジェクトデバッグ用
 	static void ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3d);
 	// 2dスプライトデバッグ用
-	static void ImGuiDebug2dSprite();
+	static void ImGuiDebug2dSprite(sTransform2D& transform,sUVTransform& uvTransform,cSprite* sprite);
 #pragma endregion
 
 

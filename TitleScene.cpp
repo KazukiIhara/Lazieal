@@ -18,8 +18,8 @@ void cTitleScene::Initialize() {
 	// デバッグ用文字
 	cLogger::Log("TitleScene,Initialized\n");
 
-	// 各シーンの先頭でサウンドマネージャを初期化
-	cLazieal::InitializeSoundManager();
+	// 共通初期化処理
+	cBaseScene::Initialize();
 
 #pragma region PunctualLight
 	// ライト初期化
@@ -114,8 +114,8 @@ void cTitleScene::Initialize() {
 
 	bunny_ = new cObject3D();
 	bunny_->Initialize();
-	bunny_->SetPunctualLight(punctualLight_);
 	bunny_->SetModel("bunny");
+	bunny_->SetPunctualLight(punctualLight_);
 	bunny_->SetTransform(bunnyTransform_);
 
 #pragma endregion
@@ -129,8 +129,8 @@ void cTitleScene::Initialize() {
 
 	sphere_ = new cObject3D();
 	sphere_->Initialize();
-	sphere_->SetPunctualLight(punctualLight_);
 	sphere_->SetModel("Sphere_uvChecker.png");
+	sphere_->SetPunctualLight(punctualLight_);
 	sphere_->SetTransform(sphereTransform_);
 
 #pragma endregion
@@ -150,23 +150,23 @@ void cTitleScene::Initialize() {
 }
 
 void cTitleScene::Finalize() {
-	// デバッグ用文字
-	cLogger::Log("TitleScene,Finalized\n");
+	// 共通終了処理
+	cBaseScene::Finalize();
 
 	delete punctualLight_;
-
 	delete teapot_;
 	delete suzanne_;
 	delete multiMesh_;
 	delete multiMaterial_;
 	delete bunny_;
 	delete sphere_;
-
 	delete uvChecker_;
 
-	// 音声データを解放する前にサウンドマネージャの終了処理
-	cLazieal::FinalizeSoundManager();
+	// サウンドのアンロード
 	cLazieal::UnloadSound(&soundData);
+
+	// デバッグ用文字
+	cLogger::Log("TitleScene,Finalized\n");
 }
 
 void cTitleScene::Update() {
@@ -182,6 +182,7 @@ void cTitleScene::Update() {
 	// オブジェクトの表示切替
 	SwitchShowObjects();
 
+	// 3DObjectImgui
 	if (isShow[teapot]) {
 		cLazieal::ImGuiDebug3dObject(teapotTransform_, teapot_);
 	}
@@ -201,21 +202,8 @@ void cTitleScene::Update() {
 		cLazieal::ImGuiDebug3dObject(sphereTransform_, sphere_);
 	}
 
-	ImGui::Begin("Sprite");
-	ImGui::DragFloat2("Size", &uvCheckerTransform_.size.x, 0.01f);
-	ImGui::DragFloat("Rotate", &uvCheckerTransform_.rotate, 0.01f);
-	ImGui::DragFloat2("Position", &uvCheckerTransform_.position.x, 1.0f);
-
-	ImGui::DragFloat2("uvScale", &uvCheckerUVTransform_.scale.x, 0.01f);
-	ImGui::DragFloat("uvRotate", &uvCheckerUVTransform_.rotateZ, 0.01f);
-	ImGui::DragFloat2("uvTranslate", &uvCheckerUVTransform_.translate.x, 0.01f);
-
-	uvChecker_->SetSize(uvCheckerTransform_.size);
-	uvChecker_->SetRotation(uvCheckerTransform_.rotate);
-	uvChecker_->SetPosition(uvCheckerTransform_.position);
-	uvChecker_->SetUVTransform(uvCheckerUVTransform_);
-	ImGui::End();
-
+	// 2DSpriteImGui
+	cLazieal::ImGuiDebug2dSprite(uvCheckerTransform_, uvCheckerUVTransform_, uvChecker_);
 
 	ImGui::Begin("PunctualLightSetting");
 

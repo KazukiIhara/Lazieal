@@ -18,6 +18,7 @@
 #include "Object3dSystem.h"
 #include "Object2dSystem.h"
 #include "Object3d.h"
+#include "Sprite.h"
 #include "AbstractSceneFactory.h"
 
 // staticメンバ変数の初期化
@@ -374,6 +375,21 @@ void cLazieal::ImGuiDebug3dObject(cWorldTransform& transform, cObject3D* object3
 	ImGui::End();
 }
 
-void cLazieal::ImGuiDebug2dSprite() {
+void cLazieal::ImGuiDebug2dSprite(sTransform2D& transform, sUVTransform& uvTransform, cSprite* sprite) {
+	// Transform
+	ImGui::Begin(sprite->GetTextureFilePath().c_str());
+	ImGui::DragFloat2("Size", &transform.size.x, 1.0f);
+	ImGui::DragFloat("Rotate", &transform.rotate, 0.01f);
+	ImGui::DragFloat2("Position", &transform.position.x, 1.0f);
+
+	// UvTransform
+	ImGui::DragFloat2("uvScale", &uvTransform.scale.x, 0.01f);
+	ImGui::DragFloat("uvRotate", &uvTransform.rotateZ, 0.01f);
+	ImGui::DragFloat2("uvTranslate", &uvTransform.translate.x, 0.01f);
+
+	sprite->SetTransform(transform);
+
+	sprite->SetUVTransform(uvTransform);
+	ImGui::End();
 
 }
