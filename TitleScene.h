@@ -9,7 +9,7 @@
 #include "Sprite.h"
 #include "SoundManager.h"
 
-class cTitleScene :public cBaseScene {
+class cTitleScene:public cBaseScene {
 public:
 	enum Object {
 		teapot,
@@ -44,41 +44,11 @@ private: // 非公開メンバ変数
 	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
 
-#pragma region 3dModel
-	// ティーポット
-	cWorldTransform teapotTransform_{};
-	cObject3D* teapot_ = nullptr;
-
-	// スザンヌ
-	cWorldTransform suzanneTransform_{};
-	cObject3D* suzanne_ = nullptr;
-
-	// マルチメッシュ
-	cWorldTransform multiMeshTransform_{};
-	cObject3D* multiMesh_ = nullptr;
-
-	// マルチマテリアル
-	cWorldTransform multiMaterialTransform_{};
-	cObject3D* multiMaterial_ = nullptr;
-
-	// バニー
-	cWorldTransform bunnyTransform_{};
-	cObject3D* bunny_ = nullptr;
-
-	// スフィア
-	cWorldTransform sphereTransform_{};
-	cObject3D* sphere_ = nullptr;
 
 	// 描画フラグ
 	bool isShow[kObjectNum]{};
-#pragma endregion
 
-#pragma region Sprite
-	// uvChecker
-	sTransform2D uvCheckerTransform_{};
-	sUVTransform uvCheckerUVTransform_{};
-	cSprite* uvChecker_ = nullptr;
-#pragma endregion
+
 #pragma region SoundData
 	cSoundManager::SoundData soundData{};
 #pragma endregion
