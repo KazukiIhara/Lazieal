@@ -7,6 +7,7 @@
 // MyHedder
 #include "Lazieal.h"
 #include "Logger.h"
+#include "SceneManager.h"
 
 cTitleScene::cTitleScene() {
 }
@@ -123,7 +124,7 @@ void cTitleScene::Update() {
 
 #pragma region 3dObject
 	
-
+	
 
 #pragma endregion
 

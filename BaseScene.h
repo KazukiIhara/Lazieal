@@ -21,7 +21,8 @@ public: // 仮想関数
 	virtual void SetSceneManager(cSceneManager* sceneManager) {
 		sceneManager_ = sceneManager;
 	}
-private:
+
+protected:
 	// シーンマネージャ
 	cSceneManager* sceneManager_ = nullptr;
 };
