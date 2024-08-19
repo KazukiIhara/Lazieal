@@ -17,12 +17,4 @@ public: // 仮想関数
 	// 描画
 	virtual void Draw() = 0;
 
-	// シーンマネージャのセット
-	virtual void SetSceneManager(cSceneManager* sceneManager) {
-		sceneManager_ = sceneManager;
-	}
-
-protected:
-	// シーンマネージャ
-	cSceneManager* sceneManager_ = nullptr;
 };

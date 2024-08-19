@@ -144,8 +144,6 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject3DUnUV();
 
 	
-
-
 	// 2Dオブジェクト描画前処理
 	cLazieal::PreDrawObject2D();
 

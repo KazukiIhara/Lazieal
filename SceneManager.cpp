@@ -41,9 +41,6 @@ void cSceneManager::SwitchScene() {
 		currentScene_ = nextScene_;
 		nextScene_ = nullptr;
 
-		// シーンマネージャをセット
-		currentScene_->SetSceneManager(this);
-
 		// 次のシーンを初期化
 		currentScene_->Initialize();
 	}

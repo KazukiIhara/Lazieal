@@ -14,6 +14,7 @@
 #include "PipelineManager.h"
 #include "SoundManager.h"
 #include "ModelManager.h"
+#include "SceneManager.h"
 #include "Camera.h"
 #include "Object3dSystem.h"
 #include "Object2dSystem.h"
@@ -28,6 +29,7 @@ cTextureManager* cLazieal::textureManager_ = nullptr;
 cPipelineManager* cLazieal::pipelineManager_ = nullptr;
 cSoundManager* cLazieal::soundManager_ = nullptr;
 cModelManager* cLazieal::modelManager_ = nullptr;
+cSceneManager* cLazieal::sceneManager_ = nullptr;
 cObject3dSystem* cLazieal::object3dSystem_ = nullptr;
 cObject2DSystem* cLazieal::object2dSystem_ = nullptr;
 
@@ -97,12 +99,16 @@ void cLazieal::Initialize() {
 	soundManager_ = new cSoundManager();
 #pragma endregion
 
-
 #pragma region ModelManager
 	// ModelManagerの生成
 	modelManager_ = new cModelManager();
 	// ModelManagerの初期化
 	modelManager_->Initialize();
+#pragma endregion
+
+#pragma region SceneManager
+	// SceneManagerの生成
+	sceneManager_ = new cSceneManager();
 #pragma endregion
 
 #pragma region DebugCamera
@@ -140,6 +146,9 @@ void cLazieal::Finalize() {
 	// デバッグ用文字出力
 	cLogger::Log("Lazieal,Finalized\n");
 	// 基底システムの解放処理を実行
+
+	// SceneManagerを解放
+	delete sceneManager_;
 
 	// シーンファクトリーを開放
 	delete sceneFactory_;
@@ -297,6 +306,22 @@ void cLazieal::CreateSphere(const std::string& textureFilePath) {
 
 cModel* cLazieal::FindModel(const std::string& filePath) {
 	return modelManager_->Find(filePath);
+}
+
+void cLazieal::SetSceneFactory(cAbstractSceneFactory* sceneFactory) {
+	sceneManager_->SetSceneFactory(sceneFactory);
+}
+
+void cLazieal::ChangeScene(const std::string& sceneName) {
+	sceneManager_->ChangeScene(sceneName);
+}
+
+void cLazieal::UpdateScene() {
+	sceneManager_->Update();
+}
+
+void cLazieal::DrawScene() {
+	sceneManager_->Draw();
 }
 
 void cLazieal::PreDrawObject3D() {

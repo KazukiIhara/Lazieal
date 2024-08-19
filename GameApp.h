@@ -25,6 +25,4 @@ public: // 公開メンバ関数
 private: // メンバ変数
 	// シーンファクトリ
 	cSceneFactory* sceneFactory_ = nullptr;
-	// シーンマネージャ
-	cSceneManager* sceneManager_ = nullptr;
 };
