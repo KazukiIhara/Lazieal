@@ -153,14 +153,3 @@ void cTitleScene::Draw() {
 	cLazieal::PreDrawObject2D();
 
 }
-
-void cTitleScene::SwitchShowObjects() {
-	ImGui::Begin("Objects");
-	ImGui::Checkbox("teapot", &isShow[teapot]);
-	ImGui::Checkbox("suzanne", &isShow[suzanne]);
-	ImGui::Checkbox("multiMesh", &isShow[multiMesh]);
-	ImGui::Checkbox("multiMaterial", &isShow[multiMaterial]);
-	ImGui::Checkbox("bunny", &isShow[bunny]);
-	ImGui::Checkbox("sphere", &isShow[sphere]);
-	ImGui::End();
-}

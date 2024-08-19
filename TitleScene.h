@@ -11,15 +11,6 @@
 
 class cTitleScene:public cBaseScene {
 public:
-	enum Object {
-		teapot,
-		suzanne,
-		multiMesh,
-		multiMaterial,
-		bunny,
-		sphere,
-	};
-	static const uint32_t kObjectNum = 6;
 
 public: // 公開メンバ関数
 	// コンストラクタ
@@ -36,18 +27,12 @@ public: // 公開メンバ関数
 	void Draw()override;
 
 private: // 非公開メンバ関数
-	void SwitchShowObjects();
 
 private: // 非公開メンバ変数
 #pragma region PunctualLight
 	cPunctualLightSetting punctualLightSetting_{};
 	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
-
-
-	// 描画フラグ
-	bool isShow[kObjectNum]{};
-
 
 #pragma region SoundData
 	cSoundManager::SoundData soundData{};
