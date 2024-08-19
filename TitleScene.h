@@ -34,6 +34,13 @@ private: // 非公開メンバ変数
 	cPunctualLight* punctualLight_ = nullptr;
 #pragma endregion
 
+#pragma region Sprite
+	// uvChecker
+	sTransform2D uvCheckerTransform_{};
+	sUVTransform uvCheckerUVTransform_{};
+	cSprite* uvChecker_ = nullptr;
+#pragma endregion
+
 #pragma region SoundData
 	cSoundManager::SoundData soundData{};
 #pragma endregion

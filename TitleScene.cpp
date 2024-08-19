@@ -33,6 +33,12 @@ void cTitleScene::Initialize() {
 
 #pragma endregion
 
+#pragma region uvChecker
+	uvCheckerUVTransform_ = { { 1.0f,1.0f }, 0.0f, { 0.0f,0.0f } };
+	uvChecker_ = new cSprite();
+	uvChecker_->Initialize("Resources/uvChecker.dds");
+	uvCheckerTransform_ = uvChecker_->GetTransform();
+#pragma endregion
 
 #pragma region SoundData
 	// 音声読み込み
@@ -52,6 +58,8 @@ void cTitleScene::Finalize() {
 
 	// ライト開放
 	delete punctualLight_;
+
+	delete uvChecker_;
 
 	// サウンドのアンロード
 	cLazieal::UnloadSound(&soundData);
@@ -115,6 +123,8 @@ void cTitleScene::Update() {
 		ImGui::EndTabBar();
 	}
 
+	// SpriteDebug
+	cLazieal::ImGuiDebug2dSprite(uvCheckerTransform_, uvCheckerUVTransform_, uvChecker_);
 
 	ImGui::End();
 
@@ -128,14 +138,15 @@ void cTitleScene::Update() {
 #pragma endregion
 
 #pragma region 3dObject
-	
-	
+
+
 
 #pragma endregion
 
 #pragma region 2dObject
-	
 
+	// uvChecker更新
+	uvChecker_->Update();
 
 #pragma endregion
 }
@@ -148,8 +159,11 @@ void cTitleScene::Draw() {
 	// UVなし3Dオブジェクト描画前処理
 	cLazieal::PreDrawObject3DUnUV();
 
-	
+
 	// 2Dオブジェクト描画前処理
 	cLazieal::PreDrawObject2D();
+
+	// uvChecker描画
+	uvChecker_->Draw();
 
 }

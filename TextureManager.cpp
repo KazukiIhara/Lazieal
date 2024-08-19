@@ -117,10 +117,22 @@ void cTextureManager::KickCommand() {
 }
 
 DirectX::ScratchImage cTextureManager::LoadTexture(const std::string& filePath) {
+	HRESULT hr = S_FALSE;
+
 	// テクスチャファイルを読んでプログラムで扱えるようにする
 	DirectX::ScratchImage image{};
 	std::wstring filePathW = cLogger::ConvertString(filePath);
-	HRESULT hr = DirectX::LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+
+	std::string fileExt = cLogger::ConvertString(PullOutExtension(filePathW));
+
+	if (fileExt == "dds") {
+		// DDSテクスチャのロード
+		hr = DirectX::LoadFromDDSFile(filePathW.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+	} else {
+		// WICテクスチャのロード
+		hr = DirectX::LoadFromWICFile(filePathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+	}
+
 	assert(SUCCEEDED(hr));
 
 	// ミップマップの作成
@@ -177,6 +189,22 @@ Microsoft::WRL::ComPtr<ID3D12Resource> cTextureManager::UploadTextureData(ID3D12
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
 	directX_->GetCommandList()->ResourceBarrier(1, &barrier);
 	return intermediateResource;
+}
+
+std::wstring cTextureManager::PullOutExtension(const std::wstring& filePath) {
+	size_t pos1;
+	std::wstring fileExt;
+	// 区切り文字'.'が出てくる一番最後の部分を検索
+	pos1 = filePath.rfind('.');
+	// 検索がヒットしたら
+	if (pos1 != std::wstring::npos) {
+		// 区切り文字の後ろをファイル拡張子として保存
+		fileExt = filePath.substr(pos1 + 1, filePath.size() - pos1 - 1);
+	} else {
+		fileExt = L"";
+	}
+
+	return fileExt;
 }
 
 

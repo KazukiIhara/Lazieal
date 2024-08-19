@@ -68,7 +68,8 @@ private: // 非公開メンバ関数
 	Microsoft::WRL::ComPtr<ID3D12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata);
 	// テクスチャデータを送る
 	Microsoft::WRL::ComPtr<ID3D12Resource> UploadTextureData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
-
+	// ファイル拡張子を抜き出す
+	std::wstring PullOutExtension(const std::wstring& filePath);
 
 private: // メンバ変数
 	// テクスチャコンテナ
