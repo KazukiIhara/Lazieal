@@ -18,7 +18,6 @@
     <ClCompile Include="GameApp.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="Lazieal.cpp" />
-    <ClCompile Include="LevelData.cpp" />
     <ClCompile Include="LevelDataManager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />

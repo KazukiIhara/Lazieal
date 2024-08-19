@@ -39,6 +39,11 @@ void cTitleScene::Initialize() {
 	soundData = cLazieal::LoadSoundWave("Resources/Alarm01.wav");
 #pragma endregion
 
+#pragma region LevelData
+	// レベルデータ読み込み
+	cLazieal::LoadLevelData("level");
+#pragma endregion
+
 }
 
 void cTitleScene::Finalize() {

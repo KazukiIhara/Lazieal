@@ -14,7 +14,7 @@
 void cLevelDataManager::LoadLevelData(const std::string& fileName) {
 
 	// 連結してフルパスを得る
-	const std::string fullpath = "LevelDatas" + fileName + ".json";
+	const std::string fullpath = "LevelDatas/" + fileName + ".json";
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -45,7 +45,7 @@ void cLevelDataManager::LoadLevelData(const std::string& fileName) {
 
 	// レベルデータ格納用インスタンスを生成
 	cLevelData* levelData = new cLevelData();
-	
+
 	// "objects"の全オブジェクトを走査
 	for (nlohmann::json& object : deserialized["objects"]) {
 		assert(object.contains("type"));
@@ -65,11 +65,30 @@ void cLevelDataManager::LoadLevelData(const std::string& fileName) {
 				objectData.fileName = object["file_name"];
 			}
 
+			// トランスフォームのパラメータ読み込み
+			nlohmann::json& transform = object["transform"];
+			// 平行移動
+			objectData.translation.x = static_cast<float>(transform["translation"][0]);
+			objectData.translation.y = static_cast<float>(transform["translation"][2]);
+			objectData.translation.z = static_cast<float>(transform["translation"][1]);
+
+			// 回転角
+			objectData.rotation.x = static_cast<float>(transform["rotation"][0]);
+			objectData.rotation.y = static_cast<float>(transform["rotation"][2]);
+			objectData.rotation.z = static_cast<float>(transform["rotation"][1]);
+
+			// スケーリング
+			objectData.scaling.x = static_cast<float>(transform["scaling"][0]);
+			objectData.scaling.y = static_cast<float>(transform["scaling"][2]);
+			objectData.scaling.z = static_cast<float>(transform["scaling"][1]);
+
 		}
 
+		// TODO: 子の処理　エンジン側が未対応のため後ほど
+		
 	}
 
 	// レベルデータをメンバ変数にコピー
 	levelData_ = levelData;
-	
+
 }
