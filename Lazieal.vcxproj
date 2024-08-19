@@ -19,7 +19,7 @@
     <ClCompile Include="ImGuiManager.cpp" />
     <ClCompile Include="Lazieal.cpp" />
     <ClCompile Include="LevelData.cpp" />
-    <ClCompile Include="LevelDataLoader.cpp" />
+    <ClCompile Include="LevelDataManager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathFunction.cpp" />
@@ -52,7 +52,7 @@
     <ClInclude Include="ImGuiManager.h" />
     <ClInclude Include="Lazieal.h" />
     <ClInclude Include="LevelData.h" />
-    <ClInclude Include="LevelDataLoader.h" />
+    <ClInclude Include="LevelDataManager.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MathFunction.h" />
     <ClInclude Include="MathOperator.h" />

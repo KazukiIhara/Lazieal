@@ -6,12 +6,12 @@
 // 前方宣言
 class cLevelData;
 
-class cLevelDataLoader {
+class cLevelDataManager {
 public:
 	// レベルデータファイルの読み込み
 	void LoadLevelData(const std::string& fileName);
 
 private:
-
+	cLevelData *levelData_;
 };
 

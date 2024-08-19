@@ -1,5 +1,5 @@
 // This
-#include "LevelDataLoader.h"
+#include "LevelDataManager.h"
 
 // C++
 #include <fstream>
@@ -8,10 +8,13 @@
 // Json
 #include <json.hpp>
 
-void cLevelDataLoader::LoadLevelData(const std::string& fileName) {
+// MyHedder
+#include "LevelData.h"
+
+void cLevelDataManager::LoadLevelData(const std::string& fileName) {
 
 	// 連結してフルパスを得る
-	const std::string fullpath = "LevelData" + fileName + ".json";
+	const std::string fullpath = "LevelDatas" + fileName + ".json";
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -40,6 +43,9 @@ void cLevelDataLoader::LoadLevelData(const std::string& fileName) {
 	// 正しいレベルデータファイルかチェック
 	assert(name.compare("scene") == 0);
 
+	// レベルデータ格納用インスタンスを生成
+	cLevelData* levelData = new cLevelData();
+	
 	// "objects"の全オブジェクトを走査
 	for (nlohmann::json& object : deserialized["objects"]) {
 		assert(object.contains("type"));
@@ -50,9 +56,20 @@ void cLevelDataLoader::LoadLevelData(const std::string& fileName) {
 		// MESHの読み込み
 		if (type.compare("MESH") == 0) {
 			// 要素追加
+			levelData->objects.emplace_back(cLevelData::sObjectData{});
+			// 今追加した要素の参照を得る
+			cLevelData::sObjectData& objectData = levelData->objects.back();
+
+			if (object.contains("file_name")) {
+				// ファイル名
+				objectData.fileName = object["file_name"];
+			}
 
 		}
 
 	}
 
+	// レベルデータをメンバ変数にコピー
+	levelData_ = levelData;
+	
 }

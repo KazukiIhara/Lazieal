@@ -23,6 +23,7 @@ class cPipelineManager;
 class cSoundManager;
 class cModelManager;
 class cSceneManager;
+class cLevelDataManager;
 class cModel;
 class cObject3dSystem;
 class cObject2DSystem;
@@ -115,6 +116,12 @@ public: // 静的メンバ関数
 	static void DrawScene();
 #pragma endregion
 
+#pragma region LevelDataManager
+	// レベルデータファイルの読み込み
+	static void LoadLevelData(const std::string& fileName);
+
+#pragma endregion
+
 
 #pragma region Object3d
 	// 3dオブジェクト描画前処理
@@ -161,6 +168,8 @@ private: // 汎用クラスのポインタ
 	static cModelManager* modelManager_;
 	// SceneManager
 	static cSceneManager* sceneManager_;
+	// LevelDataManager
+	static cLevelDataManager* levelDataManager_;
 	// デバッグカメラのトランスフォーム
 	cWorldTransform debugCameraTransform_{};
 	// デバッグカメラ

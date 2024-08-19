@@ -5,9 +5,14 @@
 #include <string>
 
 class cLevelData {
-public:
-	// テスト用のstring型配列
-	std::vector<std::string> filenames_;
-
+public: // 構造体
+	// オブジェクトデータ型構造体
+	struct sObjectData {
+		std::string fileName;
+	};
+	
+public: // 公開メンバ変数
+	// オブジェクト
+	std::vector<sObjectData> objects;
 };
 

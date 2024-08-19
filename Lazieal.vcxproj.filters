@@ -83,11 +83,11 @@
     <ClCompile Include="BaseScene.cpp">
       <Filter>Engine\Lazieal\Scene\BaseScene</Filter>
     </ClCompile>
-    <ClCompile Include="LevelDataLoader.cpp">
-      <Filter>Engine\Lazieal\Level\Loader</Filter>
+    <ClCompile Include="LevelDataManager.cpp">
+      <Filter>Engine\Lazieal\Manager\LevelDataManager</Filter>
     </ClCompile>
     <ClCompile Include="LevelData.cpp">
-      <Filter>Engine\Lazieal\Level\Data</Filter>
+      <Filter>Engine\Lazieal\LevelData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,13 +226,10 @@
     <Filter Include="Engine\Lazieal\Manager\SoundManager">
       <UniqueIdentifier>{61255ae6-782a-4f85-afc1-f42e0fe79516}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Lazieal\Level">
+    <Filter Include="Engine\Lazieal\LevelData">
       <UniqueIdentifier>{8eb6726c-b851-480f-b353-b1a4f6472922}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Lazieal\Level\Data">
-      <UniqueIdentifier>{c780c5c8-af1b-41f6-9219-d6030afa183d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Lazieal\Level\Loader">
+    <Filter Include="Engine\Lazieal\Manager\LevelDataManager">
       <UniqueIdentifier>{edc6bbab-b2ad-4303-8af4-4928866dc572}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -336,11 +333,11 @@
     <ClInclude Include="SoundManager.h">
       <Filter>Engine\Lazieal\Manager\SoundManager</Filter>
     </ClInclude>
-    <ClInclude Include="LevelDataLoader.h">
-      <Filter>Engine\Lazieal\Level\Loader</Filter>
+    <ClInclude Include="LevelDataManager.h">
+      <Filter>Engine\Lazieal\Manager\LevelDataManager</Filter>
     </ClInclude>
     <ClInclude Include="LevelData.h">
-      <Filter>Engine\Lazieal\Level\Data</Filter>
+      <Filter>Engine\Lazieal\LevelData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
