@@ -1,19 +1,14 @@
 // WinAPI
 #include <Windows.h>
-
 // C++
 #include <memory>
-
 // MyHedder
-
 #include "Lazieal.h"
 #include "GameApp.h"
 #include "Logger.h"
-
 #ifdef _DEBUG
 #include "D3DResourceLeakChecker.h"
 #endif // _DEBUG
-
 
 // エントリーポイント
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
@@ -23,17 +18,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// リークチェッカのインスタンスを最初に取得
 	D3DResourceLeakChecker* leakCheck = D3DResourceLeakChecker::GetInstance();
 #endif // _DEBUG
-
-
 	// ゲームを動的確保
 	std::unique_ptr<cLazieal> game = std::make_unique<cGameApp>();
-
 	// 実行
 	game->Run();
-
 	// 終了時デバッグ用文字
 	cLogger::Log("Bye,Lazieal!\n");
-
 	// 無事終了
 	return 0;
 }
