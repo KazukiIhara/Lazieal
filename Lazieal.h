@@ -31,6 +31,7 @@ class cObject3dSystem;
 class cObject2DSystem;
 class cObject3D;
 class cAbstractSceneFactory;
+class cDirectInput;
 
 // フレームワーク
 class cLazieal {
@@ -142,6 +143,8 @@ private: // 汎用クラスのポインタ
 	static cSrvManager* srvManager_;
 	// ImGuiManager
 	cImGuiManager* imguiManager_ = nullptr;
+	// Input
+	static cDirectInput* input_;
 	// TextureManager
 	static cTextureManager* textureManager_;
 	// ModelManager

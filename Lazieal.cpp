@@ -10,6 +10,7 @@
 #include "DirectXCommon.h"
 #include "SrvManager.h"
 #include "ImGuiManager.h"
+#include "Input.h"
 #include "TextureManager.h"
 #include "PipelineManager.h"
 #include "SoundManager.h"
@@ -23,6 +24,7 @@
 // staticメンバ変数の初期化
 cDirectXCommon* cLazieal::directX_ = nullptr;
 cSrvManager* cLazieal::srvManager_ = nullptr;
+cDirectInput* cLazieal::input_ = nullptr;
 cTextureManager* cLazieal::textureManager_ = nullptr;
 cPipelineManager* cLazieal::pipelineManager_ = nullptr;
 cSoundManager* cLazieal::soundManager_ = nullptr;
@@ -70,6 +72,12 @@ void cLazieal::Initialize() {
 	// ImGuiManagerの初期化
 	imguiManager_->Initialize();
 #pragma endregion
+#pragma region Input
+	input_ = new cDirectInput();
+	input_->Initialize(win_);
+
+#pragma endregion
+
 
 #pragma region TextureManager
 	// TextureManagerの生成
@@ -166,6 +174,8 @@ void cLazieal::Finalize() {
 	imguiManager_->Finalize();
 	delete imguiManager_;
 
+	delete input_;
+
 	// SrvManagerを開放
 	delete srvManager_;
 
@@ -185,6 +195,8 @@ void cLazieal::Update() {
 		endRequest_ = true;
 	}
 
+	input_->Update();
+
 	// ImGui開始処理
 	imguiManager_->BeginFrame();
 
@@ -198,6 +210,10 @@ void cLazieal::Update() {
 
 	// デバッグカメラの更新
 	debugCamera_->Update();
+
+	if (input_->PushKey(DIK_ESCAPE)) {
+		endRequest_ = true;
+	}
 
 }
 

@@ -266,6 +266,10 @@ void cTitleScene::Update() {
 
 	ImGui::End();
 
+	ImGui::Begin("framelate");
+	ImGui::Text("%f", ImGui::GetIO().Framerate);
+	ImGui::End();
+
 #pragma endregion
 
 #pragma region PunctualLight
